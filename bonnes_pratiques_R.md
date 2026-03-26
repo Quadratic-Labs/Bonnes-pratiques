@@ -164,7 +164,16 @@ D’un point de vue de lisibité, je conseille la fonction vectorize(). Elle sim
 
 Les fonctions sur R sont parallélisables avec des paquets, notamment via le paquet parallel. Néanmoins attention : la parallélisation doit être considéré comme le dernier recour pour gagner du temps d’exécution, c’est-à-dire si toutes les méthodes ci-dessus n‘ont pas suffit. En effet, la parallélisation consiste en une optimisation “du matérielle”, plutôt qu’une optimisation “du code”. D’autant plus que l’introduction de la parallélisation a tendance à complexifier le code, et nécessite une réelle maitrise du développeur. 
 
+# PARTIE 3 : FORME DU LIVRABLE
 
+Au-delà de la propreté du code, la forme finale du livrable jouera un rôle déterminant dans l’appréciation du client. 
+La forme que doit prendre le livrable est un choix qui dépend avant tout du sujet sur lequel vous travaillez.
+
+## un rmarkdown pour l’analyse
+
+## un paquet R pour le code 
+
+## un shiny pour les outils interactifs
 
 
 # PARTIE 4 : SELECTION DE PAQUETS PAR CAS D'USAGE
