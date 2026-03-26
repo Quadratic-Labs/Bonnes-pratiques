@@ -160,9 +160,31 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
 D’un point de vue de lisibité, je conseille la fonction vectorize(). Elle simule une vectorisation sur des fonctions non vectorisable. Néanmoins cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. 
 
-## 3. Optimisation de son environnement
+## 3. Optimisation de l'utilisation de son environnement
 
-Les fonctions sur R sont parallélisables avec des paquets, notamment via le paquet parallel. Néanmoins attention : la parallélisation doit être considéré comme le dernier recour pour gagner du temps d’exécution, c’est-à-dire si toutes les méthodes ci-dessus n‘ont pas suffit. En effet, la parallélisation consiste en une optimisation “du matérielle”, plutôt qu’une optimisation “du code”. D’autant plus que l’introduction de la parallélisation a tendance à complexifier le code, et nécessite une réelle maitrise du développeur. 
+Nous avons vu comment optimiser le temps d'exécution d'un code indépendamment de son environnement.
+Or, les ressources de calcul à disposition forment un autre levier d'action possible.
+
+C'est une étape qui arrive après, et seulement après, avoir optimisé son code. 
+En effet, l'environnement d'un code peut être amené à changer. 
+Or, votre code doit pouvoir s'éxécuter au mieux quelles que soit les ressources de son utilisateur.
+
+2 questions doivent se poser : 
+* Comment maximiser son utilisation des ressources à disposition ? (efficacité)
+* La quantité de ressources mobilisées est-elle cohérente avec votre besoin ? (efficience)
+
+En terme d'efficacité, la parallélisation est une technique qui vous permet d'exploiter toute la puissance de calcul de vos ressources.
+En effet, elle consiste à répartir l'exécution du code simultanément sur plusieurs unités de calcul (coeurs ou processeurs). 
+Dans les paquets R, la parallélisation se manifeste sous la forme d'un ou plusieurs paramètres utilisateur : activer ou non la paraléllisation, combien d'unités doivent être utilisées ... 
+Il sera particulièrement apprécié dans les paquets réalisant des traitements de donnée volumineuse.
+L'objectif ici sera de paralléliser le maximum de traitement. En effet, plus de traitements seront parallélisés, et plus le gain de vitesse par unité de calcul sera important. 
+Plusieurs paquets R permettent de paralléliser son code, comme par exemple `parallel` ou le duo `doParallel` et `foreach`.
+Attention : en plus d'avoir tendance à complexifier le code, la mise en place de la parallélisation nécessite une certaine expérience pour être bien exploitée. 
+
+Une fois la parallélisation implémentée, il faut identifier le nombre d'unités de traitement suffisant pour votre code. 
+En effet, mobiliser des ressources a un coût (monétaire ou d'opportunité), qu'il convient de minimiser.
+Or, le gain de vitesse obtenu par chaque unité de calcul (coeurs ou processeurs) est décroissant, et tend 0 (cf. Loi d'Amdahl).
+Ainsi, avec les outils présentés dans la sous-section 1, on identifera le nombre optimal de ressources pour votre besoin.
 
 # PARTIE 3 : FORME DU LIVRABLE
 
