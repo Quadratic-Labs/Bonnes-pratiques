@@ -114,3 +114,54 @@ Dans les faits, une fonction a rarement besoin de plus de 3 arguments. Ce nombre
 Pour les paramètres techniques : les développeurs ont tendance à mettre l’ensemble des paramètres techniques en argument, en leur attribuant une valeur par défaut. Or, si la valeur d’un paramètre ne varie dans votre fonction, alors celui-ci n’a pas besoin d’être un argument, mais seulement d’être une variable locale 
 Utiliser des listes : les listes tendent à remplacer la programmation orientée objet (POO) en R (qui existent bien, mais sont rarement utilisés). Il n’y a donc pas de soucis à mettre une liste en argument, à condition que “l’objet” qu’elle représente ait une structure clairement définie 
 Pour les paramètres utilisateurs : à l’inverse des paramètres techniques, les paramètres peuvent varier selon le souhait de l’utilisateur. Mon conseille est de créer une fonction spécifique pour récupérer les valeurs des paramètres utilisateurs. Pour cela, les valeurs de ces paramètres doivent être stockés dans un fichier isolé (dans le cas d’un projet R) ou comme un objet global (dans le cas d’un paquet) 
+
+
+# PARTIE 2 : OPTIMISATION DU CODE 
+
+L’optimisation est l’étape logique qui suit la réécriture d’un code.  Elle a 2 objectifs : 
+* Mobiliser de manière efficiente les ressources, à la fois en termes de mémoire (RAM) et de calcul (processeur) 
+* Diminuer le temps d'exécution du code 
+
+En pratique, l’optimisation consiste donc à : 
+* Utiliser les méthodes les plus adaptées à la volumétrie de la donnée 
+* Minimiser le volume des tables 
+* Arbitrer entre les performances de 2 processus similaires 
+* Minimiser l'usage des processus itératif 
+
+Dans cette section, nous verrons d’abord comment analyser les performances d’un code, et ensuite comment les améliorer. 
+
+Remarque importante : l’optimisation ne doit pas se faire au détriment de sa propreté. Le temps gagné côté utilisateur ne doit pas se transformer en du temps perdu côté développeur. 
+
+## 1. Analyse des performances 
+
+L'outil de base de l'optimisation est le benchmark : l’évaluation des performances d’un code, ou seulement d’une partie. Deux fonctions complémentaires sont couramment utilisées pour cela : 'profis' et 'microbenmark'. Ils sont chacun associés à un paquet éponyme. 
+
+La fonction profis() s'exécute sur un code entier.  La fonction analyse les performances de chaque étape. On peut donc identifier quelles sont celles qui nécessitent une optimisation. A noter qu'on retrouve généralement une répartition de Pareto. En effet, dans un code non optimisé, une faible partie du code (<20%) est responsable d'une grande partie du temps d'exécution (>80%). 
+
+C’est à l’issue de l’identification qu’on utilise microbenchmark(). Contrairement à profis(), celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l'aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser (par exemple le temps d’exécution). Il faut bien vérifier que ces gains sont significatifs, et vérifier comment ils évoluent avec l’augmentation du volume de données. 
+
+## 2. Astuce d’optimisation  
+
+Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pour optimiser le temps d’exécution de votre code. 
+
+1. Affiner la lecture des inputs
+
+   Il faut éviter de stocker la totalité de la table en mémoire. Il faut donc essayer d’importer de filtrer les données et/ou sélectionner les colonnes dès la lecture de l’input sur le disque dure.
+   Dans le cas de de fichier Excel, cela consiste utilise les argument col_names, skip, et n_max (présent dans toutes les fonctions d’import). Dans le cas d’une table située sur une base de données SQL, cela revient à restreindre la quantité dans la requête SQL.  
+
+2. Gérer les données volumineuses avec data.table
+
+   Comparable au paquet dplyr, le paquet data.table propose une syntaxe pour manipulation de la donnée. Elle est adapté au traitement de volume de données important. En effet, dans ce cas précis, l’utilisation de data.table peut faire gagner un temps significatif sur les temps d’exécution. 
+
+3. Vectoriser les processus itératifs
+
+   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. C’est une caractéristique permet de ne pas avoir systématiquement recours à des boucles WHILE ou FOR.
+   En effet, en règle générale, réaliser une opération par vectorisation est plus rapide que la réaliser par boucle. De plus, il permet d’éviter un niveau d’indentation supplémentaire. 
+
+D’un point de vue de lisibité, je conseille la fonction vectorize(). Elle simule une vectorisation sur des fonctions non vectorisable. Néanmoins cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. 
+
+ 
+
+## 3. Paralléliser le code optimisé 
+
+Les fonctions sur R sont parallélisables avec des paquets, notamment via le paquet parallel. Néanmoins attention : la parallélisation doit être considéré comme le dernier recour pour gagner du temps d’exécution, c’est-à-dire si toutes les méthodes ci-dessus n‘ont pas suffit. En effet, la parallélisation consiste en une optimisation “du matérielle”, plutôt qu’une optimisation “du code”. D’autant plus que l’introduction de la parallélisation a tendance à complexifier le code, et nécessite une réelle maitrise du développeur. 
