@@ -132,7 +132,7 @@ Dans cette section, nous verrons d’abord comment analyser les performances d�
 
 Remarque importante : l’optimisation ne doit pas se faire au détriment de sa propreté. Le temps gagné côté utilisateur ne doit pas se transformer en du temps perdu côté développeur. 
 
-## 1. Analyse des performances 
+## 1. Analyse des performances
 
 L'outil de base de l'optimisation est le benchmark : l’évaluation des performances d’un code, ou seulement d’une partie. Deux fonctions complémentaires sont couramment utilisées pour cela : 'profis' et 'microbenmark'. Ils sont chacun associés à un paquet éponyme. 
 
@@ -140,7 +140,7 @@ La fonction profis() s'exécute sur un code entier.  La fonction analyse les per
 
 C’est à l’issue de l’identification qu’on utilise microbenchmark(). Contrairement à profis(), celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l'aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser (par exemple le temps d’exécution). Il faut bien vérifier que ces gains sont significatifs, et vérifier comment ils évoluent avec l’augmentation du volume de données. 
 
-## 2. Astuce d’optimisation  
+## 2. Optimisation du temps d'exécution de son code
 
 Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pour optimiser le temps d’exécution de votre code. 
 
@@ -160,7 +160,7 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
 D’un point de vue de lisibité, je conseille la fonction vectorize(). Elle simule une vectorisation sur des fonctions non vectorisable. Néanmoins cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. 
 
-## 3. Paralléliser le code optimisé 
+## 3. Optimisation de son environnement
 
 Les fonctions sur R sont parallélisables avec des paquets, notamment via le paquet parallel. Néanmoins attention : la parallélisation doit être considéré comme le dernier recour pour gagner du temps d’exécution, c’est-à-dire si toutes les méthodes ci-dessus n‘ont pas suffit. En effet, la parallélisation consiste en une optimisation “du matérielle”, plutôt qu’une optimisation “du code”. D’autant plus que l’introduction de la parallélisation a tendance à complexifier le code, et nécessite une réelle maitrise du développeur. 
 
