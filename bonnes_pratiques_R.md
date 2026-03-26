@@ -160,8 +160,53 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
 D’un point de vue de lisibité, je conseille la fonction vectorize(). Elle simule une vectorisation sur des fonctions non vectorisable. Néanmoins cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. 
 
- 
-
 ## 3. Paralléliser le code optimisé 
 
 Les fonctions sur R sont parallélisables avec des paquets, notamment via le paquet parallel. Néanmoins attention : la parallélisation doit être considéré comme le dernier recour pour gagner du temps d’exécution, c’est-à-dire si toutes les méthodes ci-dessus n‘ont pas suffit. En effet, la parallélisation consiste en une optimisation “du matérielle”, plutôt qu’une optimisation “du code”. D’autant plus que l’introduction de la parallélisation a tendance à complexifier le code, et nécessite une réelle maitrise du développeur. 
+
+
+
+
+# PARTIE 4 : SELECTION DE PAQUETS PAR CAS D'USAGE
+
+La force de R réside dans son immense bibliothèque de packages (plus de 20 000 sur le CRAN). Pour garantir la pérennité et l'efficacité de vos développements, il est crucial de s'appuyer sur des outils standards et éprouvés. Voici une sélection des packages incontournables classés par domaine d'application. 
+
+## 1. Gestion de la data 
+
+Avant toute analyse, la manipulation et le nettoyage des données constituent souvent 80 % du travail. Le "Tidyverse" a révolutionné cette étape en proposant une syntaxe lisible et performante. 
+
+* **dplyr** : C'est la grammaire de la manipulation de données. Il permet d'effectuer les opérations les plus courantes (filtrer, sélectionner, réorganiser, créer des variables ou agréger) via des verbes simples et intuitifs. Son utilisation avec l'opérateur "pipe" (%>% ou |>) rend le code extrêmement lisible, proche du langage naturel, ce qui facilite grandement la revue de code et la maintenance. 
+
+* **tidyr** : Ce package est dédié au "nettoyage" de la structure des données. Il permet de passer d'un format "large" à un format "long" (et vice-versa) pour que chaque variable soit une colonne et chaque observation une ligne. C’est un outil indispensable pour préparer vos jeux de données avant de les injecter dans des modèles statistiques ou des outils de visualisation. 
+
+## 2. Statistique et Machine Learning (ML) 
+
+R est avant tout un langage statistique. Pour le Machine Learning, l'enjeu est d'unifier les méthodes d'appels des différents algorithmes (souvent disparates) au sein d'un workflow cohérent. 
+
+* **caret** : Historiquement le package de référence pour le ML en R. Il fournit une interface unique pour entraîner des centaines d'algorithmes différents. Caret gère tout le cycle de vie d'un modèle : du prétraitement des données (normalisation, gestion des valeurs manquantes) à la sélection des variables, en passant par l'optimisation des hyperparamètres et l'évaluation des performances. 
+
+* **tidymodels** : C'est la version moderne et "Tidyverse-compatible" du Machine Learning. Ce n'est pas un seul package mais une collection d'outils (parsnip, recipes, rsample, etc.) qui favorisent de bonnes pratiques de modélisation. Plus modulaire que caret, il permet de construire des "pipelines" de modélisation robustes, reproductibles et très structurés, idéaux pour des projets complexes à grande échelle. 
+
+## 3. Graphique et Visualisation 
+
+La visualisation est l'un des plus grands atouts de R. Elle permet d'explorer les données et de communiquer des résultats complexes de manière percutante. 
+
+* **ggplot2** : Basé sur la "Grammaire des Graphiques", ce package permet de construire des visualisations couche par couche (données, esthétiques, géométries). Sa flexibilité est quasi infinie et la qualité esthétique des graphiques produits est de standard professionnel (publication scientifique, presse). 
+
+* **plotly** : Ce package permet de transformer vos graphiques statiques ggplot2 en versions interactives (zoom, survol à la souris, filtres) avec une seule fonction : ggplotly(). C'est l'outil parfait pour l'exploration de données ou pour enrichir des rapports HTML. 
+
+* **highcharter** : Une interface R pour la célèbre bibliothèque JavaScript Highcharts. Il est particulièrement apprécié pour créer des graphiques dynamiques et élégants, très utilisés dans les tableaux de bord professionnels, offrant une grande fluidité et de nombreuses options de personnalisation. 
+
+## 4. Shiny : Applications Web Interactives 
+
+Shiny permet de transformer vos analyses R en applications web interactives sans avoir besoin de connaissances approfondies en HTML/CSS ou JavaScript. 
+
+* **shiny** : C'est le framework de base. Il repose sur un modèle de programmation réactive : dès qu'un utilisateur modifie un paramètre (curseur, menu déroulant), les calculs et les graphiques se mettent à jour instantanément. C’est l’outil idéal pour l'aide à la décision. 
+
+* **golem** : Pour passer d'un simple script Shiny à une application robuste prête pour la production, golem est indispensable. Il impose une structure de "package" à votre application Shiny, facilitant ainsi les tests unitaires, le contrôle de version et le déploiement sécurisé. C’est le garant du respect des bonnes pratiques de développement logiciel. 
+
+## 5. Déboggage 
+
+Le débogage est une étape inévitable pour garantir la fiabilité de vos scripts, surtout lorsque la logique métier devient complexe. 
+
+* **base::browser()** : Plus qu'un package, c'est une fonction native essentielle. Insérée dans votre code, elle interrompt l'exécution et vous permet d'inspecter l'environnement à cet instant précis. Vous pouvez alors tester vos variables, exécuter le code ligne par ligne et comprendre exactement où et pourquoi une erreur se produit. C'est l'outil de diagnostic primaire de tout développeur R. 
