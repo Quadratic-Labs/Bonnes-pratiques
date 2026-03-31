@@ -64,12 +64,12 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 
 * Utiliser les pipes
   
-  Les pipes (ou ‘conduits’ en français) est un type d’opérateur qui permet de construire un 'pipeline', pour appliquer une suite de transformation à un input. Il évite la création de variables purement intermédiaires, tout en rendant le code moins redondant. L'opérateur de type pipe le plus connu est ‘%>%’ du package magrittr. Mais je conseillerais plutôt l’utilisation du pipe natif ‘|>’. Bien qu'il soit moins courant, il a l’avantage d'être légèrement plus rapide que celui de magrittr, tout en évitant une dépendance supplémentaire. 
+  Les pipes (ou ‘conduits’ en français) est un type d’opérateur qui permet de construire un 'pipeline', pour appliquer une suite de transformation à un input. Il évite la création de variables purement intermédiaires, tout en rendant le code moins redondant. L'opérateur de type pipe le plus connu est `%>%` du package magrittr. Mais je conseillerais plutôt l’utilisation du pipe natif `|>`. Bien qu'il soit moins courant, il a l’avantage d'être légèrement plus rapide que celui de magrittr, tout en évitant une dépendance supplémentaire. 
 
 * Identifier, minimiser, et mettre à jour les paquets importés
   
-  Les importations ont tendance à complexifier la maintenance et le déploiement de code. C’est le cas par exemple si une montée de version d’un paquet utilisé engendre des nouveaux comportements non gérés par le code. De plus, le risque de conflits entre paquets augmente logiquement avec le nombre de dépendances. C'est pourquoi je déconseille d’avoir un recours systématique au paquet  dplyr. Bien que pratique et couramment utilisé, il ne reste pas moins une dépendance supplémentaire à gérer.
-  Pour minimiser le nombre de dépendances, je conseille d’abord de les identifier en signalant les fonctions importées de cette façon : ‘[paquet]::[methode]’. De cette manière, vous pouvez vérifier si certains paquets importés ne sont plus nécessaires. Ensuite, pour des paquets où seul une ou deux fonctions sont importés, recherchez si des fonctions de R Base pourraient les remplacer. De cette manière, vous pourrez supprimer certaines dépendances. Enfin, pour les dépendances restantes, vérifier que votre code est fonctionnel avec leurs dernières versions. 
+  Les importations ont tendance à complexifier la maintenance et le déploiement de code. C’est le cas par exemple si une montée de version d’un paquet utilisé engendre des nouveaux comportements non gérés par le code. De plus, le risque de conflits entre paquets augmente logiquement avec le nombre de dépendances. C'est pourquoi je déconseille d’avoir un recours systématique au paquet dplyr. Bien que pratique et couramment utilisé, il ne reste pas moins une dépendance supplémentaire à gérer.
+  Pour minimiser le nombre de dépendances, je conseille d’abord de les identifier en signalant les fonctions importées de cette façon : `[paquet]::[methode]`. De cette manière, vous pouvez vérifier si certains paquets importés ne sont plus nécessaires. Ensuite, pour des paquets où seul une ou deux fonctions sont importés, recherchez si des fonctions de R Base pourraient les remplacer. De cette manière, vous pourrez supprimer certaines dépendances. Enfin, pour les dépendances restantes, vérifier que votre code est fonctionnel avec leurs dernières versions. 
 
 * Gérer explicitement les erreurs de lecture/écriture
   
@@ -78,14 +78,14 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 * Pas de codage dynamique
   
   Le codage dynamique fait référence à l’utilisation de chaînes de caractères consistant en des instructions ou des noms de variables. En R, il se manifeste notamment par la présence des fonctions suivantes :
-  * eval et parse pour gérer les chaînes de caractère comme des instructions 
-  * get et assign pour gérer les chaînes de caractère comme des noms de variable
+  * `eval()` et `parse()` pour gérer les chaînes de caractère comme des instructions 
+  * `get()` et `assign()` pour gérer les chaînes de caractère comme des noms de variable
 
   N’utilisez jamais ces méthodes. En effet, elles rendent particulièrement laborieuses le débogage des scripts. C'est pourquoi si vous les trouvez dans un script existant, je vous déconseille fortement de le modifier. Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, elles sont substituables.  
 
-* Ne pas utiliser ‘$’ pour référencer les colonnes d’un tableau
+* Ne pas utiliser `$` pour référencer les colonnes d’un tableau
   
-  Avec les data.frames (la structure de table de base), il existe 2 moyens de manipuler une colonne comme un vecteur : soit avec des crochets (Table1[[« nom_colonne1 »]]), soit un symbole dollar (Table1$nom_colonne1). Parmi ces 2 possibilités, je conseille d’utiliser plutôt les crochets. En effet, l’opérateur ‘$’ fait implicitement de l’auto-complétion. Par conséquent, si le nom de la colonne après le symbole ‘$’n’existe pas, alors il peut malgré tout retourner les valeurs d’une autre colonne. 
+  Avec les data.frames (la structure de table de base), il existe 2 moyens de manipuler une colonne comme un vecteur : soit avec des crochets (`Table1[[« nom_colonne1 »]]`), soit un symbole dollar (`Table1$nom_colonne1)`. Parmi ces 2 possibilités, je conseille d’utiliser plutôt les crochets. En effet, l’opérateur `$` fait implicitement de l’auto-complétion. Par conséquent, si le nom de la colonne après le symbole `$` n’existe pas, alors il peut malgré tout retourner les valeurs d’une autre colonne. 
 
  
 
@@ -134,11 +134,11 @@ Remarque importante : l’optimisation ne doit pas se faire au détriment de sa 
 
 ## 1. Analyse des performances
 
-L'outil de base de l'optimisation est le benchmark : l’évaluation des performances d’un code, ou seulement d’une partie. Deux fonctions complémentaires sont couramment utilisées pour cela : 'profis' et 'microbenmark'. Ils sont chacun associés à un paquet éponyme. 
+L'outil de base de l'optimisation est le benchmark : l’évaluation des performances d’un code, ou seulement d’une partie. Deux fonctions complémentaires sont couramment utilisées pour cela : `profis()` et `microbenmark()`. Ils sont chacun associés à un paquet éponyme. 
 
-La fonction profis() s'exécute sur un code entier.  La fonction analyse les performances de chaque étape. On peut donc identifier quelles sont celles qui nécessitent une optimisation. A noter qu'on retrouve généralement une répartition de Pareto. En effet, dans un code non optimisé, une faible partie du code (<20%) est responsable d'une grande partie du temps d'exécution (>80%). 
+La fonction `profis()` s'exécute sur un code entier.  La fonction analyse les performances de chaque étape. On peut donc identifier quelles sont celles qui nécessitent une optimisation. A noter qu'on retrouve généralement une répartition de Pareto. En effet, dans un code non optimisé, une faible partie du code (<20%) est responsable d'une grande partie du temps d'exécution (>80%). 
 
-C’est à l’issue de l’identification qu’on utilise microbenchmark(). Contrairement à profis(), celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l'aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser (par exemple le temps d’exécution). Il faut bien vérifier que ces gains sont significatifs, et vérifier comment ils évoluent avec l’augmentation du volume de données. 
+C’est à l’issue de l’identification qu’on utilise `microbenchmark()`. Contrairement à `profis()`, celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l'aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser (par exemple le temps d’exécution). Il faut bien vérifier que ces gains sont significatifs, et vérifier comment ils évoluent avec l’augmentation du volume de données. 
 
 ## 2. Optimisation du temps d'exécution de son code
 
@@ -147,7 +147,7 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 1. Affiner la lecture des inputs
 
    Il faut éviter de stocker la totalité de la table en mémoire. Il faut donc essayer d’importer de filtrer les données et/ou sélectionner les colonnes dès la lecture de l’input sur le disque dure.
-   Dans le cas de de fichier Excel, cela consiste utilise les argument col_names, skip, et n_max (présent dans toutes les fonctions d’import). Dans le cas d’une table située sur une base de données SQL, cela revient à restreindre la quantité dans la requête SQL.  
+   Dans le cas de de fichier Excel, cela consiste utilise les argument `col_names`, `skip`, et `n_max` (présent dans toutes les fonctions d’import). Dans le cas d’une table située sur une base de données SQL, cela revient à restreindre la quantité dans la requête SQL.  
 
 2. Gérer les données volumineuses avec data.table
 
@@ -158,7 +158,7 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
    La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. C’est une caractéristique permet de ne pas avoir systématiquement recours à des boucles WHILE ou FOR.
    En effet, en règle générale, réaliser une opération par vectorisation est plus rapide que la réaliser par boucle. De plus, il permet d’éviter un niveau d’indentation supplémentaire. 
 
-D’un point de vue de lisibité, je conseille la fonction vectorize(). Elle simule une vectorisation sur des fonctions non vectorisable. Néanmoins cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. 
+D’un point de vue de lisibité, je conseille la fonction `vectorize()`. Elle simule une vectorisation sur des fonctions non vectorisable. Néanmoins cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. 
 
 ## 3. Optimisation de l'utilisation de son environnement
 
@@ -178,7 +178,7 @@ En effet, elle consiste à répartir l'exécution du code simultanément sur plu
 Dans les paquets R, la parallélisation se manifeste sous la forme d'un ou plusieurs paramètres utilisateur : activer ou non la paraléllisation, combien d'unités doivent être utilisées ... 
 Il sera particulièrement apprécié dans les paquets réalisant des traitements de donnée volumineuse.
 L'objectif ici sera de paralléliser le maximum de traitement. En effet, plus de traitements seront parallélisés, et plus le gain de vitesse par unité de calcul sera important. 
-Plusieurs paquets R permettent de paralléliser son code, comme par exemple `parallel` ou le duo `doParallel` et `foreach`.
+Plusieurs paquets R permettent de paralléliser son code, comme par exemple 'parallel' ou le duo 'doParallel' et 'foreach'.
 Attention : en plus d'avoir tendance à complexifier le code, la mise en place de la parallélisation nécessite une certaine expérience pour être bien exploitée. 
 
 Une fois la parallélisation implémentée, il faut identifier le nombre d'unités de traitement suffisant pour votre code. 
@@ -199,7 +199,7 @@ C'est un type de fichier adapté pour la présentation de résultats ou la réal
 Concernant la forme du markdown : 
 * Un minimun de code R doit être intégré dans les chunks. En particulier, les fonctions ne doivent pas être déclarées dans le fichier. Pour cela, on pourra les intégrer à ses proches paquets (voir sous-section suivante)
 * Toujours nommer les chunks pour mieux se repérer dans le document
-* Le paquet `knitr` ne sert pas uniquement à compiler le document. En effet, certaines de ses autres fonctions méritent d'être connues. Je pense par exemple à `knitr::ktable()` pour afficher des tables ou `knitr::opts_chunk()` pour définir globalement les paramètres des chunks.
+* Le paquet 'knitr' ne sert pas uniquement à compiler le document. En effet, certaines de ses autres fonctions méritent d'être connues. Je pense par exemple à `knitr::ktable()` pour afficher des tables ou `knitr::opts_chunk()` pour définir globalement les paramètres des chunks.
 * Dans le cadre de la production de rapport de présentation, vous pouvez omettre le code avec le paramètre `echo=FALSE` pour le rendre plus lisible. Les profils techniques pourront directement consulter le fichier rmarkdown pour conslter le code.
 
 ## Un paquet R pour le code 
@@ -212,8 +212,8 @@ Je déconseille fortement de définir ses fonctions dans des scripts R isolés. 
 Pour résoudre ces problèmes, la meilleure solution consiste à rassembler toutes ses fonctions dans un paquet. Ce terme peut faire peur mais je vous rassure : la création de paquets sur R est relativement simple, et de mon avis plus simple que sur Python. Je vous renvoie en particulier vers la bible de la création de paquet (gratuit !) : R Packages (2e) de Hadley Wickham and Jennifer Bryan.
 
 Ainsi, un paquet R vous permettra de :
-* Gérer vos dépendances, avec la possibilité de les classer selon leur importance (Depends/Imports/Suggest). L'ensemble des paquets utilisés doivent être explicitement cité dans la documentation `roxygen2` avec les tags `@importFrom` (ou `@import` dans le cas des paquets "framework" comme `dplyr` ou `data.table`). 
-* Ajouter des tests unitaires pour garantir la robustesse du code et la gestion des cas particuliers. Pour rappel : les tests unitaires doivent être réalisés en parallèle du développement de la fonction, et non après. Aussi, le paquet `codecov` permet d'évaluer la couverture du code, c'est-à-dire la proportion du code "protégée" par les tests unitaires (attention : le taux de couverture est un indicateur, non un objectif !) 
+* Gérer vos dépendances, avec la possibilité de les classer selon leur importance (Depends/Imports/Suggest). L'ensemble des paquets utilisés doivent être explicitement cité dans la documentation 'roxygen2' avec les tags `@importFrom` (ou `@import` dans le cas des paquets "framework" comme 'dplyr' ou 'data.table'). 
+* Ajouter des tests unitaires pour garantir la robustesse du code et la gestion des cas particuliers. Pour rappel : les tests unitaires doivent être réalisés en parallèle du développement de la fonction, et non après. Aussi, le paquet 'codecov' permet d'évaluer la couverture du code, c'est-à-dire la proportion du code "protégée" par les tests unitaires (attention : le taux de couverture est un indicateur, non un objectif !) 
 * Intégrer directement la documentation à chaque fonction. Lors de la phase de `Check` du paquet, l’adéquation entre la fonction et sa documentation sera vérifiées 
 * Lier de la documentation annexe à votre code avec les vignettes. Elles sont particulièrement utiles pour illustrer le fonctionnement de vos fonctions.
 * Intégrer des méta-données, telles que le nom de l’auteur, la licence, ... 
@@ -248,7 +248,7 @@ La visualisation est l'un des plus grands atouts de R. Elle permet d'explorer le
 
 * **ggplot2** : Basé sur la "Grammaire des Graphiques", ce package permet de construire des visualisations couche par couche (données, esthétiques, géométries). Sa flexibilité est quasi infinie et la qualité esthétique des graphiques produits est de standard professionnel (publication scientifique, presse). 
 
-* **plotly** : Ce package permet de transformer vos graphiques statiques ggplot2 en versions interactives (zoom, survol à la souris, filtres) avec une seule fonction : ggplotly(). C'est l'outil parfait pour l'exploration de données ou pour enrichir des rapports HTML. 
+* **plotly** : Ce package permet de transformer vos graphiques statiques ggplot2 en versions interactives (zoom, survol à la souris, filtres) avec une seule fonction : `ggplotly()`. C'est l'outil parfait pour l'exploration de données ou pour enrichir des rapports HTML. 
 
 * **highcharter** : Une interface R pour la célèbre bibliothèque JavaScript Highcharts. Il est particulièrement apprécié pour créer des graphiques dynamiques et élégants, très utilisés dans les tableaux de bord professionnels, offrant une grande fluidité et de nombreuses options de personnalisation. 
 
@@ -264,4 +264,4 @@ Shiny permet de transformer vos analyses R en applications web interactives sans
 
 Le débogage est une étape inévitable pour garantir la fiabilité de vos scripts, surtout lorsque la logique métier devient complexe. 
 
-* **base::browser()** : Plus qu'un package, c'est une fonction native essentielle. Insérée dans votre code, elle interrompt l'exécution et vous permet d'inspecter l'environnement à cet instant précis. Vous pouvez alors tester vos variables, exécuter le code ligne par ligne et comprendre exactement où et pourquoi une erreur se produit. C'est l'outil de diagnostic primaire de tout développeur R. 
+* `base::browser()` : Plus qu'un package, c'est une fonction native essentielle. Insérée dans votre code, elle interrompt l'exécution et vous permet d'inspecter l'environnement à cet instant précis. Vous pouvez alors tester vos variables, exécuter le code ligne par ligne et comprendre exactement où et pourquoi une erreur se produit. C'est l'outil de diagnostic primaire de tout développeur R. 
