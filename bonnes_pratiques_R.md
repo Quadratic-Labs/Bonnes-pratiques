@@ -189,9 +189,8 @@ Ainsi, avec les outils présentés dans la sous-section 1, on identifera le nomb
 # PARTIE 3 : FORME DU LIVRABLE
 
 Au-delà de la propreté du code, la forme finale du livrable jouera un rôle déterminant dans l’appréciation du client. 
-La forme que doit prendre le livrable est un choix qui dépend avant tout du sujet sur lequel vous travaillez.
 
-## un rmarkdown pour l’analyse
+## Un rmarkdown pour l’analyse
 
 Le format de fichier rmarkdown (ou 'qwarto' dans sa forme plus moderne) est un type de fichier fusionnant la syntaxe markdown et du code R.
 
@@ -203,9 +202,24 @@ Concernant la forme du markdown :
 * Le paquet `knitr` ne sert pas uniquement à compiler le document. En effet, certaines de ses autres fonctions méritent d'être connues. Je pense par exemple à `knitr::ktable()` pour afficher des tables ou `knitr::opts_chunk()` pour définir globalement les paramètres des chunks.
 * Dans le cadre de la production de rapport de présentation, vous pouvez omettre le code avec le paramètre `echo=FALSE` pour le rendre plus lisible. Les profils techniques pourront directement consulter le fichier rmarkdown pour conslter le code.
 
-## un paquet R pour le code 
+## Un paquet R pour le code 
 
-## un shiny pour les outils interactifs
+Je déconseille fortement de définir ses fonctions dans des scripts R isolés. En effet, cela présente plusieurs inconvénients :
+* On ne sait pas avec quelle version des paquets importés votre code fonctionne, car les dépendances ne sont pas clairement citées.
+* Aucun test ne vérifie le bon fonctionnement de chaque fonction, ce qui le rend plus risqué à modifier
+* La documentation est indépendante du code, et donc n'est pas nécessairement à jour
+
+Pour résoudre ces problèmes, la meilleure solution consiste à rassembler toutes ses fonctions dans un paquet. Ce terme peut faire peur mais je vous rassure : la création de paquets sur R est relativement simple, et de mon avis plus simple que sur Python. Je vous renvoie en particulier vers la bible de la création de paquet (gratuit !) : R Packages (2e) de Hadley Wickham and Jennifer Bryan.
+
+Ainsi, un paquet R vous permettra de :
+* Gérer vos dépendances, avec la possibilité de les classer selon leur importance (Depends/Imports/Suggest). L'ensemble des paquets utilisés doivent être explicitement cité dans la documentation `roxygen2` avec les tags `@importFrom` (ou `@import` dans le cas des paquets "framework" comme `dplyr` ou `data.table`). 
+* Ajouter des tests unitaires pour garantir la robustesse du code et la gestion des cas particuliers. Pour rappel : les tests unitaires doivent être réalisés en parallèle du développement de la fonction, et non après. Aussi, le paquet `codecov` permet d'évaluer la couverture du code, c'est-à-dire la proportion du code "protégée" par les tests unitaires (attention : le taux de couverture est un indicateur, non un objectif !) 
+* Intégrer directement la documentation à chaque fonction. Lors de la phase de `Check` du paquet, l’adéquation entre la fonction et sa documentation sera vérifiées 
+* Lier de la documentation annexe à votre code avec les vignettes. Elles sont particulièrement utiles pour illustrer le fonctionnement de vos fonctions.
+* Intégrer des méta-données, telles que le nom de l’auteur, la licence, ... 
+* Instaurer une notion de versionnage, avec donc un suivi des corrections de bugs ou d'ajouts de fonctionnalités
+
+## Un shiny pour les outils interactifs
 
 
 # PARTIE 4 : SELECTION DE PAQUETS PAR CAS D'USAGE
