@@ -31,7 +31,7 @@ Les performances doivent être proches de l'idéal [...].
 Un code propre fait une chose et le fait bien"  
 *B. STROUSTRUP* (humble inventeur du C++)
 
-Avant d’aborder plus précisément les spécificités du langage R, j’aborde d’abord ces principes généraux. 
+Avant d’aborder plus précisément les spécificités du langage R, j’aborde présenter les principes généraux de propreté d'un code. 
 
 Les indicateurs de propreté du code ont été discutés par des développeurs renommés. Dans les différents points de vue que l’on peut trouver, on retrouve certaines tendances. Ainsi, un code propre doit être :  
 * Explicite : aucune règle n’est implicite. Le lecteur n’a rien à deviner 
