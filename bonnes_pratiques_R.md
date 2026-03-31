@@ -151,19 +151,19 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
 1. Affiner la lecture des inputs
 
-   Il faut éviter de stocker la totalité de la table en mémoire. Il faut donc essayer d’importer de filtrer les données et/ou sélectionner les colonnes dès la lecture de l’input sur le disque dure.
-   Dans le cas de de fichier Excel, cela consiste utilise les argument `col_names`, `skip`, et `n_max` (présent dans toutes les fonctions d’import). Dans le cas d’une table située sur une base de données SQL, cela revient à restreindre la quantité dans la requête SQL.  
+   Il faut éviter de stocker la totalité de la table en mémoire. Pour cela, on peut filtrer les données et/ou sélectionner les colonnes dès la lecture de l’input sur le disque dure.
+   Dans le cas de de fichier Excel, cela consiste utilise les arguments `col_names`, `skip`, et `n_max` (présents dans les fonctions de lecture les plus connues). Dans le cas d’une table située sur une base de données SQL, cela revient à optimiser la requête SQL.
 
 2. Gérer les données volumineuses avec data.table
 
-   Comparable au paquet 'dplyr', le paquet data.table propose une syntaxe pour manipulation de la donnée. Elle est adapté au traitement de volume de données important. En effet, dans ce cas précis, l’utilisation de data.table peut faire gagner un temps significatif sur les temps d’exécution. 
+   Comparable au paquet 'dplyr', le paquet 'data.table' propose une syntaxe pour manipuler la donnée. Elle est adaptée aux volumes important de données. En effet, dans ce contexte, l’utilisation de 'data.table' peut faire gagner un temps significatif sur l’exécution du code.
 
 3. Vectoriser les processus itératifs
 
-   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. C’est une caractéristique permet de ne pas avoir systématiquement recours à des boucles WHILE ou FOR.
+   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. Cette caractéristique permet de ne pas avoir systématiquement recours à des boucles WHILE ou FOR.
    En effet, en règle générale, réaliser une opération par vectorisation est plus rapide que la réaliser par boucle. De plus, il permet d’éviter un niveau d’indentation supplémentaire. 
 
-D’un point de vue de lisibité, je conseille la fonction `base::vectorize()`. Elle simule une vectorisation sur des fonctions non vectorisable. Néanmoins cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. 
+D’un point de vue de lisibité, je conseille la fonction `base::vectorize()`. Elle simule une vectorisation sur des fonctions non vectorisable. Attention, cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. Néanmoins, ils existent d'autres fonctions qui appliquent une "vraie" vectorisation. C'est le cas de par exemple `base::bind_rows()` pour les concaténations, `plyr::join()` pour les jointures, ou les fonctions de la famille `base::apply` pour différentes applications de la vectorisation.
 
 ## 3. Optimisation de l'utilisation de son environnement
 
