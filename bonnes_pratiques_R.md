@@ -65,7 +65,7 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 
 * Utiliser les pipes
   
-  Les pipes (ou ‘conduits’ en français) est un type d’opérateur qui permet de construire un 'pipeline', pour appliquer une suite de transformation à un input. Il évite la création de variables purement intermédiaires, tout en rendant le code moins redondant. L'opérateur de type pipe le plus connu est `%>%` du package magrittr. Mais je conseillerais plutôt l’utilisation du pipe natif `|>`. Bien qu'il soit moins courant, il a l’avantage d'être légèrement plus rapide que celui de magrittr, tout en évitant une dépendance supplémentaire. 
+  Les pipes (ou ‘conduits’ en français) est un type d’opérateur qui permet de construire un 'pipeline', pour appliquer une suite de transformation à un input. Il évite la création de variables purement intermédiaires, tout en rendant le code moins redondant. L'opérateur de type pipe le plus connu est `%>%` du package 'magrittr'. Mais je conseillerais plutôt l’utilisation du pipe natif `|>`. Bien qu'il soit moins courant, il a l’avantage d'être légèrement plus rapide que celui de 'magrittr', tout en évitant une dépendance supplémentaire. 
 
 * Identifier, minimiser, et mettre à jour les paquets importés
   
