@@ -52,7 +52,7 @@ De cette manière, le script gagnera en qualité à chaque passe.
 
 ## 2. Les règles de propreté en R  
 
-A partir des indicateurs précédents, on déduit des règles concrètes appliqués au langage R. A noter que certaines de ces critères sont transposables à d'autres langages, selon qu’il soit proche ou non de R. 
+A partir des indicateurs précédents, on déduit des règles concrètes appliquées au langage R. A noter que certains de ces critères sont transposables à d'autres langages, selon qu’il soit proche ou non de R. 
 
 * Respecter les conventions d’indentation
   
