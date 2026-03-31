@@ -25,9 +25,9 @@ Dans cette partie, je vous présente des moyens pour produire un code qui auraie
 ## 1. La propreté du code 
 
 > "La logique doit être simple, pour que les bogues aient du mal à se cacher.  
-Les dépendances doivent être minimes afin de faciliter la maintenance. 
+Les dépendances doivent être minimes afin de faciliter la maintenance.  
 La gestion des erreurs doit être totale [...].  
-Les performances doivent être proches de l'idéal [...]. 
+Les performances doivent être proches de l'idéal [...].  
 Un code propre fait une chose et le fait bien"  
 B. STROUSTRUP (humble inventeur du C++)
 
