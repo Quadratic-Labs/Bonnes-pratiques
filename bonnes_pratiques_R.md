@@ -16,7 +16,7 @@ Dans ce document, je me focalise sur les bonnes pratiques appliquées aux langag
 La notion de propreté est commune à tous les langages de programmation, malgré leurs différences (orienté objet ou procédural, de haut ou bas niveau...).
 Un code propre, quel que soit son langage, a les qualités subjectives suivantes :  
 * Sa maintenabilité : Il peut être lu et amélioré par un développeur autre que le développeur d’origine 
-* Son imperfectibilité : rien de permet de l’améliorer de manière évidente 
+* Son imperfectibilité : rien ne permet de l’améliorer de manière évidente 
 * Sa clarté : il demande peu d’effort pour être lu et compris 
 * Sa limpidité : il retranscrit parfaitement l’idée d’origine du développeur 
 
@@ -31,7 +31,7 @@ Les performances doivent être proches de l'idéal [...].
 Un code propre fait une chose et le fait bien"  
 *B. STROUSTRUP* (humble inventeur du C++)
 
-Avant d’aborder plus précisément les spécificités du langage R, j’aborde présenter les principes généraux de propreté d'un code. 
+Avant d’aborder plus précisément les spécificités du langage R, je présente les principes généraux de propreté d'un code. 
 
 Les indicateurs de propreté du code ont été discutés par des développeurs renommés. Dans les différents points de vue que l’on peut trouver, on retrouve certaines tendances. Ainsi, un code propre doit être :  
 * Explicite : aucune règle n’est implicite. Le lecteur n’a rien à deviner 
@@ -52,20 +52,19 @@ De cette manière, le script gagnera en qualité à chaque passe.
 
 ## 2. Les règles de propreté en R  
 
-A partir des indicateurs précédents, on déduit des règles concrètes appliquées au langage R. A noter que certains de ces critères sont transposables à d'autres langages, selon qu’il soit proche ou non de R. 
+A partir des indicateurs précédents, on déduit des règles concrètes appliquées au langage R. A noter que certains de ces critères sont transposables à d'autres langages, selon qu’ils soient proches ou non de R. 
 
 * Respecter les conventions d’indentation
   
-  En R, l’indentation du code n'a pas de conséquences sur son exécution. Néanmoins, un script mal indenté perd significativement en lisibilité. De plus, une bonne indentation indique quelles parties du code sont particulièrement imbriquées, et donc lesquelles pourraient bénéficier d’une réécriture. En effet, un code imbriqué est généralement moins lisible qu'un code plat. Pour reprendre le zen de Python (cf. Annexe 2) « Nested is better than flat”. 
+  En R, l’indentation du code n'a pas de conséquences sur son exécution. Néanmoins, un script mal indenté perd significativement en lisibilité. De plus, une bonne indentation indique quelles parties du code sont particulièrement imbriquées, et donc lesquelles pourraient bénéficier d’une réécriture. En effet, un code imbriqué est généralement moins lisible qu'un code plat. Pour reprendre le *zen de Python* (cf. Annexe 2) « Nested is better than flat”. 
 
 * Ecrire des commentaires uniquement s’ils sont irremplaçables
   
-  S’ils peuvent être pertinents, les commentaires sont souvent utilisés pour compenser des défauts réels du code. Si le code est propre, alors un développeur n’a pas besoin de commentaires pour le comprendre. Par opposition, le bon commentaire est celui qui ne peut pas être remplacé par du code (cf. Annexe 3 pour des exemples précis de mauvais commentaires).
-  De plus, un nombre important de commentaires nuit à la maintenabilité du code. En effet, les développeurs sont plus réticents à supprimer un commentaire qu’à modifier du code, même si le commentaire en question est énigmatique. 
+  S’ils peuvent être pertinents, les commentaires sont souvent utilisés pour compenser des défauts réels du code. Si le code est propre, alors un développeur n’a pas besoin de commentaires pour le comprendre. Par opposition, le bon commentaire est celui qui ne peut pas être remplacé par du code (cf. Annexe 3 pour des exemples précis de mauvais commentaires). Aussi, les développeurs, intervenant sur un code tierce, sont plus réticents à supprimer un commentaire qu’à modifier du code, même si le commentaire en question est énigmatique. 
 
 * Utiliser les pipes
   
-  Les pipes (ou ‘conduits’ en français) est un type d’opérateur qui permet de construire un 'pipeline', pour appliquer une suite de transformation à un input. Il évite la création de variables purement intermédiaires, tout en rendant le code moins redondant. L'opérateur de type pipe le plus connu est `%>%` du package 'magrittr'. Mais je conseillerais plutôt l’utilisation du pipe natif `|>`. Bien qu'il soit moins courant, il a l’avantage d'être légèrement plus rapide que celui de 'magrittr', tout en évitant une dépendance supplémentaire. 
+  Le pipe (ou ‘conduit’ en français) est un type d’opérateur qui permet de construire un 'pipeline', pour appliquer une suite de transformations à un input. Il évite la création de variables purement intermédiaires, tout en rendant le code moins redondant. L'opérateur de type pipe le plus connu est `%>%` du package 'magrittr'. Mais je conseillerais plutôt l’utilisation du pipe natif `|>`. Bien qu'il soit moins courant, il a l’avantage d'être légèrement plus rapide que celui de 'magrittr', tout en évitant une dépendance supplémentaire. 
 
 * Identifier, minimiser, et mettre à jour les paquets importés
   
@@ -75,7 +74,7 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 
 * Gérer explicitement les erreurs de lecture/écriture
   
-  La lecture et écriture de fichiers utilise des chemins physiques pour localiser des données sur le disque. Ces chemins sont souvent gérés par des chaînes de caractères en un unique bloc. Pour repérer plus facilement les problèmes de fichier non trouvé, je recommande d’utiliser en amont de la lecture les fonctions `base::dir.exits` ou `base::file.exists`. De plus, pour gagner en lisibilité, je recommande d’utiliser la fonction `base::file.path`, où chaque répertoire du chemin correspond à un argument. Elle est d’autant plus pratique qu’elle fonctionne de manière récursive. 
+  La lecture et l'écriture de fichiers utilisent des chemins physiques pour localiser des données sur le disque. Ces chemins sont souvent gérés par des chaînes de caractères en un unique bloc. Pour repérer plus facilement les problèmes de fichier non trouvé, je recommande d’utiliser en amont de la lecture les fonctions `base::dir.exits` ou `base::file.exists`. De plus, pour gagner en lisibilité, je recommande d’utiliser la fonction `base::file.path`, où chaque répertoire du chemin correspond à un argument. Elle est d’autant plus pratique qu’elle fonctionne de manière récursive. 
 
 * Pas de codage dynamique
   
@@ -101,22 +100,22 @@ J’aimerais aborder certains critères spécifiques aux fonctions. Les concerna
    Cette phrase implique que :  
     * Le nom de la fonction énonce clairement ce qu’elle est sensée faire.
     * Chaque fonction est associée à un niveau d’abstraction. Le vocabulaire employé pour nommer la fonction et ses variables locales doit être cohérent avec le lexique de ce niveau. Par exemple, une fonction de haut niveau utilisera plutôt un vocabulaire métier, tandis qu’une fonction de bas niveau utilisera plutôt un vocabulaire technique/informatique.
-    * Une fonction ne doit pas produire d’effet de bords, c’est-à-dire d’autres effets que celui qu’il est sensé produire.
+    * Une fonction ne doit pas produire d’effet de bords, c’est-à-dire d’autres effets que celui qu’elle est sensée produire.
     * Ne pas avoir d’arguments indicateurs, c’est-à-dire d’arguments booléens qui changeraient le rôle de la fonction. Ce type d’argument indique qu’il vous faut non pas une, mais deux fonctions. 
     * Des tests unitaires doivent vérifier si la fonction remplie bien son unique objectif, y compris dans les cas particuliers.
     * Le nombre de fonctions dans un script est souvent important, et cela n’est pas un problème.
 
 2. : **"Ecrire des fonctions courtes"**  
 
-    A cette règle, on peut se demander quelle est la longueur maximale (en nombre de lignes) que doit atteindre une fonction. Dans la littérature, ce seuil maximum varie généralement de 30 à 50 lignes, mais peut descendre jusqu’à 10. Plutôt que de se baser sur un seul arbitraire dans cet intervalle, je vous propose une méthode simple : à chaque passe d’écriture de votre fonction, considérer qu’elle est trop longue et essayer de la rendre plus courte.  
+    A cette règle, on peut se demander quelle est la longueur maximale (en nombre de lignes) que doit atteindre une fonction. Dans la littérature, ce seuil maximum varie généralement de 30 à 50 lignes, mais peut descendre jusqu’à 10. Plutôt que de se baser sur un seuil arbitraire dans cet intervalle, je vous propose une méthode simple : à chaque passe d’écriture de votre fonction, considérer qu’elle est trop longue et essayer de la rendre plus courte.  
 
 3. : **"Pour chaque fonction, limiter drastiquement le nombre d’arguments"**  
 
-    L’ajout d’arguments dans une fonction n’est pas sans conséquences : elle complexifie son l’utilisation. De plus, chaque argument nécessite la création de tests unitaires adéquats pour tester son bon fonctionnement.
+    L’ajout d’arguments dans une fonction n’est pas sans conséquences : elle complexifie son utilisation. De plus, chaque argument nécessite la création de tests unitaires adéquats pour tester son bon fonctionnement.
 Dans les faits, une fonction a rarement besoin de plus de 3 arguments. Ce nombre peut sembler irréalisable. Néanmoins certaines astuces permettent de s’en rapprocher :
     * Pour les paramètres techniques : les développeurs ont tendance à mettre l’ensemble des paramètres techniques en argument, en leur attribuant une valeur par défaut. Or, si la valeur d’un paramètre ne varie pas dans votre fonction, alors celui-ci n’a pas besoin d’être un argument, mais seulement une variable locale
-    * Utiliser des listes : les listes tendent à remplacer la programmation orientée objet (POO) en R (qui existe bien, mais est rarement utilisé). Il n’y a donc pas de soucis à mettre une liste en argument, à condition que l’objet qu’elle représente a une structure clairement définie et a du sens.
-    * Pour les paramètres utilisateurs : à l’inverse des paramètres techniques, certaines paramètres peuvent varier selon le souhait de l’utilisateur. Mon conseille est de créer une fonction spécifique pour récupérer les valeurs des paramètres utilisateurs depuis un fichier isolé (dans le cas d’un projet R) ou comme un objet global (dans le cas d’un paquet)
+    * Utiliser des listes : les listes tendent à remplacer la programmation orientée objet (POO) en R (qui existe bien, mais est rarement utilisée). Il n’y a donc pas de soucis à mettre une liste en argument, à condition que l’objet qu’elle représente a une structure clairement définie et a du sens.
+    * Pour les paramètres utilisateurs : à l’inverse des paramètres techniques, certains paramètres peuvent varier selon le souhait de l’utilisateur. Mon conseil est de créer une fonction spécifique pour récupérer les valeurs des paramètres utilisateurs depuis un fichier isolé (dans le cas d’un projet R) ou comme un objet global (dans le cas d’un paquet)
   
 Pour rappel : l’écriture des fonctions est un processus itératif. Quand vous écrivez une nouvelle fonction, il est normal que celle-ci ne soit pas propre dans sa première version. L’objectif du développeur consistera à faire plusieurs passes d'écriture sur cette fonction pour qu’elle adhère progressivement aux critères de qualité.
 
