@@ -20,7 +20,7 @@ Un code propre, quel que soit son langage, a les qualités subjectives suivantes
 * Sa clarté : il demande peu d’effort pour être lu et compris 
 * Sa limpidité : il retranscrit parfaitement l’idée d’origine du développeur 
 
-Dans cette partie, je vous présente des moyens pour produire un code qui auraient ces qualités. 
+Dans cette partie, je vous présente des moyens pour produire un code ayant ces qualités. 
 
 ## 1. La propreté du code 
 
