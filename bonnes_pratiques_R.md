@@ -56,7 +56,7 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 
 * Respecter les conventions d’indentation
   
-  En R, l’indentation du code n'a pas de conséquences sur son exécution. Néanmoins, un script mal indenté perd significativement en lisibilité. De plus, une bonne indentation indique quelles parties du code sont particulièrement imbriqués, et donc qui pourraient bénéficier d’une réécriture. En effet, un code imbriqué est généralement moins lisible qu'un code plat. Pour reprendre le zen de Python (cf. Annexe 2) « Nested is better than flat”. 
+  En R, l’indentation du code n'a pas de conséquences sur son exécution. Néanmoins, un script mal indenté perd significativement en lisibilité. De plus, une bonne indentation indique quelles parties du code sont particulièrement imbriquées, et donc lesquelles pourraient bénéficier d’une réécriture. En effet, un code imbriqué est généralement moins lisible qu'un code plat. Pour reprendre le zen de Python (cf. Annexe 2) « Nested is better than flat”. 
 
 * Ecrire des commentaires uniquement s’ils sont irremplaçables
   
