@@ -215,11 +215,11 @@ Pour résoudre ces problèmes, la meilleure solution consiste à rassembler tout
 
 Ainsi, un paquet R vous permettra de :
 * Gérer vos dépendances, avec la possibilité de les classer selon leur importance (Depends/Imports/Suggest). L'ensemble des paquets utilisés doivent être explicitement cité dans la documentation 'roxygen2' avec les tags `@importFrom` (ou `@import` dans le cas des paquets "framework" comme 'dplyr' ou 'data.table'). 
-* Ajouter des tests unitaires pour garantir la robustesse du code et la gestion des cas particuliers. Pour rappel : les tests unitaires doivent être réalisés en parallèle du développement de la fonction, et non après. Aussi, le paquet 'codecov' permet d'évaluer la couverture du code, c'est-à-dire la proportion du code "protégée" par les tests unitaires (attention : le taux de couverture est un indicateur, non un objectif !) 
-* Intégrer directement la documentation à chaque fonction. Lors de la phase de `Check` du paquet, l’adéquation entre la fonction et sa documentation sera vérifiées 
-* Lier de la documentation annexe à votre code avec les vignettes. Elles sont particulièrement utiles pour illustrer le fonctionnement de vos fonctions.
+* Ajouter des tests unitaires pour garantir la robustesse du code et la gestion des cas particuliers. Pour rappel : les tests unitaires doivent être réalisés en parallèle du développement de la fonction, et non après. Aussi, le paquet 'codecov' permet d'évaluer la couverture du code, c'est-à-dire la proportion du code "protégée" par les tests unitaires (attention : le taux de couverture est un indicateur, non un objectif !). 
+* Intégrer directement la documentation à chaque fonction. Lors de la phase de `Check` du paquet, l’adéquation entre la fonction et sa documentation sera vérifiée. 
+* Lier de la documentation annexe à votre code avec les vignettes. Elles sont particulièrement utiles pour illustrer à l'utilisateur le fonctionnement de vos fonctions.
 * Intégrer des méta-données, telles que le nom de l’auteur, la licence, ... 
-* Instaurer une notion de versionnage, avec donc un suivi des corrections de bogues ou d'ajouts de fonctionnalités
+* Instaurer une notion de versionnage, avec donc un suivi des corrections des bogues ou d'ajouts de fonctionnalités
 
 ## Un shiny pour les outils interactifs
 
