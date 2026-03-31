@@ -194,7 +194,7 @@ Au-delà de la propreté du code, la forme finale du livrable jouera un rôle d�
 
 ## Un rmarkdown pour l’analyse
 
-Le format de fichier rmarkdown (ou 'qwarto' dans sa forme plus moderne) est un type de fichier fusionnant la syntaxe markdown et du code R.
+Le format de fichier rmarkdown (ou 'qwarto' dans sa forme plus moderne) est un type de fichier fusionnant la syntaxe markdown avec du code R.
 
 C'est un type de fichier adapté pour la présentation de résultats ou la réalisation d'une analyse. Dans ces cas précis, le fichier rmarkdown et une version compilée (HTML,PDF,...) doivent être tous deux fournis au client. En effet, le rmarkdown est une 'preuve' de la reproductibilité des résultats. N'importe qui doit pouvoir re-compiler le fichier sous un autre format, tout en conservant les mêmes résultats. C'est pour cela qu'il est important de vérifier la consistance des résultats entre plusieurs exécutions complètes : tous les aléas potentiels doivent être maîtrisés.
 
