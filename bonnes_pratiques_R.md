@@ -94,7 +94,7 @@ Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vou
 
 ## 3. Gestion des fonctions  
 
-J’aimerais aborder certains critères spécifiques aux fonctions. L’écriture des fonctions est un processus itératif. Quand vous écrivez une nouvelle fonction, il est normal que celle-ci ne soit pas propre dans sa première version. L’objectif du développeur consistera à faire plusieurs passes sur cette fonction pour qu’elle adhère progressivement à certains critères. C’est pourquoi il existe trois règles essentielles les concernant : 
+J’aimerais aborder certains critères spécifiques aux fonctions. Les concernant, 3 règles essentielles reviennent : 
 
 1. **"Une fonction ne fait qu’une seule chose, et le fait bien"**  
 
@@ -116,7 +116,9 @@ J’aimerais aborder certains critères spécifiques aux fonctions. L’écritur
 Dans les faits, une fonction a rarement besoin de plus de 3 arguments. Ce nombre peut sembler irréalisable. Néanmoins certaines astuces permettent de s’en rapprocher :
     * Pour les paramètres techniques : les développeurs ont tendance à mettre l’ensemble des paramètres techniques en argument, en leur attribuant une valeur par défaut. Or, si la valeur d’un paramètre ne varie dans votre fonction, alors celui-ci n’a pas besoin d’être un argument, mais seulement d’être une variable locale
     * Utiliser des listes : les listes tendent à remplacer la programmation orientée objet (POO) en R (qui existent bien, mais sont rarement utilisés). Il n’y a donc pas de soucis à mettre une liste en argument, à condition que “l’objet” qu’elle représente ait une structure clairement définie.
-    * Pour les paramètres utilisateurs : à l’inverse des paramètres techniques, les paramètres peuvent varier selon le souhait de l’utilisateur. Mon conseille est de créer une fonction spécifique pour récupérer les valeurs des paramètres utilisateurs. Pour cela, les valeurs de ces paramètres doivent être stockés dans un fichier isolé (dans le cas d’un projet R) ou comme un objet global (dans le cas d’un paquet) 
+    * Pour les paramètres utilisateurs : à l’inverse des paramètres techniques, les paramètres peuvent varier selon le souhait de l’utilisateur. Mon conseille est de créer une fonction spécifique pour récupérer les valeurs des paramètres utilisateurs. Pour cela, les valeurs de ces paramètres doivent être stockés dans un fichier isolé (dans le cas d’un projet R) ou comme un objet global (dans le cas d’un paquet)
+  
+Pour rappel : l’écriture des fonctions est un processus itératif. Quand vous écrivez une nouvelle fonction, il est normal que celle-ci ne soit pas propre dans sa première version. L’objectif du développeur consistera à faire plusieurs passes sur cette fonction pour qu’elle adhère progressivement à certains critères.
 
 
 # PARTIE 2 : OPTIMISATION DU CODE 
