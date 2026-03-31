@@ -142,7 +142,7 @@ L'outil de base de l'optimisation est le benchmark : l’évaluation des perform
 
 La fonction `profvis::profvis()` s'exécute sur un code entier.  La fonction analyse les performances de chaque étape. On peut donc identifier quelles sont celles qui nécessitent une optimisation. A noter qu'on retrouve généralement une répartition de Pareto. En effet, dans un code non optimisé, une faible partie du code (<20%) est responsable d'une grande partie du temps d'exécution (>80%). 
 
-C’est à l’issue de l’identification qu’on utilise `microbenmark::microbenchmark()`. Contrairement à `profvis::profvis()`, celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l'aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser, notamment en termes de temps d’exécution. Il faut bien vérifier que ces gains sont significatifs, et mais aussi analyser comment ils évoluent avec l’augmentation du volume de la donnée. 
+C’est à l’issue de l’identification qu’on utilise `microbenmark::microbenchmark()`. Contrairement à `profvis::profvis()`, celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l'aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser, notamment en termes de temps d’exécution. Il faut bien vérifier que ces gains sont significatifs, mais aussi analyser comment ils évoluent avec l’augmentation du volume de la donnée. 
 
 ## 2. Optimisation du temps d'exécution de son code
 
@@ -150,19 +150,19 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
 1. Affiner la lecture des inputs
 
-   Il faut éviter de stocker la totalité de la table en mémoire. Pour cela, on peut filtrer les données et/ou sélectionner les colonnes dès la lecture de l’input sur le disque dure.
-   Dans le cas de de fichier Excel, cela consiste utilise les arguments `col_names`, `skip`, et `n_max` (présents dans les fonctions de lecture les plus connues). Dans le cas d’une table située sur une base de données SQL, cela revient à optimiser la requête SQL.
+   Il faut éviter de stocker la totalité de la table en mémoire. Pour cela, on peut filtrer les données et/ou sélectionner les colonnes dès la lecture de l’input sur le disque dur.
+   Dans le cas de de fichier Excel, cela consiste à utiliser les arguments `col_names`, `skip`, et `n_max` (présents dans les fonctions de lecture les plus connues). Dans le cas d’une table située dans une base de données SQL, cela revient à optimiser la requête SQL.
 
 2. Gérer les données volumineuses avec data.table
 
-   Comparable au paquet 'dplyr', le paquet 'data.table' propose une syntaxe pour manipuler la donnée. Elle est adaptée aux volumes important de données. En effet, dans ce contexte, l’utilisation de 'data.table' peut faire gagner un temps significatif sur l’exécution du code.
+   Comparable au paquet 'dplyr', le paquet 'data.table' propose une syntaxe pour manipuler la donnée. Elle est adaptée aux volumes importants de données. En effet, dans ce contexte, l’utilisation de 'data.table' peut faire gagner un temps significatif sur l’exécution du code.
 
 3. Vectoriser les processus itératifs
 
-   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. Cette caractéristique permet de ne pas avoir systématiquement recours à des boucles WHILE ou FOR.
-   En effet, en règle générale, réaliser une opération par vectorisation est plus rapide que la réaliser par boucle. De plus, il permet d’éviter un niveau d’indentation supplémentaire. 
+   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. Cette caractéristique permet de ne pas avoir systématiquement recours à des boucles FOR.
+   En effet, en règle générale, réaliser une opération par vectorisation est plus rapide que de la réaliser par boucle. De plus, il permet d’éviter un niveau d’indentation supplémentaire. 
 
-D’un point de vue de lisibité, je conseille la fonction `base::vectorize()`. Elle simule une vectorisation sur des fonctions non vectorisable. Attention, cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. Néanmoins, ils existent d'autres fonctions qui appliquent une "vraie" vectorisation. C'est le cas de par exemple `base::bind_rows()` pour les concaténations, `plyr::join()` pour les jointures, ou les fonctions de la famille `base::apply` pour différentes applications de la vectorisation.
+Du point de vue de la lisibité, je conseille la fonction `base::vectorize()`. Elle simule une vectorisation sur des fonctions non vectorisables. Attention, cette fonction ne diminue pas le temps d’exécution : elle n’est qu’un "wrapper" pour les boucles. Néanmoins, il existe d'autres fonctions qui appliquent une "vraie" vectorisation. C'est le cas de par exemple `base::bind_rows()` pour les concaténations, `plyr::join()` pour les jointures, ou les fonctions de la famille `base::apply` pour différentes applications de la vectorisation.
 
 ## 3. Optimisation de l'utilisation de son environnement
 
@@ -174,17 +174,17 @@ C'est une étape qui arrive après, et seulement après, avoir optimisé son cod
 * Comment maximiser son utilisation des ressources à disposition ? (efficacité)
 * La quantité de ressources mobilisées est-elle cohérente avec votre besoin ? (efficience)
 
-En terme d'efficacité, la parallélisation est une technique qui vous permet d'exploiter toute la puissance de calcul de vos ressources.
+En termes d'efficacité, la parallélisation est une technique qui vous permet d'exploiter toute la puissance de calcul de vos ressources.
 En effet, elle consiste à répartir l'exécution du code simultanément sur plusieurs unités de calcul (coeurs ou processeurs). 
 Dans les paquets R, la parallélisation se manifeste sous la forme d'un ou plusieurs paramètres utilisateur : activer ou non la paraléllisation, combien d'unités doivent être mobilisées... 
 Il sera particulièrement apprécié dans les paquets réalisant des traitements de donnée volumineuse.
-L'objectif ici sera de paralléliser le maximum de traitement. En effet, plus de traitements seront parallélisés, et plus le gain de vitesse par unité de calcul sera important. 
+L'objectif ici sera de paralléliser le maximum de traitements. En effet, plus les traitements seront parallélisés, et plus le gain de vitesse par unité de calcul sera important. 
 Plusieurs paquets R permettent de paralléliser son code, comme par exemple 'parallel' ou le duo de 'doParallel' et 'foreach'.
 Attention : en plus d'avoir tendance à complexifier le code, la mise en place de la parallélisation nécessite une certaine expérience pour être bien exploitée.
 
 Une fois la parallélisation implémentée, il faut identifier le nombre d'unités de traitement suffisant pour votre code. 
 En effet, mobiliser des ressources a un coût (monétaire ou d'opportunité), qu'il convient de minimiser.
-Or, le gain de vitesse obtenu par chaque unité de calcul (coeurs ou processeurs) est décroissant, et tend 0 (cf. Loi d'Amdahl).
+Or, le gain de vitesse obtenu par chaque unité de calcul (coeurs ou processeurs) est décroissant, et tend vers 0 (cf. Loi d'Amdahl).
 Ainsi, avec les outils présentés dans la sous-section 1, vous identifierez le nombre optimal de ressources pour votre besoin.
 
 # PARTIE 3 : FORME DU LIVRABLE
@@ -198,22 +198,22 @@ Le format de fichier rmarkdown (ou 'qwarto' dans sa forme plus moderne) est un t
 C'est un type de fichier adapté pour la présentation de résultats ou la réalisation d'une analyse. Dans ces cas précis, le fichier rmarkdown et une version compilée (HTML,PDF,...) doivent être tous deux fournis au client. En effet, le rmarkdown est une 'preuve' de la reproductibilité des résultats. N'importe qui doit pouvoir re-compiler le fichier sous un autre format, tout en conservant les mêmes résultats. C'est pour cela qu'il est important de vérifier la consistance des résultats entre plusieurs exécutions complètes : tous les aléas potentiels doivent être maîtrisés.
 
 Concernant la forme du markdown : 
-* Un minimun de code R doit être intégré dans les chunks. En particulier, les fonctions ne doivent pas être déclarées dans le fichier. Pour cela, on pourra les intégrer à ses proches paquets (voir sous-section suivante)
+* Un minimun de code R doit être intégré dans les chunks. En particulier, les fonctions ne doivent pas être déclarées dans le fichier. Pour cela, on pourra les intégrer à ses propres paquets (voir sous-section suivante)
 * Toujours nommer les chunks pour mieux se repérer dans le document
 * Le paquet 'knitr' ne sert pas uniquement à compiler le document. En effet, certaines de ses autres fonctions méritent d'être connues. Je pense par exemple à `knitr::ktable()` pour afficher des tables ou `knitr::opts_chunk()` pour définir globalement les paramètres des chunks.
-* Dans le cadre de la production de rapport de présentation, vous pouvez omettre le code avec le paramètre `echo=FALSE` pour le rendre plus lisible. Les profils techniques pourront directement consulter le fichier rmarkdown pour consulter le code.
+* Dans le cadre de la production de rapports de présentation, vous pouvez omettre le code avec le paramètre `echo=FALSE` pour le rendre plus lisible. Les profils techniques pourront directement consulter le fichier rmarkdown pour consulter le code.
 
 ## Un paquet R pour le code 
 
 Je déconseille fortement de définir ses fonctions dans des scripts R isolés. En effet, cela présente plusieurs inconvénients :
-* On ne sait pas avec quelle version des paquets importés votre code fonctionne, car les dépendances ne sont pas clairement citées.
-* Aucun test ne vérifie le bon fonctionnement de chaque fonction, ce qui le rend plus risqué à modifier
+* On ne sait pas avec quelles versions des paquets importés votre code fonctionne, car les dépendances ne sont pas clairement citées.
+* Aucun test ne vérifie le bon fonctionnement de chaque fonction, ce qui les rend plus risquées à modifier
 * La documentation est indépendante du code, et donc n'est pas nécessairement à jour
 
 Pour résoudre ces problèmes, la meilleure solution consiste à rassembler toutes ses fonctions dans un paquet. Ce terme peut faire peur mais je vous rassure : la création de paquets sur R est relativement simple, et de mon avis plus simple que sur Python. Je vous renvoie en particulier vers la bible de la création de paquet (gratuit !) : R Packages (2e) de Hadley Wickham and Jennifer Bryan.
 
 Ainsi, un paquet R vous permettra de :
-* Gérer vos dépendances, avec la possibilité de les classer selon leur importance (Depends/Imports/Suggest). L'ensemble des paquets utilisés doivent être explicitement cité dans la documentation 'roxygen2' avec les tags `@importFrom` (ou `@import` dans le cas des paquets "framework" comme 'dplyr' ou 'data.table'). 
+* Gérer vos dépendances, avec la possibilité de les classer selon leur importance (Depends/Imports/Suggest). L'ensemble des paquets utilisés doivent être explicitement cités dans la documentation 'roxygen2' avec les tags `@importFrom` (ou `@import` dans le cas des paquets "framework" comme 'dplyr' ou 'data.table'). 
 * Ajouter des tests unitaires pour garantir la robustesse du code et la gestion des cas particuliers. Pour rappel : les tests unitaires doivent être réalisés en parallèle du développement de la fonction, et non après. Aussi, le paquet 'codecov' permet d'évaluer la couverture du code, c'est-à-dire la proportion du code "protégée" par les tests unitaires (attention : le taux de couverture est un indicateur, non un objectif !). 
 * Intégrer directement la documentation à chaque fonction. Lors de la phase de `Check` du paquet, l’adéquation entre la fonction et sa documentation sera vérifiée. 
 * Lier de la documentation annexe à votre code avec les vignettes. Elles sont particulièrement utiles pour illustrer à l'utilisateur le fonctionnement de vos fonctions.
