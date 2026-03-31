@@ -39,7 +39,7 @@ Les indicateurs de propreté du code ont été discutés par des développeurs r
 * Simple : le code est logique et va à l’essentiel 
 * Parcimonieux : aucune opération superflue est présente 
 * Non redondant : il n’y a pas 2 blocs/fonctions qui réalisent un traitement identique 
-* Harmonieux : le style est cohérent tout au long du script (cf. Annexe 1 pour + de détails sur la notion de style, en opposition à la propreté) 
+* Harmonieux : le style (cf. annexe1 pour plus de détails sur cette notion) est cohérent tout au long du script
 
 __Le mythe de la reprise à 0 :__  
 Pour appliquer ces principes aux scripts existants, il peut être tentant de tenter de le réécrire en partant de 0. En effet, il est plus facile de créer son propre script, que de bien modifier celui de quelqu’un d’autre. Néanmoins il est communément admis que cela n’est pas une bonne idée, y compris si vous êtes un développeur expérimenté. En effet, si le code n’est pas propre, alors les intentions du développeur d’origine ne sont pas claires. Par conséquent, il vous manquerait très probablement des informations pour produire un script au moins aussi fonctionnel que celui de votre prédécesseur.  
