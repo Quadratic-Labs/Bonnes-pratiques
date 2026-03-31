@@ -38,7 +38,7 @@ Les indicateurs de propreté du code ont été discutés par des développeurs r
 * Lisible : les imbrications sont identifiées. Le code est aéré. Les noms des entités sont pertinents. 
 * Simple : le code est logique et va à l’essentiel 
 * Parcimonieux : aucune opération superflue est présente 
-* Non redondant : il n’y a pas 2 parties/fonctions qui réalisent un traitement identique 
+* Non redondant : il n’y a pas 2 blocs/fonctions qui réalisent un traitement identique 
 * Harmonieux : le style est cohérent tout au long du script (cf. Annexe 1 pour + de détails sur la notion de style, en opposition à la propreté) 
 
 __Le mythe de la reprise à 0 :__  
