@@ -60,7 +60,7 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 
 * Ecrire des commentaires uniquement s’ils sont irremplaçables
   
-  S’ils peuvent être perinentes, les commentaires sont souvent utilisés pour compenser les défauts réels du code. Si le code est propre, alors un développeur n’a pas besoin de commentaires pour le comprendre. Par opposition, le bon commentaire est celui qui ne peut pas remplacé par du code.
+  S’ils peuvent être pertinents, les commentaires sont souvent utilisés pour compenser les défauts réels du code. Si le code est propre, alors un développeur n’a pas besoin de commentaires pour le comprendre. Par opposition, le bon commentaire est celui qui ne peut pas remplacé par du code.
   De plus, de nombreux commentaires nuisent à la maintenabilité du code. En effet, les développeurs sont en effet plus réticents à supprimer un commentaire qu’à modifier du code, même si le commentaire en question est énigmatique. (cf. Annexe 3 pour des exemples précis de mauvais commentaires) 
 
 * Utiliser les pipes
