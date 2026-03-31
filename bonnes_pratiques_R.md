@@ -75,7 +75,7 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 
 * Gérer explicitement les erreurs de lecture/écriture
   
-  La lecture et écriture de fichiers utilise des chemins physiques pour localiser des données sur le disque. Ces chemins sont souvent gérés par des chaînes de caractères en un unique bloc. Pour repérer plus facilement les problèmes de fichier non trouvé, je recommande d’utiliser en amont de la lecture les fonctions dir.exits ou file.exist. De plus, pour gagner en lisibilité, je recommande d’utiliser la fonction file.path de R Base, où chaque répertoire du chemin correspond à un argument. Elle est d’autant plus pratique qu’elle fonctionne de manière récursive. 
+  La lecture et écriture de fichiers utilise des chemins physiques pour localiser des données sur le disque. Ces chemins sont souvent gérés par des chaînes de caractères en un unique bloc. Pour repérer plus facilement les problèmes de fichier non trouvé, je recommande d’utiliser en amont de la lecture les fonctions `base::dir.exits` ou `base::file.exists`. De plus, pour gagner en lisibilité, je recommande d’utiliser la fonction `base::file.path`, où chaque répertoire du chemin correspond à un argument. Elle est d’autant plus pratique qu’elle fonctionne de manière récursive. 
 
 * Pas de codage dynamique
   
