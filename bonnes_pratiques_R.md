@@ -108,7 +108,7 @@ J’aimerais aborder certains critères spécifiques aux fonctions. Les concerna
 
 2. : **"Ecrire des fonctions courtes"**  
 
-    A cette règle, on peut se demander quelle est la longueur maximale (en nombre de lignes) que peut atteindre une fonction. Dans la littérature, ce seuil maximum varie généralement de 30 à 50 lignes, mais peut descendre jusqu’à 10. Plutôt que de se baser un seul arbitraire dans cet intervalle, je vous propose une méthode suivante. A chaque passe d’écriture de votre fonction, considérer qu’elle est trop longue et essayer de la rendre plus courte.  
+    A cette règle, on peut se demander quelle est la longueur maximale (en nombre de lignes) que doit atteindre une fonction. Dans la littérature, ce seuil maximum varie généralement de 30 à 50 lignes, mais peut descendre jusqu’à 10. Plutôt que de se baser sur un seul arbitraire dans cet intervalle, je vous propose une méthode simple : à chaque passe d’écriture de votre fonction, considérer qu’elle est trop longue et essayer de la rendre plus courte.  
 
 3. : **"Pour chaque fonction, limiter drastiquement le nombre d’arguments"**  
 
