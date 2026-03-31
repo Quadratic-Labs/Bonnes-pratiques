@@ -143,7 +143,7 @@ L'outil de base de l'optimisation est le benchmark : l’évaluation des perform
 
 La fonction `profvis::profvis()` s'exécute sur un code entier.  La fonction analyse les performances de chaque étape. On peut donc identifier quelles sont celles qui nécessitent une optimisation. A noter qu'on retrouve généralement une répartition de Pareto. En effet, dans un code non optimisé, une faible partie du code (<20%) est responsable d'une grande partie du temps d'exécution (>80%). 
 
-C’est à l’issue de l’identification qu’on utilise `microbenmark::microbenchmark()`. Contrairement à `profvis::profvis()`, celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l'aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser (par exemple le temps d’exécution). Il faut bien vérifier que ces gains sont significatifs, et vérifier comment ils évoluent avec l’augmentation du volume de données. 
+C’est à l’issue de l’identification qu’on utilise `microbenmark::microbenchmark()`. Contrairement à `profvis::profvis()`, celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l'aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser, notamment en termes de temps d’exécution. Il faut bien vérifier que ces gains sont significatifs, et mais aussi analyser comment ils évoluent avec l’augmentation du volume de la donnée. 
 
 ## 2. Optimisation du temps d'exécution de son code
 
