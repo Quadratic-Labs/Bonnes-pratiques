@@ -99,12 +99,12 @@ J’aimerais aborder certains critères spécifiques aux fonctions. Les concerna
 1. **"Une fonction ne fait qu’une seule chose, et le fait bien"**  
 
    Cette phrase implique que :  
-    * Le nom de la fonction énonce clairement ce qu’elle est sensée faire 
-    * Chaque fonction est associée à un niveau d’abstraction. Le vocabulaire employé pour nommer la fonction et ses variables locales doit être cohérent avec le lexique de ce niveau. Par exemple, une fonction de haut niveau utilisera un vocabulaire en lien avec métier, tandis qu’une fonction de bas niveau utilisera un vocabulaire en lien avec le hardware 
-    * Une fonction ne doit pas produire d’effet de bords, c’est-à-dire d’autres effets que ce que celui qu’il est sensé produire 
-    * Ne pas avoir d’arguments indicateurs, c’est-à-dire d’arguments booléens qui changeraient le rôle de la fonction. Ce type d’argument indique qu’il vous faut probablement non pas une, mais deux fonctions. 
-    * Des tests unitaires doivent vérifier si la fonction remplie bien son unique objectif, y compris dans les cas particuliers 
-    * Le nombre de fonction dans un script est souvent important, et cela n’est pas un problème 
+    * Le nom de la fonction énonce clairement ce qu’elle est sensée faire.
+    * Chaque fonction est associée à un niveau d’abstraction. Le vocabulaire employé pour nommer la fonction et ses variables locales doit être cohérent avec le lexique de ce niveau. Par exemple, une fonction de haut niveau utilisera plutôt un vocabulaire métier, tandis qu’une fonction de bas niveau utilisera plutôt un vocabulaire technique/informatique.
+    * Une fonction ne doit pas produire d’effet de bords, c’est-à-dire d’autres effets que celui qu’il est sensé produire.
+    * Ne pas avoir d’arguments indicateurs, c’est-à-dire d’arguments booléens qui changeraient le rôle de la fonction. Ce type d’argument indique qu’il vous faut non pas une, mais deux fonctions. 
+    * Des tests unitaires doivent vérifier si la fonction remplie bien son unique objectif, y compris dans les cas particuliers.
+    * Le nombre de fonctions dans un script est souvent important, et cela n’est pas un problème.
 
 2. : **"Ecrire des fonctions courtes"**  
 
