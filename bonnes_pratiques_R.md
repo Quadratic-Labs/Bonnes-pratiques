@@ -131,7 +131,7 @@ En pratique, l’optimisation consiste donc à :
 * Utiliser les méthodes les plus adaptées à la volumétrie de la donnée 
 * Minimiser le volume des tables 
 * Arbitrer entre les performances de 2 processus similaires 
-* Minimiser l'usage des processus itératif 
+* Minimiser l'usage des processus itératifs
 
 Dans cette section, nous verrons d’abord comment analyser les performances d’un code, et ensuite comment les améliorer. 
 
