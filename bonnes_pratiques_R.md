@@ -69,9 +69,9 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 
 * Identifier, minimiser, et mettre à jour les paquets importés
   
-  Les importations ont tendance à complexifier la maintenance et le déploiement de code. C’est le cas par exemple si une montée de version d’un paquet utilisé engendre des nouveaux comportements non gérés par le code. De plus, le risque de conflits entre paquets augmente logiquement avec le nombre de dépendances. C'est pourquoi je déconseille d’avoir un recours systématique au paquet dplyr. Bien que pratique et couramment utilisé, il ne reste pas moins une dépendance supplémentaire à gérer.
+  Les importations ont tendance à complexifier la maintenance et le déploiement de code. C’est le cas par exemple si une montée de version d’un paquet utilisé engendre des nouveaux comportements non gérés par le code. De plus, le risque de conflit entre paquets augmente logiquement avec le nombre de dépendances. C'est pourquoi je déconseille notamment d’avoir un recours systématique au paquet 'dplyr'. Bien que pratique et couramment utilisé, il ne reste pas moins une dépendance supplémentaire à gérer.
   
-  Pour minimiser le nombre de dépendances, je conseille d’abord de les identifier en signalant les fonctions importées de cette façon : `[paquet]::[methode]`. De cette manière, vous pouvez vérifier si certains paquets importés ne sont plus nécessaires. Ensuite, pour des paquets où seul une ou deux fonctions sont importés, recherchez si des fonctions de R Base pourraient les remplacer. De cette manière, vous pourrez supprimer certaines dépendances. Enfin, pour les dépendances restantes, vérifier que votre code est fonctionnel avec leurs dernières versions. 
+  Pour minimiser le nombre de dépendances, je conseille d’abord de les identifier en signalant les fonctions importées de cette façon : `[paquet]::[methode]`. De cette manière, vous pouvez vérifier si certains paquets importés ne sont plus nécessaires. Ensuite, pour des paquets où seul une ou deux fonctions sont importées, recherchez si des fonctions natives pourraient les remplacer. De cette manière, vous pourrez les supprimer. Enfin, pour les dépendances restantes, vérifiez que votre code est fonctionnel avec la version la plus récente du CRAN.
 
 * Gérer explicitement les erreurs de lecture/écriture
   
