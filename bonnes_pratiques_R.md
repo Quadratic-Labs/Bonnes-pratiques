@@ -78,8 +78,8 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 * Pas de codage dynamique
   
   Le codage dynamique fait référence à l’utilisation de chaînes de caractères consistant en des instructions ou des noms de variables. En R, il se manifeste notamment par la présence des fonctions suivantes :
-  * `eval()` et `parse()` pour gérer les chaînes de caractère comme des instructions 
-  * `get()` et `assign()` pour gérer les chaînes de caractère comme des noms de variable
+  * `base::eval()` et `base::parse()` pour gérer les chaînes de caractère comme des instructions 
+  * `base::get()` et `base::assign()` pour gérer les chaînes de caractère comme des noms de variable
 
   N’utilisez jamais ces méthodes. En effet, elles rendent particulièrement laborieuses le débogage des scripts. C'est pourquoi si vous les trouvez dans un script existant, je vous déconseille fortement de le modifier. Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, elles sont substituables.  
 
@@ -134,11 +134,11 @@ Remarque importante : l’optimisation ne doit pas se faire au détriment de sa 
 
 ## 1. Analyse des performances
 
-L'outil de base de l'optimisation est le benchmark : l’évaluation des performances d’un code, ou seulement d’une partie. Deux fonctions complémentaires sont couramment utilisées pour cela : `profis()` et `microbenmark()`. Ils sont chacun associés à un paquet éponyme. 
+L'outil de base de l'optimisation est le benchmark : l’évaluation des performances d’un code, ou seulement d’une partie. Deux fonctions complémentaires sont couramment utilisées pour cela : `profvis::profvis()` et `microbenmark::microbenmark()`. Ils sont chacun associés à un paquet éponyme. 
 
-La fonction `profis()` s'exécute sur un code entier.  La fonction analyse les performances de chaque étape. On peut donc identifier quelles sont celles qui nécessitent une optimisation. A noter qu'on retrouve généralement une répartition de Pareto. En effet, dans un code non optimisé, une faible partie du code (<20%) est responsable d'une grande partie du temps d'exécution (>80%). 
+La fonction `profvis::profvis()` s'exécute sur un code entier.  La fonction analyse les performances de chaque étape. On peut donc identifier quelles sont celles qui nécessitent une optimisation. A noter qu'on retrouve généralement une répartition de Pareto. En effet, dans un code non optimisé, une faible partie du code (<20%) est responsable d'une grande partie du temps d'exécution (>80%). 
 
-C’est à l’issue de l’identification qu’on utilise `microbenchmark()`. Contrairement à `profis()`, celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l'aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser (par exemple le temps d’exécution). Il faut bien vérifier que ces gains sont significatifs, et vérifier comment ils évoluent avec l’augmentation du volume de données. 
+C’est à l’issue de l’identification qu’on utilise `microbenmark::microbenchmark()`. Contrairement à `profvis::profvis()`, celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l'aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser (par exemple le temps d’exécution). Il faut bien vérifier que ces gains sont significatifs, et vérifier comment ils évoluent avec l’augmentation du volume de données. 
 
 ## 2. Optimisation du temps d'exécution de son code
 
@@ -151,14 +151,14 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
 2. Gérer les données volumineuses avec data.table
 
-   Comparable au paquet dplyr, le paquet data.table propose une syntaxe pour manipulation de la donnée. Elle est adapté au traitement de volume de données important. En effet, dans ce cas précis, l’utilisation de data.table peut faire gagner un temps significatif sur les temps d’exécution. 
+   Comparable au paquet 'dplyr', le paquet data.table propose une syntaxe pour manipulation de la donnée. Elle est adapté au traitement de volume de données important. En effet, dans ce cas précis, l’utilisation de data.table peut faire gagner un temps significatif sur les temps d’exécution. 
 
 3. Vectoriser les processus itératifs
 
    La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. C’est une caractéristique permet de ne pas avoir systématiquement recours à des boucles WHILE ou FOR.
    En effet, en règle générale, réaliser une opération par vectorisation est plus rapide que la réaliser par boucle. De plus, il permet d’éviter un niveau d’indentation supplémentaire. 
 
-D’un point de vue de lisibité, je conseille la fonction `vectorize()`. Elle simule une vectorisation sur des fonctions non vectorisable. Néanmoins cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. 
+D’un point de vue de lisibité, je conseille la fonction `base::vectorize()`. Elle simule une vectorisation sur des fonctions non vectorisable. Néanmoins cette fonction ne diminue le temps d’exécution : elle n’est qu’un wrapper pour les boucles. 
 
 ## 3. Optimisation de l'utilisation de son environnement
 
@@ -248,7 +248,7 @@ La visualisation est l'un des plus grands atouts de R. Elle permet d'explorer le
 
 * **ggplot2** : Basé sur la "Grammaire des Graphiques", ce package permet de construire des visualisations couche par couche (données, esthétiques, géométries). Sa flexibilité est quasi infinie et la qualité esthétique des graphiques produits est de standard professionnel (publication scientifique, presse). 
 
-* **plotly** : Ce package permet de transformer vos graphiques statiques ggplot2 en versions interactives (zoom, survol à la souris, filtres) avec une seule fonction : `ggplotly()`. C'est l'outil parfait pour l'exploration de données ou pour enrichir des rapports HTML. 
+* **plotly** : Ce package permet de transformer vos graphiques statiques ggplot2 en versions interactives (zoom, survol à la souris, filtres) avec une seule fonction : `plotly::ggplotly()`. C'est l'outil parfait pour l'exploration de données ou pour enrichir des rapports HTML. 
 
 * **highcharter** : Une interface R pour la célèbre bibliothèque JavaScript Highcharts. Il est particulièrement apprécié pour créer des graphiques dynamiques et élégants, très utilisés dans les tableaux de bord professionnels, offrant une grande fluidité et de nombreuses options de personnalisation. 
 
