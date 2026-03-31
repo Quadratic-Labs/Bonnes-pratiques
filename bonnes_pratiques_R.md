@@ -42,7 +42,7 @@ Les indicateurs de propreté du code ont été discutés par des développeurs r
 * Harmonieux : le style (cf. annexe1 pour plus de détails sur cette notion) est cohérent tout au long du script
 
 __Le mythe de la reprise à 0 :__  
-Pour appliquer ces principes aux scripts existants, il peut être tentant de tenter de le réécrire en partant de 0. En effet, il est plus facile de créer son propre script, que de bien modifier celui de quelqu’un d’autre. Néanmoins il est communément admis que cela n’est pas une bonne idée, y compris si vous êtes un développeur expérimenté. En effet, si le code n’est pas propre, alors les intentions du développeur d’origine ne sont pas claires. Par conséquent, il vous manquerait très probablement des informations pour produire un script au moins aussi fonctionnel que celui de votre prédécesseur.  
+Pour appliquer ces principes aux scripts existants, il peut être tentant d'entreprendre une réécriture complète. En effet, il est plus facile de créer son propre script, que de bien modifier celui de quelqu’un d’autre. Néanmoins il est communément admis que cela n’est pas une bonne idée, y compris si vous êtes un développeur expérimenté. En effet, si le code n’est pas propre, alors les intentions du développeur d’origine ne sont pas claires. Par conséquent, il vous manquerait très probablement des informations pour produire un script au moins aussi fonctionnel que celui de votre prédécesseur.  
 
 Ainsi, pour éviter de reprendre de zéro tous les scripts non propres, je vous propose les 2 règles suivantes : 
 * Quand vous travaillez sur un code, quitter le toujours un peu plus propre qu’il ne l’était initialement 
