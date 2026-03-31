@@ -6,7 +6,7 @@ La qualité est tout ce qui entoure le produit final au-delà de son simple bon 
 En effet, en informatique, un code fonctionnel n’est pas nécessairement un code de qualité.
 Dans le cadre de R, ces bonnes pratiques sont d’autant plus importantes qu'elles pourraient vous aider à publier des paquets sur le CRAN (dépôt officiel de R), et donc contribuer au modèle open-source de ce langage. 
 
-Dans ce document, je me focalise sur les bonnes pratiques appliquées aux langages R. Kee me concentrerai sur les axes suivants : 
+Dans ce document, je me focalise sur les bonnes pratiques appliquées aux langages R. Je me concentrerai sur les axes suivants : 
 * La production d'un code propre 
 * L'optimisation de l’exécution d'un code 
 * Le choix de la forme du livrable 
