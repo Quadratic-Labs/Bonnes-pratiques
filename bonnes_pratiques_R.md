@@ -79,11 +79,12 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 
 * Pas de codage dynamique
   
-  Le codage dynamique fait référence à l’utilisation de chaînes de caractères consistant en des instructions ou des noms de variables. En R, il se manifeste notamment par la présence des fonctions suivantes :
+  Le codage dynamique fait référence à l’utilisation de chaînes de caractères dont la valeur est une instruction ou un nom de variables. En R, il se manifeste notamment par la présence des fonctions suivantes :
   * `base::eval()` et `base::parse()` pour gérer les chaînes de caractère comme des instructions 
   * `base::get()` et `base::assign()` pour gérer les chaînes de caractère comme des noms de variable
 
-  N’utilisez jamais ces méthodes. En effet, elles rendent particulièrement laborieuses le débogage des scripts. C'est pourquoi si vous les trouvez dans un script existant, je vous déconseille fortement de le modifier. Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, elles sont substituables.  
+  N’utilisez jamais ces méthodes. En effet, elles rendent particulièrement laborieux le débogage des scripts. C'est pourquoi si vous les trouvez dans un script existant, je vous déconseille fortement de le modifier.  
+Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vous n'en avez pas besoin.  
 
 * Ne pas utiliser `$` pour référencer les colonnes d’un tableau
   
