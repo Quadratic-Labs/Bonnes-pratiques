@@ -193,6 +193,16 @@ La forme que doit prendre le livrable est un choix qui dépend avant tout du suj
 
 ## un rmarkdown pour l’analyse
 
+Le format de fichier rmarkdown (ou 'qwarto' dans sa forme plus moderne) est un type de fichier fusionnant la syntaxe markdown et du code R.
+
+C'est un type de fichier adapté pour la présentation de résultats ou la réalisation d'une analyse. Dans ces cas précis, le fichier rmarkdown et une version compilée (HTML,PDF,...) doivent être tous deux fournis au client. En effet, le rmarkdown est une 'preuve' de la reproductibilité des résultats. N'importe qui doit pouvoir re-compiler le fichier sous un autre format, tout en conservant les mêmes résultats. C'est pour cela qu'il est important de vérifier la consistance des résultats entre plusieurs exécutions complètes : tous les aléas potentiels doivent être maîtrisés.
+
+Concernant la forme du markdown : 
+* Un minimun de code R doit être intégré dans les chunks. En particulier, les fonctions ne doivent pas être déclarées dans le fichier. Pour cela, on pourra les intégrer à ses proches paquets (voir sous-section suivante)
+* Toujours nommer les chunks pour mieux se repérer dans le document
+* Le paquet `knitr` ne sert pas uniquement à compiler le document. En effet, certaines de ses autres fonctions méritent d'être connues. Je pense par exemple à `knitr::ktable()` pour afficher des tables ou `knitr::opts_chunk()` pour définir globalement les paramètres des chunks.
+* Dans le cadre de la production de rapport de présentation, vous pouvez omettre le code avec le paramètre `echo=FALSE` pour le rendre plus lisible. Les profils techniques pourront directement consulter le fichier rmarkdown pour conslter le code.
+
 ## un paquet R pour le code 
 
 ## un shiny pour les outils interactifs
