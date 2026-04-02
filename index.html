@@ -1,0 +1,550 @@
+<!DOCTYPE HTML>
+<!--
+	Story by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Bonnes Pratiques R</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* Modal overlay */
+			.modal-overlay {
+				display: none;
+				position: fixed;
+				inset: 0;
+				background: rgba(0,0,0,0.7);
+				z-index: 10000;
+				overflow-y: auto;
+				padding: 2rem 1rem;
+			}
+			.modal-overlay.is-open { display: flex; align-items: flex-start; justify-content: center; }
+			.modal-box {
+				background: #fff;
+				border-radius: 6px;
+				max-width: 760px;
+				width: 100%;
+				padding: 2.5rem 3rem;
+				position: relative;
+				margin: auto;
+				color: #333;
+				line-height: 1.75;
+			}
+			.modal-box h2 { margin-top: 0; color: #1a1a1a; }
+			.modal-box h3 { color: #2c2c2c; margin-top: 1.5rem; }
+			.modal-box code {
+				background: #f4f4f4;
+				padding: 0.1em 0.4em;
+				border-radius: 3px;
+				font-size: 0.9em;
+			}
+			.modal-box blockquote {
+				border-left: 4px solid #ccc;
+				margin: 1rem 0;
+				padding: 0.5rem 1rem;
+				color: #555;
+				font-style: italic;
+			}
+			.modal-box ul, .modal-box ol { padding-left: 1.5rem; }
+			.modal-close {
+				position: absolute;
+				top: 1rem;
+				right: 1.25rem;
+				background: none;
+				border: none;
+				font-size: 1.6rem;
+				cursor: pointer;
+				color: #666;
+				line-height: 1;
+			}
+			.modal-close:hover { color: #000; }
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="divided">
+
+				<!-- Banner -->
+					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+						<div class="content">
+							<h1>Bonnes Pratiques R</h1>
+							<p class="major">Un guide pratique pour produire du code R de qualité : propre, optimisé, et livré sous la bonne forme. Ces bonnes pratiques vous aideront à maintenir, partager et faire évoluer vos développements avec confiance.</p>
+							<ul class="actions stacked">
+								<li><a href="#first" class="button big wide smooth-scroll-middle">Commencer</a></li>
+						<li><button class="button" onclick="openModal('modal-intro')">En savoir plus</button></li>
+							</ul>
+						</div>
+						<div class="image">
+							<img src="images/banner.jpg" alt="" />
+						</div>
+					</section>
+
+				<!-- Partie 1 : Coder proprement -->
+					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
+						<div class="content">
+							<h2>Partie 1 : Coder proprement en R</h2>
+							<p>La qualité d'un code va au-delà de son simple bon fonctionnement. Un code propre est <strong>maintenable</strong>, <strong>clair</strong> et <strong>limpide</strong> — il peut être lu et amélioré par n'importe quel développeur, pas seulement son auteur.</p>
+							<blockquote>«&nbsp;La logique doit être simple, pour que les bogues aient du mal à se cacher. Un code propre fait une chose et le fait bien.&nbsp;»<br /><em>— B. Stroustrup, inventeur du C++</em></blockquote>
+							<p>Un code propre doit être <strong>explicite</strong>, <strong>lisible</strong>, <strong>simple</strong>, <strong>parcimonieux</strong>, <strong>non redondant</strong> et <strong>harmonieux</strong>.</p>
+						<ul class="actions stacked">
+							<li><button class="button" onclick="openModal('modal-partie1')">En savoir plus</button></li>
+						</ul>
+						<div class="image">
+							<img src="images/spotlight01.jpg" alt="" />
+						</div>
+					</section>
+
+				<!-- Règles de propreté en R -->
+					<section class="wrapper style1 align-center">
+						<div class="inner">
+							<h2>Les règles de propreté en R</h2>
+							<p>Ces principes généraux se déclinent en règles concrètes appliquées au langage R.</p>
+							<div class="items style1 medium onscroll-fade-in">
+								<section>
+									<span class="icon solid style2 major fa-align-left"></span>
+									<h3>Indentation</h3>
+									<p>L'indentation n'affecte pas l'exécution en R, mais un script mal indenté perd significativement en lisibilité. Elle révèle aussi les parties trop imbriquées qui bénéficieraient d'une réécriture.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-comment-slash"></span>
+									<h3>Commentaires</h3>
+									<p>N'écrire des commentaires que s'ils sont irremplaçables. Un code propre n'en a pas besoin. Le bon commentaire est celui qui ne peut pas être remplacé par du code lui-même plus explicite.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-stream"></span>
+									<h3>Le pipe natif <code>|&gt;</code></h3>
+									<p>Préférer le pipe natif <code>|&gt;</code> au <code>%&gt;%</code> de 'magrittr'. Il est plus rapide, évite une dépendance, et permet de construire des pipelines de transformations lisibles.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-box"></span>
+									<h3>Gestion des paquets</h3>
+									<p>Minimiser les dépendances. Signaler les imports avec <code>paquet::methode</code>. Pour les paquets où seule une ou deux fonctions sont utilisées, chercher des alternatives natives de R.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-folder-open"></span>
+									<h3>Lecture / écriture</h3>
+									<p>Vérifier l'existence des fichiers avec <code>base::file.exists()</code> avant toute lecture. Construire les chemins avec <code>base::file.path()</code> pour la lisibilité et la portabilité.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-ban"></span>
+									<h3>Pas de codage dynamique</h3>
+									<p>Ne jamais utiliser <code>eval()</code>, <code>parse()</code>, <code>get()</code> ou <code>assign()</code>. Ces fonctions rendent le débogage laborieux. Dans 99&nbsp;% des cas, ce n'est pas nécessaire.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-columns"></span>
+									<h3>Référencement des colonnes</h3>
+									<p>Préférer <code>Table[["colonne"]]</code> au symbole dollar <code>Table$colonne</code>. L'opérateur <code>$</code> fait de l'auto-complétion implicite et peut retourner une colonne inattendue.</p>
+								</section>
+							</div>
+						<ul class="actions" style="justify-content:center;margin-top:2rem">
+							<li><button class="button" onclick="openModal('modal-regles')">En savoir plus</button></li>
+						</ul>
+							<h2>Gestion des fonctions</h2>
+							<p>Trois règles essentielles gouvernent l'écriture de fonctions de qualité :</p>
+							<ol>
+								<li><strong>Une fonction ne fait qu'une seule chose, et le fait bien.</strong> Son nom doit l'énoncer clairement. Pas d'effets de bord, pas d'arguments booléens indicateurs. Des tests unitaires vérifient son bon fonctionnement.</li>
+								<li><strong>Écrire des fonctions courtes.</strong> À chaque passe d'écriture, considérer qu'elle est trop longue et essayer de la raccourcir. Le seuil maximal usuel est de 30 à 50 lignes.</li>
+								<li><strong>Limiter drastiquement le nombre d'arguments</strong> (idéalement ≤&nbsp;3). Utiliser des variables locales pour les paramètres constants, des listes pour regrouper les paramètres liés.</li>
+							</ol>
+							<p><em>L'écriture de fonctions est un processus itératif. La première version n'est jamais la version finale.</em></p>
+						<ul class="actions stacked">
+							<li><button class="button" onclick="openModal('modal-fonctions')">En savoir plus</button></li>
+						</ul>
+						<div class="image">
+							<img src="images/spotlight02.jpg" alt="" />
+						</div>
+					</section>
+
+				<!-- Partie 2 : Optimisation -->
+					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
+						<div class="content">
+							<h2>Partie 2 : Optimisation du code</h2>
+							<p>L'optimisation est l'étape logique qui suit la réécriture d'un code propre. Elle vise à mobiliser les ressources (RAM et CPU) de manière efficiente et à diminuer le temps d'exécution.</p>
+							<p>Commencez par identifier les goulots d'étranglement avec <code>profvis::profvis()</code>. En général, moins de 20&nbsp;% du code est responsable de plus de 80&nbsp;% du temps d'exécution — loi de Pareto. Mesurez ensuite précisément les blocs critiques avec <code>microbenchmark::microbenchmark()</code>.</p>
+							<p><em>L'optimisation ne doit jamais se faire au détriment de la propreté du code.</em></p>
+						<ul class="actions stacked">
+							<li><button class="button" onclick="openModal('modal-optim-analyse')">En savoir plus</button></li>
+						</ul>
+						<div class="image">
+							<img src="images/spotlight03.jpg" alt="" />
+						</div>
+					</section>
+
+				<!-- Leviers d'optimisation -->
+					<section class="wrapper style1 align-center">
+						<div class="inner">
+							<h2>4 leviers d'optimisation</h2>
+							<p>Une fois les goulots d'étranglement identifiés, voici les principales techniques pour améliorer les performances.</p>
+							<div class="items style1 medium onscroll-fade-in">
+								<section>
+									<span class="icon solid style2 major fa-filter"></span>
+									<h3>Affiner la lecture des inputs</h3>
+									<p>Éviter de charger la totalité d'une table en mémoire. Filtrer colonnes et lignes dès la lecture via <code>col_names</code>, <code>skip</code>, <code>n_max</code>. Pour les bases SQL, optimiser la requête en amont.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-database"></span>
+									<h3>data.table</h3>
+									<p>Pour les volumes importants, le package <code>data.table</code> offre des performances bien supérieures aux approches classiques. Sa syntaxe minimise la copie en mémoire et exploite au mieux le processeur.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-bolt"></span>
+									<h3>Vectorisation</h3>
+									<p>Préférer les fonctions vectorisées aux boucles <code>for</code>. Les fonctions de la famille <code>base::apply</code>, <code>base::rbind()</code> ou <code>plyr::join()</code> sont plus rapides et évitent un niveau d'indentation.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-microchip"></span>
+									<h3>Parallélisation</h3>
+									<p>Exploiter toute la puissance des ressources disponibles avec les packages <code>parallel</code> ou le duo <code>doParallel</code> + <code>foreach</code>. Attention à la loi d'Amdahl : le gain par cœur est décroissant.</p>
+								</section>
+							</div>
+						<ul class="actions" style="justify-content:center;margin-top:2rem">
+							<li><button class="button" onclick="openModal('modal-optim-leviers')">En savoir plus</button></li>
+						</ul>
+							<h2>Partie 3 : Forme du livrable</h2>
+							<p>Au-delà de la qualité du code, la forme du livrable détermine la facilité de maintenance, de réutilisation et de communication des résultats. Choisir la bonne forme est une décision structurante.</p>
+							<ul>
+								<li><strong>R Markdown / Quarto</strong> — pour l'analyse et la présentation de résultats reproductibles</li>
+								<li><strong>Paquet R</strong> — pour organiser, documenter et partager ses fonctions</li>
+								<li><strong>Shiny</strong> — pour les outils interactifs d'aide à la décision</li>
+							</ul>
+						<ul class="actions stacked">
+							<li><button class="button" onclick="openModal('modal-livrable-intro')">En savoir plus</button></li>
+						</ul>
+
+				<!-- Détail des livrables -->
+					<section class="wrapper style1 align-center">
+						<div class="inner">
+							<h2>Choisir la bonne forme</h2>
+							<div class="items style1 medium onscroll-fade-in">
+								<section>
+									<span class="icon solid style2 major fa-file-alt"></span>
+									<h3>R Markdown / Quarto</h3>
+									<p>Format fusionnant syntaxe markdown et code R. Le fichier source <em>et</em> la version compilée (HTML, PDF) doivent tous deux être livrés : le <code>.Rmd</code> est la preuve de reproductibilité. Toujours nommer les chunks ; ne pas y déclarer de fonctions.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-cubes"></span>
+									<h3>Paquet R</h3>
+									<p>Rassembler ses fonctions dans un paquet résout les problèmes de dépendances non déclarées, d'absence de tests et de documentation non maintenue. Gestion fine des dépendances (<code>Imports</code>, <code>Suggests</code>), tests unitaires, documentation <code>roxygen2</code> et vignettes.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-globe"></span>
+									<h3>Shiny</h3>
+									<p>Transformer vos analyses en applications web réactives sans HTML/CSS/JS. Pour la production, utiliser <strong>golem</strong> qui impose une structure de paquet : tests, versionnage et déploiement sécurisé inclus.</p>
+								</section>
+							</div>
+						<ul class="actions" style="justify-content:center;margin-top:2rem">
+							<li><button class="button" onclick="openModal('modal-livrable-detail')">En savoir plus</button></li>
+						</ul>
+							<h2>Partie 4 : Sélection de paquets par cas d'usage</h2>
+							<p>Plus de 20&nbsp;000 packages sur le CRAN. Voici une sélection des incontournables, classés par domaine, pour garantir la pérennité et l'efficacité de vos développements.</p>
+							<div class="items style1 medium onscroll-fade-in">
+								<section>
+									<span class="icon solid style2 major fa-table"></span>
+									<h3>Gestion de la data</h3>
+									<p><strong>dplyr</strong> — grammaire de manipulation des données (filtrer, sélectionner, agréger) via des verbes intuitifs.<br /><strong>tidyr</strong> — restructuration (format long ↔ large) pour préparer les données avant modélisation.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-cog"></span>
+									<h3>Machine Learning</h3>
+									<p><strong>caret</strong> — interface unifiée pour des centaines d'algorithmes : prétraitement, hyperparamètres, évaluation.<br /><strong>tidymodels</strong> — collection moderne et Tidyverse-compatible pour des pipelines de modélisation robustes.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-chart-bar"></span>
+									<h3>Visualisation</h3>
+									<p><strong>ggplot2</strong> — graphiques de qualité publication, construits couche par couche.<br /><strong>plotly</strong> — rend vos graphiques ggplot2 interactifs avec <code>ggplotly()</code>.<br /><strong>highcharter</strong> — graphiques dynamiques pour tableaux de bord professionnels.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-desktop"></span>
+									<h3>Applications Shiny</h3>
+									<p><strong>shiny</strong> — framework de base pour applications web réactives.<br /><strong>golem</strong> — structure votre application comme un paquet R pour la production : tests, versionnage, déploiement sécurisé.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-bug"></span>
+									<h3>Débogage</h3>
+									<p><strong><code>base::browser()</code></strong> — insérée dans votre code, interrompt l'exécution et ouvre un environnement interactif pour inspecter les variables et identifier précisément l'origine d'une erreur.</p>
+								</section>
+							</div>
+							<ul class="actions" style="justify-content:center;margin-top:2rem">
+								<li><button class="button" onclick="openModal('modal-paquets')">En savoir plus</button></li>
+							</ul>
+						</div>
+					</section>
+				<!-- Modals -->
+
+				<!-- Modal: Partie 4 — Sélection de paquets -->
+				<div id="modal-paquets" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-paquets-title">
+					<div class="modal-box">
+						<button class="modal-close" onclick="closeModal('modal-paquets')" aria-label="Fermer">&times;</button>
+						<h2 id="modal-paquets-title">Partie 4 : Sélection de paquets par cas d'usage</h2>
+						<p>La force de R réside dans son immense bibliothèque de packages (plus de 20&nbsp;000 sur le CRAN). Voici une sélection des incontournables classés par domaine.</p>
+						<h3>1. Gestion de la data</h3>
+						<ul>
+							<li><strong>dplyr</strong> — grammaire de la manipulation de données : filtrer, sélectionner, réorganiser, créer des variables, agréger, via des verbes simples et intuitifs. Très lisible avec le pipe <code>|&gt;</code>.</li>
+							<li><strong>tidyr</strong> — restructuration des données (format large ↔ long) pour que chaque variable soit une colonne et chaque observation une ligne. Indispensable avant modélisation ou visualisation.</li>
+						</ul>
+						<h3>2. Statistique et Machine Learning</h3>
+						<ul>
+							<li><strong>caret</strong> — interface unifiée pour des centaines d'algorithmes. Gère tout le cycle de vie d'un modèle : prétraitement, sélection de variables, optimisation des hyperparamdètres, évaluation des performances.</li>
+							<li><strong>tidymodels</strong> — version moderne et Tidyverse-compatible du ML. Collection de paquets (<em>parsnip</em>, <em>recipes</em>, <em>rsample</em>…) pour des pipelines de modélisation robustes et reproductibles. Plus modulaire que <em>caret</em>.</li>
+						</ul>
+						<h3>3. Graphique et Visualisation</h3>
+						<ul>
+							<li><strong>ggplot2</strong> — basé sur la « Grammaire des Graphiques ». Construction couche par couche. Qualité esthétique de standard professionnel (publication scientifique, presse).</li>
+							<li><strong>plotly</strong> — transforme vos graphiques ggplot2 en versions interactives (zoom, survol, filtres) avec une seule fonction : <code>plotly::ggplotly()</code>.</li>
+							<li><strong>highcharter</strong> — interface R pour la bibliothèque JavaScript Highcharts. Graphiques dynamiques et élégants pour les tableaux de bord professionnels.</li>
+						</ul>
+						<h3>4. Shiny : Applications Web Interactives</h3>
+						<ul>
+							<li><strong>shiny</strong> — framework de base. Programmation réactive : l'interface se met à jour instantanément à chaque interaction utilisateur. Idéal pour l'aide à la décision.</li>
+							<li><strong>golem</strong> — impose une structure de paquet à votre application Shiny : tests unitaires, contrôle de version, déploiement sécurisé. Indispensable pour la production.</li>
+						</ul>
+						<h3>5. Débogage</h3>
+						<ul>
+							<li><strong><code>base::browser()</code></strong> — insérée dans votre code, interrompt l'exécution et ouvre un environnement interactif. Vous pouvez inspecter les variables, exécuter le code ligne par ligne et identifier précisément l'origine d'une erreur. Outil de diagnostic primaire de tout développeur R.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Modal: Partie 3 — Introduction livrable -->
+				<div id="modal-livrable-intro" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-livrable-intro-title">
+					<div class="modal-box">
+						<button class="modal-close" onclick="closeModal('modal-livrable-intro')" aria-label="Fermer">&times;</button>
+						<h2 id="modal-livrable-intro-title">Partie 3 : Forme du livrable</h2>
+						<p>Au-delà de la propreté du code, la forme finale du livrable joue un rôle déterminant dans l'appréciation du client. Trois formes couvrent la quasi-totalité des cas d'usage :</p>
+						<ul>
+							<li><strong>R Markdown / Quarto</strong> — pour l'analyse et la présentation de résultats reproductibles.</li>
+							<li><strong>Un paquet R</strong> — pour organiser, documenter, tester et partager ses fonctions.</li>
+							<li><strong>Shiny</strong> — pour les outils interactifs d'aide à la décision.</li>
+						</ul>
+						<p>Ces trois formes ne sont pas mutuellement exclusives : un paquet R peut être la fondation d'un R Markdown et d'une application Shiny à la fois.</p>
+					</div>
+				</div>
+
+				<!-- Modal: Partie 3 — Détail des livrables -->
+				<div id="modal-livrable-detail" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-livrable-detail-title">
+					<div class="modal-box">
+						<button class="modal-close" onclick="closeModal('modal-livrable-detail')" aria-label="Fermer">&times;</button>
+						<h2 id="modal-livrable-detail-title">Choisir la bonne forme de livrable</h2>
+						<h3>R Markdown / Quarto</h3>
+						<p>Le format R Markdown (ou Quarto dans sa forme moderne) fusionne la syntaxe markdown avec du code R. Il est adapté pour la présentation de résultats ou la réalisation d'une analyse. Le fichier source <em>et</em> une version compilée (HTML, PDF…) doivent être tous deux fournis au client : le <code>.Rmd</code> est la preuve de la reproductibilité des résultats.</p>
+						<p>Bonnes pratiques :</p>
+						<ul>
+							<li>Intégrer un minimum de code R dans les chunks — les fonctions ne doivent pas y être déclarées.</li>
+							<li>Toujours nommer les chunks pour se repérer dans le document.</li>
+							<li>Explorer les fonctions utiles de <code>knitr</code> : <code>knitr::kable()</code> pour afficher des tables, <code>knitr::opts_chunk()</code> pour définir globalement les paramètres des chunks.</li>
+							<li>Pour les rapports de présentation, utiliser <code>echo=FALSE</code> pour masquer le code et améliorer la lisibilité.</li>
+						</ul>
+						<h3>Un paquet R pour le code</h3>
+						<p>Définir ses fonctions dans des scripts R isolés présente plusieurs inconvénients : dépendances non déclarées, absence de tests, documentation non maintenue. Rassembler ses fonctions dans un paquet résout ces problèmes. La création de paquets en R est relativement simple — référence : <em>R Packages (2e)</em> de Hadley Wickham &amp; Jennifer Bryan.</p>
+						<p>Un paquet R permet de :</p>
+						<ul>
+							<li><strong>Gérer les dépendances</strong> avec <code>Depends</code>, <code>Imports</code>, <code>Suggests</code> et les tags <code>@importFrom</code> / <code>@import</code> de <em>roxygen2</em>.</li>
+							<li><strong>Ajouter des tests unitaires</strong> en parallèle du développement (pas après). Le paquet <em>codecov</em> évalue la couverture du code — indicateur, non objectif.</li>
+							<li><strong>Intégrer la documentation</strong> directement à chaque fonction, vérifiée lors du <code>Check</code> du paquet.</li>
+							<li><strong>Lier des vignettes</strong> pour illustrer le fonctionnement des fonctions à l'utilisateur.</li>
+							<li><strong>Intégrer des méta-données</strong> : auteur, licence, version…</li>
+							<li><strong>Instaurer un versionnage</strong> avec suivi des corrections et des nouvelles fonctionnalités.</li>
+						</ul>
+						<h3>Shiny pour les outils interactifs</h3>
+						<p>Shiny permet de transformer vos analyses R en applications web interactives sans HTML/CSS/JS. Il repose sur un modèle de programmation réactive : dès qu'un utilisateur modifie un paramètre, les calculs et les graphiques se mettent à jour instantanément.</p>
+						<p>Pour la production, <strong>golem</strong> est indispensable : il impose une structure de paquet à votre application, facilitant les tests unitaires, le contrôle de version et le déploiement sécurisé.</p>
+					</div>
+				</div>
+
+				<!-- Modal: Partie 2 — Analyse des performances -->
+				<div id="modal-optim-analyse" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-optim-analyse-title">
+					<div class="modal-box">
+						<button class="modal-close" onclick="closeModal('modal-optim-analyse')" aria-label="Fermer">&times;</button>
+						<h2 id="modal-optim-analyse-title">Partie 2 : Optimisation du code</h2>
+						<p>L'optimisation est l'étape logique qui suit la réécriture d'un code propre. Elle a deux objectifs :</p>
+						<ul>
+							<li>Mobiliser de manière efficiente les ressources (mémoire RAM et calcul processeur).</li>
+							<li>Diminuer le temps d'exécution du code.</li>
+						</ul>
+						<p>En pratique, cela consiste à : utiliser les méthodes les plus adaptées à la volumétrie, minimiser le volume des tables, arbitrer entre deux processus similaires, et minimiser l'usage des boucles.</p>
+						<p><strong>Remarque importante :</strong> l'optimisation ne doit pas se faire au détriment de la propreté. Le temps gagné côté utilisateur ne doit pas se transformer en temps perdu côté développeur.</p>
+						<h3>Analyse des performances avec le benchmarking</h3>
+						<p>L'outil de base est le <strong>benchmark</strong> : l'évaluation des performances d'un code ou d'une partie. Deux fonctions complémentaires sont couramment utilisées :</p>
+						<ul>
+							<li><code>profvis::profvis()</code> — s'exécute sur un code entier et analyse les performances de chaque étape. On identifie ainsi les goulots d'étranglement. En général, moins de 20&nbsp;% du code est responsable de plus de 80&nbsp;% du temps d'exécution (loi de Pareto).</li>
+							<li><code>microbenchmark::microbenchmark()</code> — conçu pour analyser des blocs courts sur plusieurs itérations. Il fournit des indicateurs fiables pour comparer deux implémentations et mesurer l'évolution des gains avec l'augmentation du volume de données.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Modal: Partie 2 — Leviers d'optimisation -->
+				<div id="modal-optim-leviers" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-optim-leviers-title">
+					<div class="modal-box">
+						<button class="modal-close" onclick="closeModal('modal-optim-leviers')" aria-label="Fermer">&times;</button>
+						<h2 id="modal-optim-leviers-title">Les leviers d'optimisation</h2>
+						<h3>1. Affiner la lecture des inputs</h3>
+						<p>Il faut éviter de stocker la totalité d'une table en mémoire. Filtrer les données et/ou sélectionner les colonnes dès la lecture sur le disque dur. Pour les fichiers Excel, utiliser les arguments <code>col_names</code>, <code>skip</code> et <code>n_max</code>. Pour une base de données SQL, optimiser la requête directement.</p>
+						<h3>2. Gérer les données volumineuses avec <code>data.table</code></h3>
+						<p>Comparable à <em>dplyr</em>, le paquet <code>data.table</code> propose une syntaxe adaptée aux volumes importants. Dans ce contexte, son utilisation peut faire gagner un temps significatif : il minimise les copies en mémoire et exploite mieux le processeur que les approches classiques.</p>
+						<h3>3. Vectoriser les processus itératifs</h3>
+						<p>Une fonction vectorisée applique sa transformation simultanément à tous les éléments d'un vecteur, sans boucle <code>for</code>. Réaliser une opération par vectorisation est en général plus rapide et évite un niveau d'indentation supplémentaire.</p>
+						<ul>
+							<li><code>base::Vectorize()</code> — simule une vectorisation (wrapper de boucle, sans gain de vitesse, mais améliore la lisibilité).</li>
+							<li><code>base::rbind()</code> — concaténations vectorisées.</li>
+							<li><code>plyr::join()</code> — jointures performantes.</li>
+							<li>Famille <code>base::apply</code> (<code>lapply</code>, <code>sapply</code>, <code>vapply</code>…) — applications vectorisées sur listes et matrices.</li>
+						</ul>
+						<h3>4. Parallélisation</h3>
+						<p>La parallélisation répartit l'exécution du code simultanément sur plusieurs unités de calcul (cœurs ou processeurs). Elle intervient <em>après</em> avoir optimisé le code lui-même. Deux questions à se poser :</p>
+						<ul>
+							<li><strong>Efficacité</strong> : comment maximiser l'utilisation des ressources disponibles ? Packages utiles : <code>parallel</code>, <code>doParallel</code> + <code>foreach</code>.</li>
+							<li><strong>Efficience</strong> : la quantité de ressources mobilisées est-elle cohérente avec le besoin ? Le gain par cœur supplémentaire est décroissant (loi d'Amdahl) — identifier le nombre optimal de ressources avec les outils de benchmarking.</li>
+						</ul>
+						<p><em>Attention : la parallélisation tend à complexifier le code et nécessite une certaine expérience pour être bien exploitée.</em></p>
+					</div>
+				</div>
+
+				<!-- Modal: Partie 1 — Coder proprement -->
+				<div id="modal-partie1" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-partie1-title">
+					<div class="modal-box">
+						<button class="modal-close" onclick="closeModal('modal-partie1')" aria-label="Fermer">&times;</button>
+						<h2 id="modal-partie1-title">Partie 1 : Coder proprement en R</h2>
+						<p>La notion de propreté est commune à tous les langages de programmation. Un code propre a les qualités suivantes : <strong>maintenabilité</strong>, <strong>imperfectibilité</strong>, <strong>clarté</strong> et <strong>limpidité</strong>.</p>
+						<blockquote>«&nbsp;La logique doit être simple, pour que les bogues aient du mal à se cacher. Les dépendances doivent être minimes afin de faciliter la maintenance. La gestion des erreurs doit être totale. Les performances doivent être proches de l'idéal. Un code propre fait une chose et le fait bien.&nbsp;»<br /><em>— B. Stroustrup, inventeur du C++</em></blockquote>
+						<p>Les indicateurs de propreté convergent vers les critères suivants. Un code propre doit être :</p>
+						<ul>
+							<li><strong>Explicite</strong> : aucune règle n'est implicite, le lecteur n'a rien à deviner.</li>
+							<li><strong>Lisible</strong> : les imbrications sont identifiées, le code est aéré, les noms sont pertinents.</li>
+							<li><strong>Simple</strong> : le code est logique et va à l'essentiel.</li>
+							<li><strong>Parcimonieux</strong> : aucune opération superflue n'est présente.</li>
+							<li><strong>Non redondant</strong> : pas deux blocs/fonctions qui réalisent un traitement identique.</li>
+							<li><strong>Harmonieux</strong> : le style est cohérent tout au long du script.</li>
+						</ul>
+						<h3>Le mythe de la reprise à zéro</h3>
+						<p>Il est tentant de réécrire un code non propre depuis zéro, mais c'est généralement une mauvaise idée : les intentions du développeur d'origine ne sont pas claires et il manquera des informations cruciales. À la place, appliquez ces deux règles :</p>
+						<ul>
+							<li>Quand vous travaillez sur un code, laissez-le toujours un peu plus propre qu'il ne l'était.</li>
+							<li>«&nbsp;Plus tard signifie jamais&nbsp;» : si vous voyez un moyen évident d'améliorer un code, faites-le maintenant.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Modal: Règles de propreté en R -->
+				<div id="modal-regles" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-regles-title">
+					<div class="modal-box">
+						<button class="modal-close" onclick="closeModal('modal-regles')" aria-label="Fermer">&times;</button>
+						<h2 id="modal-regles-title">Les règles de propreté en R</h2>
+						<h3>1. Respecter les conventions d'indentation</h3>
+						<p>En R, l'indentation n'a pas de conséquences sur l'exécution. Néanmoins, un script mal indenté perd significativement en lisibilité. Une bonne indentation indique aussi quelles parties du code sont particulièrement imbriquées — et donc lesquelles pourraient bénéficier d'une réécriture.</p>
+						<h3>2. Écrire des commentaires uniquement s'ils sont irremplaçables</h3>
+						<p>Les commentaires sont souvent utilisés pour compenser des défauts réels du code. Si le code est propre, un développeur n'a pas besoin de commentaires pour le comprendre. Le bon commentaire est celui qui ne peut pas être remplacé par du code plus explicite.</p>
+						<h3>3. Utiliser le pipe natif <code>|&gt;</code></h3>
+						<p>Le pipe permet de construire un pipeline pour appliquer une suite de transformations à un input, sans créer de variables intermédiaires. Préférer le pipe natif <code>|&gt;</code> au <code>%&gt;%</code> de <em>magrittr</em> : il est légèrement plus rapide et évite une dépendance supplémentaire.</p>
+						<h3>4. Identifier, minimiser et mettre à jour les paquets importés</h3>
+						<p>Les importations complexifient la maintenance et le déploiement. Signaler les fonctions importées avec la syntaxe <code>paquet::methode</code> pour identifier les dépendances superflues. Pour les paquets dont seule une ou deux fonctions sont utilisées, chercher des alternatives natives avant de les conserver.</p>
+						<h3>5. Gérer explicitement les erreurs de lecture/écriture</h3>
+						<p>Utiliser <code>base::file.exists()</code> ou <code>base::dir.exists()</code> avant toute lecture pour détecter rapidement les fichiers manquants. Construire les chemins avec <code>base::file.path()</code> — chaque répertoire correspond à un argument, ce qui améliore la lisibilité et la portabilité.</p>
+						<h3>6. Pas de codage dynamique</h3>
+						<p>Ne jamais utiliser <code>eval()</code>, <code>parse()</code>, <code>get()</code> ou <code>assign()</code>. Ces fonctions rendent le débogage laborieux. Si vous les trouvez dans un script existant, évitez de le modifier. Dans 99&nbsp;% des cas, ils ne sont pas nécessaires.</p>
+						<h3>7. Ne pas utiliser <code>$</code> pour référencer les colonnes</h3>
+						<p>Avec les data.frames, il existe deux façons d'accéder à une colonne : <code>Table[["colonne"]]</code> ou <code>Table$colonne</code>. Préférer les crochets : l'opérateur <code>$</code> fait de l'auto-complétion implicite et peut silencieusement retourner une colonne inattendue si le nom n'existe pas exactement.</p>
+					</div>
+				</div>
+
+				<!-- Modal: Gestion des fonctions -->
+				<div id="modal-fonctions" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-fonctions-title">
+					<div class="modal-box">
+						<button class="modal-close" onclick="closeModal('modal-fonctions')" aria-label="Fermer">&times;</button>
+						<h2 id="modal-fonctions-title">Gestion des fonctions</h2>
+						<h3>Règle 1 — Une fonction ne fait qu'une seule chose, et le fait bien</h3>
+						<p>Cette règle implique que :</p>
+						<ul>
+							<li>Le nom de la fonction énonce clairement ce qu'elle est censée faire.</li>
+							<li>Le vocabulaire est cohérent avec le niveau d'abstraction : métier pour les fonctions de haut niveau, technique pour les fonctions de bas niveau.</li>
+							<li>Pas d'effets de bord — la fonction ne produit que l'effet qu'elle est censée produire.</li>
+							<li>Pas d'arguments indicateurs (booléens qui changeraient le rôle de la fonction) : si vous en avez un, vous avez besoin de deux fonctions distinctes.</li>
+							<li>Des tests unitaires vérifient que la fonction remplit son objectif, y compris dans les cas particuliers.</li>
+						</ul>
+						<h3>Règle 2 — Écrire des fonctions courtes</h3>
+						<p>Le seuil maximal usuel varie de 30 à 50 lignes dans la littérature, mais peut descendre jusqu'à 10. Plutôt que de fixer un seuil arbitraire : à chaque passe d'écriture, considérez que la fonction est trop longue et essayez de la raccourcir.</p>
+						<h3>Règle 3 — Limiter drastiquement le nombre d'arguments (idéalement ≤ 3)</h3>
+						<p>Chaque argument supplémentaire complexifie l'utilisation et nécessite des tests unitaires dédiés. Pour s'approcher de ce seuil :</p>
+						<ul>
+							<li><strong>Paramètres techniques constants</strong> : ne pas les mettre en argument. S'ils ne varient pas, ce sont des variables locales.</li>
+							<li><strong>Utiliser des listes</strong> : elles remplacent souvent la POO en R. Passer une liste en argument est acceptable si sa structure est clairement définie.</li>
+							<li><strong>Paramètres utilisateur</strong> : les récupérer via une fonction dédiée depuis un fichier de configuration isolé (projet R) ou un objet global (paquet R).</li>
+						</ul>
+						<p><em>L'écriture de fonctions est un processus itératif. La première version n'est jamais la version finale.</em></p>
+					</div>
+				</div>
+
+				<!-- Modal: Introduction -->
+				<div id="modal-intro" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-intro-title">
+					<div class="modal-box">
+						<button class="modal-close" onclick="closeModal('modal-intro')" aria-label="Fermer">&times;</button>
+						<h2 id="modal-intro-title">Introduction : les bonnes pratiques R</h2>
+						<p>On appelle <strong>bonnes pratiques</strong> tout ce qui garantit que le produit final soit de bonne qualité. La qualité est tout ce qui entoure le produit final au-delà de son simple bon fonctionnement. En informatique, un code fonctionnel n'est pas nécessairement un code de qualité.</p>
+						<p>Dans le cadre de R, ces bonnes pratiques sont d'autant plus importantes qu'elles pourraient vous aider à publier des paquets sur le <strong>CRAN</strong> (dépôt officiel de R), et donc contribuer au modèle open-source de ce langage.</p>
+						<h3>Axes couverts dans ce guide</h3>
+						<ul>
+							<li><strong>La production d'un code propre</strong> — conventions, règles spécifiques à R, gestion des fonctions</li>
+							<li><strong>L'optimisation de l'exécution</strong> — benchmarking, vectorisation, parallélisation</li>
+							<li><strong>Le choix de la forme du livrable</strong> — R Markdown, paquet R, Shiny</li>
+						</ul>
+						<h3>Qu'est-ce qu'un code de qualité ?</h3>
+						<p>Un code propre, quel que soit son langage, présente les qualités suivantes :</p>
+						<ul>
+							<li><strong>Maintenabilité</strong> : il peut être lu et amélioré par un développeur autre que son auteur.</li>
+							<li><strong>Imperfectibilité</strong> : rien ne permet de l'améliorer de manière évidente.</li>
+							<li><strong>Clarté</strong> : il demande peu d'effort pour être lu et compris.</li>
+							<li><strong>Limpidité</strong> : il retranscrit parfaitement l'idée d'origine du développeur.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Footer -->
+					<footer class="wrapper style1 align-center">
+						<div class="inner">
+							<p>Bonnes Pratiques R — Nicolas Boitard — Vincent Fraysse &nbsp;·&nbsp; Template&nbsp;: <a href="https://html5up.net">HTML5 UP</a></p>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+		<script>
+			function openModal(id) {
+				var m = document.getElementById(id);
+				m.classList.add('is-open');
+				document.body.style.overflow = 'hidden';
+			}
+			function closeModal(id) {
+				var m = document.getElementById(id);
+				m.classList.remove('is-open');
+				document.body.style.overflow = '';
+			}
+			// Close on overlay click
+			document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+				overlay.addEventListener('click', function(e) {
+					if (e.target === overlay) closeModal(overlay.id);
+				});
+			});
+			// Close on Escape key
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape') {
+					document.querySelectorAll('.modal-overlay.is-open').forEach(function(m) {
+						closeModal(m.id);
+					});
+				}
+			});
+		</script>
+
+	</body>
+</html>
