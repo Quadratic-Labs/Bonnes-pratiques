@@ -222,6 +222,7 @@ Ainsi, un paquet R vous permettra de :
 
 ## Un shiny pour les outils interactifs
 
+Shiny est un framework pour développer des applications. Il est historiquement associé à R, mais est aussi disponible sur Python depuis 2022. Néanmoins sur ce dernier langage, il existe des alternatives plus optimisées comme dash.
 
 # PARTIE 4 : SELECTION DE PAQUETS PAR CAS D'USAGE
 
