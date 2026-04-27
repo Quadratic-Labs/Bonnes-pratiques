@@ -226,6 +226,11 @@ Shiny est un framework pour développer des applications. Il est historiquement 
 
 C'est une solution adaptée pour rendre accessible votre paquet à tous, en créant une interface "clique-bouton" ne nécessitant aucune connaissance en R et Rstudio. De plus, combiné avec un paquet comme `plotly`, on peut développer un bon outil orienté dataviz.
 
+Le coût d'entrée sur shiny est relativement faible. Néanmoins décider de recourir à ce type d'outils nécessite quelques précautions : 
+* Complexité exponentielle
+* Infrastructure du client
+* Gérer activement les dépendances
+
 
 # PARTIE 4 : SELECTION DE PAQUETS PAR CAS D'USAGE
 
