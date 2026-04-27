@@ -224,6 +224,9 @@ Ainsi, un paquet R vous permettra de :
 
 Shiny est un framework pour développer des applications. Il est historiquement associé à R, mais est aussi disponible sur Python depuis 2022. Néanmoins sur ce dernier langage, il existe des alternatives plus optimisées comme dash.
 
+C'est une solution adaptée pour rendre accessible votre paquet à tous, en créant une interface "clique-bouton" ne nécessitant aucune connaissance en R et Rstudio. De plus, combiné avec un paquet comme `plotly`, on peut développer un bon outil orienté dataviz.
+
+
 # PARTIE 4 : SELECTION DE PAQUETS PAR CAS D'USAGE
 
 La force de R réside dans son immense bibliothèque de packages (plus de 20 000 sur le CRAN). Pour garantir la pérennité et l'efficacité de vos développements, il est crucial de s'appuyer sur des outils standards et éprouvés. Voici une sélection des packages incontournables classés par domaine d'application. 
