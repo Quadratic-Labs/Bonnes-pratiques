@@ -9,25 +9,31 @@
 
 rm(list=ls())
 
+source("generate_csv_tables.R")
+
 set.seed(35)
 
-library(dplyr)
 library(caret)
-# library(readr)
+library(dplyr)
+
+generate_table_with_many_lines()
+
 
 ## Reading
 
-path_parisian_apartment <- file.path("parisian_apartments.csv")    
+path_parisian_apartment <- file.path("data","LOT_OF_parisian_apartments.csv")
 if(file.exists(path_parisian_apartment))
-  df <- read.csv(path_parisian_apartment)
+  df_full <- read.csv(path_parisian_apartment)
 
-# df <- readr::read_csv(path_parisian_apartment,col_select="AREA_SQUARE_METER")
+df_extract <- df_full |> slice(1:1000)
 
 
 ## Processing
                                  
-est_appartement_etudiant <- df$AREA<40
-df_clean <- rename(df,PRICE=PRICE_EURO,AREA=AREA_SQUARE_METER) |> 
+est_appartement_etudiant <- df_extract$AREA<40
+
+df_extract_clean <- df_extract |> 
+    rename(PRICE=PRICE_EURO,AREA=AREA_SQUARE_METER) |> 
     filter(!est_appartement_etudiant) |>
     select(AREA, PRICE, QUICKLY_SOLD) |>
     mutate(MEAN_PRICE = scale(PRICE))                
@@ -35,15 +41,15 @@ df_clean <- rename(df,PRICE=PRICE_EURO,AREA=AREA_SQUARE_METER) |>
 
 ## Training
 
-df_clean$QUICKLY_SOLD <- as.factor(df_clean$QUICKLY_SOLD)
+df_extract_clean$QUICKLY_SOLD <- as.factor(df_extract_clean$QUICKLY_SOLD)
 
-df_clean$PRICE_Z <- df_clean$PRICE - df_clean[["MEAN_PRICE"]]
+df_extract_clean$PRICE_Z <- df_extract_clean$PRICE - df_extract_clean[["MEAN_PRICE"]]
 
-idx <- caret::createDataPartition(df_clean$QUICKLY_SOLD, p = 0.8, list = FALSE)
+idx <- caret::createDataPartition(df_extract_clean$QUICKLY_SOLD, p = 0.8, list = FALSE)
 
-train_data <- df_clean[idx, ]
+train_data <- df_extract_clean[idx, ]
 
-test_data <- df_clean[-idx, ]
+test_data <- df_extract_clean[-idx, ]
 
 model <- caret::train(QUICKLY_SOLD ~ ., data = train_data, method = "glm")
 
