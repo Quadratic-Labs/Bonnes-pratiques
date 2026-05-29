@@ -17,7 +17,7 @@ library(caret)
 
 ## Reading
 
-path_parisian_apartment <- file.path("/home","nb","Documents","rstudio_stuffs","parisian_apartments.csv")    
+path_parisian_apartment <- file.path("parisian_apartments.csv")    
 if(file.exists(path_parisian_apartment))
   df <- read.csv(path_parisian_apartment)
 
@@ -37,7 +37,7 @@ df_clean <- rename(df,PRICE=PRICE_EURO,AREA=AREA_SQUARE_METER) |>
 
 df_clean$QUICKLY_SOLD <- as.factor(df_clean$QUICKLY_SOLD)
 
-df_clean$PRICE_Z <- df_clean$PRICE - df_clean["MEAN_PRICE"]
+df_clean$PRICE_Z <- df_clean$PRICE - df_clean[["MEAN_PRICE"]]
 
 idx <- caret::createDataPartition(df_clean$QUICKLY_SOLD, p = 0.8, list = FALSE)
 
