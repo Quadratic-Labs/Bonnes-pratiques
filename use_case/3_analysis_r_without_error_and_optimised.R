@@ -45,4 +45,24 @@ df_extract_clean <- df_extract_clean[
 
 ## Training
 
-### ...
+df_extract_clean[
+  ,QUICKLY_SOLD := as.factor(QUICKLY_SOLD)
+][
+  ,PRICE_Z := PRICE - MEAN_PRICE
+]
+
+idx <- caret::createDataPartition(df_extract_clean[["QUICKLY_SOLD"]], p = 0.8, list = FALSE)
+
+train_data <- df_extract_clean[idx, ]
+
+test_data <- df_extract_clean[-idx, ]
+
+model <- caret::train(QUICKLY_SOLD ~ ., data = train_data, method = "glm")
+
+
+## Prediction
+
+prediction <- stats::predict(model,newdata=test_data)
+
+print(model)
+
