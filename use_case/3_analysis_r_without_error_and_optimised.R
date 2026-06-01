@@ -5,19 +5,24 @@
 
 rm(list=ls())
 
-source("generate_csv_tables.R")
+source("function_generate_table_with_many_lines.R")
 
 set.seed(35)
 
 library(caret)
 library(data.table)
 
-generate_table_with_many_lines()
+table_to_analysis <- "LOT_OF_parisian_apartments.csv"
+
+generate_table_with_many_lines(
+  number_lines=5000000,
+  name_writed_file=table_to_analysis
+)
 
 
 ## Reading
 
-path_parisian_apartment <- file.path("data","LOT_OF_parisian_apartments.csv")    
+path_parisian_apartment <- file.path("data",table_to_analysis)    
 if(file.exists(path_parisian_apartment))
   df_extract <- data.table::fread(
     path_parisian_apartment,
@@ -39,17 +44,14 @@ df_extract_clean <- df_extract_clean[
   est_appartement_etudiant == TRUE
 ][
   ,MEAN_PRICE := scale(PRICE)
-]
-               
-
-
-## Training
-
-df_extract_clean[
+][
   ,QUICKLY_SOLD := as.factor(QUICKLY_SOLD)
 ][
   ,PRICE_Z := PRICE - MEAN_PRICE
 ]
+
+               
+## Training
 
 idx <- caret::createDataPartition(df_extract_clean[["QUICKLY_SOLD"]], p = 0.8, list = FALSE)
 

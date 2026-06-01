@@ -1,22 +1,26 @@
 
 rm(list=ls())
 
-source("generate_csv_tables.R")
+source("function_generate_table_with_many_lines.R")
 
 library(dplyr)
 library(caret)
 
-generate_table_with_many_lines()
+table_to_analysis <- "LOT_OF_parisian_apartments.csv"
+
+generate_table_with_many_lines(
+  number_lines=5000000,
+  name_writed_file=table_to_analysis
+)
 
 
 ## Reading
 
-df_full <- read.csv("data/LOT_OF_parisian_apartments.csv")
+df_full <- read.csv(paste0("data/",table_to_analysis))
 df_extract <- slice(df_full,1:1000)
 
+
 ## Processing
-
-
 
 df_extract_clean <- rename(df_extract,PRICE=PRICE_EURO,AREA=AREA_SQUARE_METER)
 
@@ -27,12 +31,13 @@ df_extract_clean <- select(df_extract_clean, AREA, PRICE, QUICKLY_SOLD)
 
 df_extract_clean <- mutate(df_extract_clean, MEAN_PRICE = scale(PRICE))
 
-
-## Training
-
 df_extract_clean$QUICKLY_SOLD <- as.factor(df_extract_clean$QUICKLY_SOLD)
 
 df_extract_clean$PRICE_Z <- df_extract_clean$PRICE - df_extract_clean$MEAN_PRIC
+
+
+
+## Training
 
 idx <- createDataPartition(df_extract_clean$QUICKLY_SOLD, p = 0.8, list = FALSE)
 
