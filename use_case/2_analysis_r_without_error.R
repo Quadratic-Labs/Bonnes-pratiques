@@ -1,17 +1,11 @@
 
 
-## Gestion de l'aléatoire pour createDataPartition()
-## Vérification de l'existence du fichier
-## Ajout de pipes
-## Correction du nom de la colonne
-## Précision du paquet en amont de la méthode
-
+######################### DO NOT MODIFY ########################################
+################################################################################
 
 rm(list=ls())
 
-source("function_generate_table_with_many_lines.R")
-
-set.seed(35)
+source("tools/function_generate_table_with_many_lines.R")
 
 library(caret)
 library(dplyr)
@@ -23,6 +17,10 @@ generate_table_with_many_lines(
   name_writed_file=table_to_analysis
 )
 
+################################################################################
+################################################################################
+
+set.seed(35)
 
 ## Reading
 

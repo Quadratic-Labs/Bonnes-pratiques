@@ -1,7 +1,11 @@
 
+
+######################### DO NOT MODIFY ########################################
+################################################################################
+
 rm(list=ls())
 
-source("function_generate_table_with_many_lines.R")
+source("tools/function_generate_table_with_many_lines.R")
 
 library(dplyr)
 library(caret)
@@ -12,6 +16,10 @@ generate_table_with_many_lines(
   number_lines=5000000,
   name_writed_file=table_to_analysis
 )
+
+################################################################################
+################################################################################
+
 
 
 ## Reading
