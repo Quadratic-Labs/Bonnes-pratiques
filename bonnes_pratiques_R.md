@@ -101,8 +101,10 @@ Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vou
   Il existe plusieurs subtilités sur les comparaisons en R, qu'il est nécessaire de connaître pour réaliser une comparaison pertiente :
   * R peut comparer tout avec n'importe quoi. En effet, les 2 expressions suivantes ne retournent pas d'erreur dans la console : `356 > TRUE` et `1 < 'a'`. En effet, R effectue une "conversion automatique vers le type le plus générale". Concrètement, R convertit les éléments jusqu'à ce qu'ils soient tous au même type. En reprenant les exemples suivants :
     * `356 > TRUE` devient `356 > 1` donc `TRUE`  
-    * `1 < 'a'` devient `'1' < 'a'`, donc `TRUE` (ordre ASCII)  
-Il est donc important de contrôler les types des variables en amont pour vérifier que la comparaison n'est pas absurde.
+    * `1 < 'a'` devient `'1' < 'a'`, donc `TRUE` (ordre ASCII)
+    Il est donc important de contrôler les types des variables en amont pour vérifier que la comparaison n'est pas absurde.
+
+  * test
     
 
 ## 3. Gestion des fonctions  
