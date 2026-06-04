@@ -182,19 +182,25 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
    On y retrouve par exemple des arguments pour filtrer les lignes (`skip`,`n_max`) et sélectionner les colonnes souhaitées (`colClasses`).
    Dans le cas d’une connexion à une base de données SQL, cela revient à enrichir la requête SQL avec un maximum de traitements.
 
-3. Gérer les données volumineuses avec data.table
+2. Gérer les données volumineuses avec data.table
 
    Comparable au paquet 'dplyr', le paquet 'data.table' propose une syntaxe pour manipuler la donnée. Elle est adaptée aux volumes importants de données. En effet, dans ce contexte, l’utilisation de 'data.table' peut faire gagner un temps significatif sur l’exécution du code.
 
-4. Vectoriser les processus itératifs
+3. Minimiser le coût des boucles
 
-   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R.
+   
+
+4. Vectoriser des processus itératifs
+
    Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante, tout en retournant un vecteur de même dimension.
    Elle est néanmoins possible uniquement dans le cas où, dans une boucle, une itération ne dépend pas du résultat de l'itération précédente.
    Quand la vectorisation est possible, elle devient une alternatives aux boucles FOR.
-   En règle générale, réaliser une opération par vectorisation est plus rapide que de la réaliser par boucle. De plus, elle a l'avantage d’éviter un niveau d’indentation supplémentaire.
+   En règle générale, réaliser une opération (réellement) vectorisée est plus rapide que de la réaliser par boucle.
 
-   Du point de vue de la lisibité, je conseille la fonction `Vectorize()` (ne pas oublier la majuscule). Elle simule une vectorisation sur des fonctions non vectorisables. Attention, cette fonction ne diminue pas le temps d’exécution : elle n’est qu’un "wrapper" pour les boucles. Néanmoins, il existe d'autres fonctions qui appliquent une "vraie" vectorisation. C'est le cas de par exemple `bind_rows()` pour les concaténations, `plyr::join()` pour les jointures, ou les fonctions de la famille `apply` pour différentes applications de la vectorisation.
+   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une erreur commune consiste à insérer dans une boucle une fonction, qui pourrait elle-même remplacer la boucle.
+   Ces fonctions peut réduire le temps de calcul, par exemple `bind_rows()` pour les concaténations, `plyr::join()` pour les jointures. Ce processus requiert une quantité de RAM importante dans le cas de données volumineuses.
+   D'autres fonctionnent réalisent qu'une illusion de vectorisation, en étant des wrappers de boucle `FOR`. C'est le cas des fonctions de la famille `apply`, et les fonctions utilisées avec `Vectorize()` (avec une majuscule). Dans ce cas-ci, ces fonctions ne sont pas nécessairement plus légitime qu'une boucle `FOR` propre.
+
 
 ## 3. Optimisation de l'utilisation de son environnement
 
