@@ -109,6 +109,13 @@ Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vou
     Si possible, on étend la condition avec `| is.na(x)` pour traiter explicitement ces cas.
 
   * Les comparaisons avec des nombres flottants retourne fréquemment des résultats étonnants. Par exemple `.1 == .3/3` est `FALSE`. Ce type d'erreur peut être qualifié de numérique. Sans rentrer dans les détails, ce résultat est la conséquence du stockage des nombres par R : les nombres flottants, ainsi que la plupart des divisions avec des entiers, ne peuvent pas stockés sur un nombre de bits exact. Vous pouvez par ailleurs constater ces écarts avec l'exemple suivant `print(2/3,digits=20)`. Ainsi, pour les comparaisons de flottants et de divisions, il faut mieux utiliser `all.equal` et `==`. En effet, `all.equal` réalise une comparaison en se basant sur un nombre défini de chiffres après la virgule.
+ 
+* Opter pour la structure simple
+
+  Il existe plusieurs types de structure en R. On distingue généralement les structure en 1 dimensions (vecteurs et listes) et ceux en 2 dimensions (matrices et data frames). Chacunes de ces structures à ses propres spécificités, que je ne vais pas traiter ici. On peut néanmoins noter que ces objets n'ont pas le même degré de complexité : un vecteur est plus simple qu'une liste, et une matrice est plus simple qu'un data frame. Ainsi, en accord avec le principe du rasoir d'Ockham, on peut établir les 2 principes suivants :
+  * On utilise un data frame uniquement si une matrice ne suffit pas
+  * On utilise une liste uniquement si un vecteur ne suffit pas
+
     
 
 ## 3. Gestion des fonctions  
