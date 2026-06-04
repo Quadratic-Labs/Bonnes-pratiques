@@ -85,11 +85,16 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
   N’utilisez jamais ces méthodes. En effet, elles rendent particulièrement laborieux le débogage des scripts. C'est pourquoi si vous les trouvez dans un script existant, je vous déconseille fortement de le modifier.  
 Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vous n'en avez pas besoin.  
 
-* Ne pas utiliser `$` pour référencer les colonnes d’un tableau
-  
-  Avec les data.frames (la structure de table de base), il existe 2 moyens de manipuler une colonne comme un vecteur : soit avec des crochets (`Table1[[« nom_colonne1 »]]`), soit un symbole dollar (`Table1$nom_colonne1)`. Parmi ces 2 possibilités, je conseille d’utiliser plutôt les crochets. En effet, l’opérateur `$` fait implicitement de l’auto-complétion. Par conséquent, si le nom de la colonne après le symbole `$` n’existe pas, alors il peut malgré tout retourner les valeurs d’une autre colonne. 
+* Ne pas utiliser dans les scripts la correspondance partielle
 
- 
+  Dans certaines situations, R peut "deviner" le nom d'un élément en ne donnant que le début de celui-ci.
+  Pour faire référence à une colonne nommée "price_wh" dans un data frame, `df$price` serait suffisant (à condition qu'il n'existe pas d'autres colonnes débutant par "price").
+  A noter que la correspondance partielle ne s'applique pas uniquement aux data frames : lorsqu'on fait appel à une fonction, elle peut être utilisée pour définir la valeur des paramètres.  
+
+  Je déconseille d'y avoir recours.
+  En effet, cette pratique génère de la confusion. Dans un script, il est difficile de déterminer si la correspondance partielle a été utilisée sciemment par le développeur, ou s'il s'agit d'une erreur de nommage.
+  De plus, si on reste sur le cas des data frames, la correspondance partielle est très sensible au renommage et ajout de colonnes. Avec ces modifications, ils risquent de vous retourner une valeur NULL, ou pire une autre colonne.
+  Ainsi, pour ne pas utiliser ce mécanisme involontairement et détecter les erreurs de nommage, je vous conseille d'utiliser les crochets (`Table1[[« nom_colonne1 »]]`) plutôt que le dollar (`Table1$nom_colonne1`). En effet, la référence par crochet n'est pas soumise à la correspondance partielle.
 
 ## 3. Gestion des fonctions  
 
