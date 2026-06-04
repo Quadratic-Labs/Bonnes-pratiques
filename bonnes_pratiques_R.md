@@ -268,3 +268,7 @@ Shiny permet de transformer vos analyses R en applications web interactives sans
 Le débogage est une étape inévitable pour garantir la fiabilité de vos scripts, surtout lorsque la logique métier devient complexe. 
 
 * `browser()` : Plus qu'un package, c'est une fonction native essentielle. Insérée dans votre code, elle interrompt l'exécution et vous permet d'inspecter l'environnement à cet instant précis. Vous pouvez alors tester vos variables, exécuter le code ligne par ligne et comprendre exactement où et pourquoi une erreur se produit. C'est l'outil de diagnostic primaire de tout développeur R. Par ailleurs, il en existe des dérivés comme `recover()` et `debug()`.
+ 
+* `codetools::findGlobals()` : Une erreur courante consiste à utiliser des objets globaux dans une fonction, c'est-à-dire définis hors de celle-ci. Avec `findGlobals()`, vous pouvez les détecter facilement et ajuster votre fonction.
+
+* `conflicts()` :  Le fait d'avoir 2 objets portant un même nom peut génèrer des erreurs assez incompréhensible. C'est le cas quand une variable porte le même nom qu'une fonction d'un paquet chargé. Ainsi, `conflicts()` vérifie si deux objets portent le nom dans l'environnement.
