@@ -271,4 +271,28 @@ Le débogage est une étape inévitable pour garantir la fiabilité de vos scrip
  
 * `codetools::findGlobals()` : Une erreur courante consiste à utiliser des objets globaux dans une fonction, c'est-à-dire définis hors de celle-ci. Avec `findGlobals()`, vous pouvez les détecter facilement et ajuster votre fonction.
 
-* `conflicts()` :  Le fait d'avoir 2 objets portant un même nom peut génèrer des erreurs assez incompréhensible. C'est le cas quand une variable porte le même nom qu'une fonction d'un paquet chargé. Ainsi, `conflicts()` vérifie si deux objets portent le nom dans l'environnement.
+* `conflicts()` :  Le fait d'avoir 2 objets portant un même nom peut génèrer des erreurs assez incompréhensible. C'est le cas quand une variable porte le même nom qu'une fonction d'un paquet chargé. Ainsi, `conflicts()` vérifie si deux objets portent le nom dans l'environnement.  
+
+# SOURCES ET RESSOURCES
+
+* "R for Data Science" de H. WICKAM et G. GROLEMUND
+  LA bible de R. Indispensable à tout data scientist.
+  Je conseille la première édition plutôt que la deuxième : elle se réfère d'avantage à des méthodes des paquets `base` et `utile`
+
+* "Advanced R" de H. WICKAM
+  Suite canonique du livre précédent
+
+* "R Packages" de H. WICKAM et J.  BRYAN
+  Essentiel pour monter en compétence sur la création des paquets R
+
+* "Coder proprement" de R. C. MARTIN
+  Référence dans le monde de la programmation. Même si il est orienté JAVA, la plupart de ses principes et règles sont transposables à R et Python.
+  Source principale de la section 1.
+
+* "R FAQ"
+  Document officiel du CRAN. Il dispose d'éléments de réponses sur certaines questions techniques récurrentes du langage.
+
+* "The R Inferno" de P. BURNS
+
+  Etrange document, mais très riche. Il aborde certaines idées fausses sur R, et liste un nombre important de particularités/bizzareries du langage.
+  Attention : le document date de 2011. Certaines observations peuvent être caduques sur les versions récentes de R.
