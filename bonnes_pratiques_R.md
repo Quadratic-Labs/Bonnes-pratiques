@@ -74,13 +74,13 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 
 * Gérer explicitement les erreurs de lecture/écriture
   
-  La lecture et l'écriture de fichiers utilisent des chemins physiques pour localiser des données sur le disque. Ces chemins sont souvent gérés par des chaînes de caractères en un unique bloc. Pour repérer plus facilement les problèmes de fichier non trouvé, je recommande d’utiliser en amont de la lecture les fonctions `base::dir.exits` ou `base::file.exists`. De plus, pour gagner en lisibilité, je recommande d’utiliser la fonction `base::file.path`, où chaque répertoire du chemin correspond à un argument. Elle est d’autant plus pratique qu’elle fonctionne de manière récursive. 
+  La lecture et l'écriture de fichiers utilisent des chemins physiques pour localiser des données sur le disque. Ces chemins sont souvent gérés par des chaînes de caractères en un unique bloc. Pour repérer plus facilement les problèmes de fichier non trouvé, je recommande d’utiliser en amont de la lecture les fonctions `dir.exits` ou `file.exists`. De plus, pour gagner en lisibilité, je recommande d’utiliser la fonction `file.path`, où chaque répertoire du chemin correspond à un argument. Elle est d’autant plus pratique qu’elle fonctionne de manière récursive. 
 
 * Pas de codage dynamique
   
   Le codage dynamique fait référence à l’utilisation de chaînes de caractères dont la valeur est une instruction ou un nom de variables. En R, il se manifeste notamment par la présence des fonctions suivantes :
-  * `base::eval()` et `base::parse()` pour gérer les chaînes de caractère comme des instructions 
-  * `base::get()` et `base::assign()` pour gérer les chaînes de caractère comme des noms de variable
+  * `eval()` et `parse()` pour gérer les chaînes de caractère comme des instructions 
+  * `get()` et `assign()` pour gérer les chaînes de caractère comme des noms de variable
 
   N’utilisez jamais ces méthodes. En effet, elles rendent particulièrement laborieux le débogage des scripts. C'est pourquoi si vous les trouvez dans un script existant, je vous déconseille fortement de le modifier.  
 Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vous n'en avez pas besoin.  
@@ -164,7 +164,7 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
    La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. Cette caractéristique permet de ne pas avoir systématiquement recours à des boucles FOR.
    En effet, en règle générale, réaliser une opération par vectorisation est plus rapide que de la réaliser par boucle. De plus, il permet d’éviter un niveau d’indentation supplémentaire. 
 
-Du point de vue de la lisibité, je conseille la fonction `base::Vectorize()` (ne pas oublier la majuscule). Elle simule une vectorisation sur des fonctions non vectorisables. Attention, cette fonction ne diminue pas le temps d’exécution : elle n’est qu’un "wrapper" pour les boucles. Néanmoins, il existe d'autres fonctions qui appliquent une "vraie" vectorisation. C'est le cas de par exemple `base::bind_rows()` pour les concaténations, `plyr::join()` pour les jointures, ou les fonctions de la famille `base::apply` pour différentes applications de la vectorisation.
+Du point de vue de la lisibité, je conseille la fonction `Vectorize()` (ne pas oublier la majuscule). Elle simule une vectorisation sur des fonctions non vectorisables. Attention, cette fonction ne diminue pas le temps d’exécution : elle n’est qu’un "wrapper" pour les boucles. Néanmoins, il existe d'autres fonctions qui appliquent une "vraie" vectorisation. C'est le cas de par exemple `bind_rows()` pour les concaténations, `plyr::join()` pour les jointures, ou les fonctions de la famille `apply` pour différentes applications de la vectorisation.
 
 ## 3. Optimisation de l'utilisation de son environnement
 
@@ -267,4 +267,4 @@ Shiny permet de transformer vos analyses R en applications web interactives sans
 
 Le débogage est une étape inévitable pour garantir la fiabilité de vos scripts, surtout lorsque la logique métier devient complexe. 
 
-* `base::browser()` : Plus qu'un package, c'est une fonction native essentielle. Insérée dans votre code, elle interrompt l'exécution et vous permet d'inspecter l'environnement à cet instant précis. Vous pouvez alors tester vos variables, exécuter le code ligne par ligne et comprendre exactement où et pourquoi une erreur se produit. C'est l'outil de diagnostic primaire de tout développeur R. 
+* `browser()` : Plus qu'un package, c'est une fonction native essentielle. Insérée dans votre code, elle interrompt l'exécution et vous permet d'inspecter l'environnement à cet instant précis. Vous pouvez alors tester vos variables, exécuter le code ligne par ligne et comprendre exactement où et pourquoi une erreur se produit. C'est l'outil de diagnostic primaire de tout développeur R. 
