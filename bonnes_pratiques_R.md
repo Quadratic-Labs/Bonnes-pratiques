@@ -85,34 +85,34 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
   N’utilisez jamais ces méthodes. En effet, elles rendent particulièrement laborieux le débogage des scripts. C'est pourquoi si vous les trouvez dans un script existant, je vous déconseille fortement de le modifier.  
 Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vous n'en avez pas besoin.  
 
-* Ne pas utiliser dans les scripts la correspondance partielle
+* Ne pas utiliser la correspondance partielle
 
   Dans certaines situations, R peut "deviner" le nom d'un élément en ne donnant que le début de celui-ci.
   Pour faire référence à une colonne nommée "price_wh" dans un data frame, `df$price` serait suffisant (à condition qu'il n'existe pas d'autres colonnes débutant par "price").
   A noter que la correspondance partielle ne s'applique pas uniquement aux data frames : lorsqu'on fait appel à une fonction, elle peut être utilisée pour définir la valeur des paramètres.  
 
   Je déconseille d'y avoir recours.
-  En effet, cette pratique génère de la confusion. Dans un script, il est difficile de déterminer si la correspondance partielle a été utilisée sciemment par le développeur, ou s'il s'agit d'une erreur de nommage.
+  En effet, cette pratique génère de la confusion. Dans un script, il est difficile de déterminer si la correspondance partielle a été utilisée sciemment, ou s'il s'agit d'une erreur de nommage.
   De plus, si on reste sur le cas des data frames, la correspondance partielle est très sensible au renommage et ajout de colonnes. Avec ces modifications, ils risquent de vous retourner une valeur NULL, ou pire une autre colonne.
-  Ainsi, pour ne pas utiliser ce mécanisme involontairement et détecter les erreurs de nommage, je vous conseille d'utiliser les crochets (`Table1[[« nom_colonne1 »]]`) plutôt que le dollar (`Table1$nom_colonne1`). En effet, la référence par crochet n'est pas soumise à la correspondance partielle.
+  Ainsi, pour ne pas utiliser ce mécanisme involontairement et bien détecter les erreurs de nommage, je vous conseille d'utiliser les crochets (`Table1[[« nom_colonne1 »]]`) plutôt que le dollar (`Table1$nom_colonne1`). En effet, la référence par crochet n'est pas soumise à la correspondance partielle.
 
 * Contrôler les comparaisons
 
-  Il existe plusieurs subtilités sur les comparaisons en R, qu'il est nécessaire de connaître pour réaliser une comparaison pertiente :
-  * R peut comparer tout avec n'importe quoi. En effet, les 2 expressions suivantes ne retournent pas d'erreur dans la console : `356 > TRUE` et `1 < 'a'`. En effet, R effectue une "conversion automatique vers le type le plus générale". Concrètement, R convertit les éléments jusqu'à ce qu'ils soient tous au même type. En reprenant les exemples suivants :
+  Il existe plusieurs subtilités sur les comparaisons en R, qu'il est nécessaire de connaître pour réaliser des comparaisons pertinentes :
+  * R peut comparer tout avec n'importe quoi. En effet, les 2 expressions suivantes ne retournent aucunes erreurs dans la console : `356 > TRUE` et `1 < 'a'`. En effet, R effectue une "conversion automatique vers le type le plus générale". Concrètement, R convertit les éléments jusqu'à ce qu'ils soient tous au même type. En reprenant les exemples suivants :
     * `356 > TRUE` devient `356 > 1` donc `TRUE`  
     * `1 < 'a'` devient `'1' < 'a'`, donc `TRUE` (ordre ASCII)
       
     Il est donc important de contrôler les types des variables en amont pour vérifier que la comparaison n'est pas absurde.
 
   * Toute comparaison faisant intervenir un `NA` aura pour sortie `NA`. C'est un problème que l'on retrouve couramment dans les conditions des `IF`. En effet, le `IF` retourne une erreur si la condition évaluée est égale à `NA`. Or il suffit qu'un seul élément soit manquant, pour que la sortie de la comparaison le soit aussi.  
-    Si possible, on étend la condition avec `| is.na(x)` pour traiter explicitement ces cas.
+    Si possible, on étend la condition avec le terme `| is.na(x)` pour traiter explicitement ces cas.
 
-  * Les comparaisons avec des nombres flottants retourne fréquemment des résultats étonnants. Par exemple `.1 == .3/3` est `FALSE`. Ce type d'erreur peut être qualifié de numérique. Sans rentrer dans les détails, ce résultat est la conséquence du stockage des nombres par R : les nombres flottants, ainsi que la plupart des divisions avec des entiers, ne peuvent pas stockés sur un nombre de bits exact. Vous pouvez par ailleurs constater ces écarts avec l'exemple suivant `print(2/3,digits=20)`. Ainsi, pour les comparaisons de flottants et de divisions, il faut mieux utiliser `all.equal` et `==`. En effet, `all.equal` réalise une comparaison en se basant sur un nombre défini de chiffres après la virgule.
+  * Les comparaisons avec des nombres flottants retournent fréquemment des résultats étonnants. Par exemple `.1 == .3/3` est `FALSE`. Sans rentrer dans les détails, les nombres flottants, ainsi que la plupart des divisions avec des entiers, ne peuvent pas stockés sur un nombre de bits exact. On retrouve des écarts minimes, que l'on peut constater avec l'exemple suivant : `print(2/3,digits=20)`. Ainsi, pour les comparaisons de nombres flottants et de divisions, il faut mieux utiliser `all.equal` que `==`. En effet, `all.equal` réalise une comparaison selon un nombre défini de chiffres après la virgule.
  
-* Opter pour la structure simple
+* Opter pour la structure la plus simple
 
-  Il existe plusieurs types de structure en R. On distingue généralement les structure en 1 dimensions (vecteurs et listes) et ceux en 2 dimensions (matrices et data frames). Chacunes de ces structures à ses propres spécificités, que je ne vais pas traiter ici. On peut néanmoins noter que ces objets n'ont pas le même degré de complexité : un vecteur est plus simple qu'une liste, et une matrice est plus simple qu'un data frame. Ainsi, en accord avec le principe du rasoir d'Ockham, on peut établir les 2 principes suivants :
+  Il existe plusieurs types de structure en R. On distingue généralement les structure à 1 dimension (vecteurs et listes) et ceux à 2 dimensions (matrices et data frames). Chacunes de ces structures à ses propres spécificités, que je ne vais pas traiter ici. On sait néanmoins noter que ces objets n'ont pas le même degré de complexité : un vecteur est plus simple qu'une liste, et une matrice est plus simple qu'un data frame. Ainsi, en accord avec le principe du rasoir d'Ockham, on peut établir les 2 principes suivants :
   * On utilise un data frame uniquement si une matrice ne suffit pas
   * On utilise une liste uniquement si un vecteur ne suffit pas
 
@@ -177,9 +177,9 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
 1. Affiner la lecture des inputs
 
-   La fonction `read.table` (et ses dérivés comme `read.csv`) disposent de nombreux arguments pour réaliser des traitements dès de la phase de lecture.
-   Or, cela permet généralement de gagner en temps d'exécution, emais aussi de ne pas stocker la totalité de la table en RAM.
-   On y retrouve par exemple des arguments pour filtrer les lignes (`skip`,`n_max`) et sélectionner les colonnes souhaitées (`colClasses`).
+   La fonction `read.table` (et ses dérivés comme `read.csv`) dispose de nombreux arguments pour réaliser des traitements dès la phase de lecture.
+   Or, cela fait généralement de gagner du temps d'exécution dans le script, et limiter la quantité de RAM nécessaire à l'opération.
+   On a par exemple des arguments pour filtrer les lignes (`skip`,`n_max`) et sélectionner les colonnes souhaitées (`colClasses`).
    Dans le cas d’une connexion à une base de données SQL, cela revient à enrichir la requête SQL avec un maximum de traitements.
 
 2. Gérer les données volumineuses avec data.table
@@ -190,19 +190,19 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
    Une pratique courante consiste à ajouter, à chaque itération d'une boucle, des éléments à un objet composé: ajout de lignes avec `rbind`, ajout d'un élément à une liste,...
    Cette pratique d'augmentation de la taille d'un objet n'est pas optimal en terme d'allocation de mémoire. En effet, le changement de taille progressif d'un objet tend à fragmenter la mémoire, et donc à utiliser plus d'espaces que l'objet nécessiterait réellement.
-   Dans le cas où la taille finale de l'objet est connu, il est conseillé d'initialiser en amont un objet de même taille (avec uniquement des valeurs NULL par exemple), puis de remplacer progressivement.
-   Dans le cas d'un data frame on peut initialiser une liste, remplacer les valeurs NULL par le résultat de chaque itération, puis enfin faire un `do.call('rbind',ma_liste)` pour retomber sur un data frame.
+   Dans le cas où la taille finale de l'objet est connu, il est conseillé d'initialiser en amont un objet de même taille (avec uniquement des valeurs NULL par exemple), puis de les remplacer lors des itérations successives.
+   Dans le cas d'un data frame on peut d'abord initialiser une liste, puis remplacer successivement les valeurs NULL par les tables, puis les concaténer avec `do.call('rbind',ma_liste)`.
 
 4. Vectoriser des processus itératifs
 
-   Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante, tout en retournant un vecteur de même dimension.
-   Elle est néanmoins possible uniquement dans le cas où, dans une boucle, une itération ne dépend pas du résultat de l'itération précédente.
+   Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ aux éléments de manière indépendante, tout en retournant un vecteur de même dimension qu'en entrée.
+   Elle est possible dans le cas où, dans une boucle, une itération ne dépend pas du résultat de l'itération précédente.
    Quand la vectorisation est possible, elle devient une alternatives aux boucles FOR.
    En règle générale, réaliser une opération (réellement) vectorisée est plus rapide que de la réaliser par boucle.
 
    La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une erreur commune consiste à insérer dans une boucle une fonction, qui pourrait elle-même remplacer la boucle.
-   Ces fonctions peut réduire le temps de calcul, par exemple `bind_rows()` pour les concaténations, `plyr::join()` pour les jointures. Ce processus requiert une quantité de RAM importante dans le cas de données volumineuses.
-   D'autres fonctionnent réalisent qu'une illusion de vectorisation, en étant des wrappers de boucle `FOR`. C'est le cas des fonctions de la famille `apply`, et les fonctions utilisées avec `Vectorize()` (avec une majuscule). Dans ce cas-ci, ces fonctions ne sont pas nécessairement plus légitime qu'une boucle `FOR` propre.
+   Ces fonctions peut réduire le temps de calcul, par exemple `bind_rows()` pour les concaténations, `plyr::join()` pour les jointures. Ce processus requiert néanmoins une quantité de RAM importante dans le cas de données volumineuses.
+   D'autres fonctions ne réalisent qu'une illusion de vectorisation, en étant simplement des wrappers de boucles `FOR`. C'est le cas des fonctions de la famille `apply`, et les fonctions utilisées avec `Vectorize()` (avec une majuscule). Dans ce cas-ci, ces fonctions ne sont pas nécessairement plus légitime qu'une boucle `FOR` propre.
 
 
 ## 3. Optimisation de l'utilisation de son environnement
@@ -316,7 +316,7 @@ Le débogage est une étape inévitable pour garantir la fiabilité de vos scrip
 
 * "R for Data Science" de H. WICKAM et G. GROLEMUND  
   LA bible de R. Indispensable à tout data scientist.  
-  Je conseille la première édition plutôt que la deuxième : elle se réfère d'avantage à des méthodes des paquets `base` et `utile`
+  Je conseille la première édition plutôt que la deuxième : elle se réfère d'avantage à des méthodes issues des paquets `base` et `utile`
 
 * "Advanced R" de H. WICKAM  
   Suite canonique du livre précédent
@@ -325,7 +325,7 @@ Le débogage est une étape inévitable pour garantir la fiabilité de vos scrip
   Essentiel pour monter en compétence sur la création des paquets R
 
 * "Coder proprement" de R. C. MARTIN  
-  Référence dans le monde de la programmation. Même si il est orienté JAVA, la plupart de ses principes et règles sont transposables à R et Python.  
+  Référence dans le monde de la programmation. Même si il est orienté JAVA, la plupart de ses principes et règles sont transposables à R.  
   Source principale de la section 1.
 
 * "R FAQ"  
