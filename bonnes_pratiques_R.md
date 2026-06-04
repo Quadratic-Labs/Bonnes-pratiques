@@ -108,7 +108,7 @@ Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vou
   * Toute comparaison faisant intervenir un `NA` aura pour sortie `NA`. C'est un problème que l'on retrouve couramment dans les conditions des `IF`. En effet, le `IF` retourne une erreur si la condition évaluée est égale à `NA`. Or il suffit qu'un seul élément soit manquant, pour que la sortie de la comparaison le soit aussi.  
     Si possible, on étend la condition avec `| is.na(x)` pour traiter explicitement ces cas.
 
-  * 
+  * Les comparaisons avec des nombres flottants retourne fréquemment des résultats étonnants. Par exemple `.1 == .3/3` est `FALSE`. Sans rentrer dans les détails, ce résultat est la conséquence du stockage des nombres par R : les nombres flottants, ainsi que la plupart des divisions avec des entiers, ne peuvent pas stockés sur un nombre de bits exact. Vous pouvez par ailleurs constater ces écarts avec l'exemple suivant `print(2/3,digits=20)`. Ainsi, pour les comparaisons de flottants et de divisions, il faut mieux utiliser `all.equal` et `==`. En effet, `all.equal` réalise une comparaison en se basant sur un nombre défini de chiffres après la virgule.
     
 
 ## 3. Gestion des fonctions  
