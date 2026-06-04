@@ -161,10 +161,13 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
 4. Vectoriser les processus itératifs
 
-   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. Cette caractéristique permet de ne pas avoir systématiquement recours à des boucles FOR.
-   En effet, en règle générale, réaliser une opération par vectorisation est plus rapide que de la réaliser par boucle. De plus, il permet d’éviter un niveau d’indentation supplémentaire. 
+   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R.
+   Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante, tout en retournant un vecteur de même dimension.
+   Elle est néanmoins possible uniquement dans le cas où, dans une boucle, une itération ne dépend pas du résultat de l'itération précédente.
+   Quand la vectorisation est possible, elle devient une alternatives aux boucles FOR.
+   En règle générale, réaliser une opération par vectorisation est plus rapide que de la réaliser par boucle. De plus, elle a l'avantage d’éviter un niveau d’indentation supplémentaire.
 
-Du point de vue de la lisibité, je conseille la fonction `Vectorize()` (ne pas oublier la majuscule). Elle simule une vectorisation sur des fonctions non vectorisables. Attention, cette fonction ne diminue pas le temps d’exécution : elle n’est qu’un "wrapper" pour les boucles. Néanmoins, il existe d'autres fonctions qui appliquent une "vraie" vectorisation. C'est le cas de par exemple `bind_rows()` pour les concaténations, `plyr::join()` pour les jointures, ou les fonctions de la famille `apply` pour différentes applications de la vectorisation.
+   Du point de vue de la lisibité, je conseille la fonction `Vectorize()` (ne pas oublier la majuscule). Elle simule une vectorisation sur des fonctions non vectorisables. Attention, cette fonction ne diminue pas le temps d’exécution : elle n’est qu’un "wrapper" pour les boucles. Néanmoins, il existe d'autres fonctions qui appliquent une "vraie" vectorisation. C'est le cas de par exemple `bind_rows()` pour les concaténations, `plyr::join()` pour les jointures, ou les fonctions de la famille `apply` pour différentes applications de la vectorisation.
 
 ## 3. Optimisation de l'utilisation de son environnement
 
