@@ -186,9 +186,12 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
    Comparable au paquet 'dplyr', le paquet 'data.table' propose une syntaxe pour manipuler la donnée. Elle est adaptée aux volumes importants de données. En effet, dans ce contexte, l’utilisation de 'data.table' peut faire gagner un temps significatif sur l’exécution du code.
 
-3. Minimiser le coût des boucles
+3. Minimiser le coût en RAM des objets construits par boucle
 
-   
+   Une pratique courante consiste à ajouter, à chaque itération d'une boucle, des éléments à un objet composé: ajout de lignes avec `rbind`, ajout d'un élément à une liste,...
+   Cette pratique d'augmentation de la taille d'un objet n'est pas optimal en terme d'allocation de mémoire. En effet, le changement de taille progressif d'un objet tend à fragmenter la mémoire, et donc à utiliser plus d'espaces que l'objet nécessiterait réellement.
+   Dans le cas où la taille finale de l'objet est connu, il est conseillé d'initialiser en amont un objet de même taille (avec uniquement des valeurs NULL par exemple), puis de remplacer progressivement.
+   Dans le cas d'un data frame on peut initialiser une liste, remplacer les valeurs NULL par le résultat de chaque itération, puis enfin faire un `do.call('rbind',ma_liste)` pour retomber sur un data frame.
 
 4. Vectoriser des processus itératifs
 
