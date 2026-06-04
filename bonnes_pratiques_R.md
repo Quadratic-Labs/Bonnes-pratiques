@@ -150,14 +150,16 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
 1. Affiner la lecture des inputs
 
-   Il faut éviter de stocker la totalité de la table en mémoire. Pour cela, on peut filtrer les données et/ou sélectionner les colonnes dès la lecture de l’input sur le disque dur.
-   Dans le cas de de fichier Excel, cela consiste à utiliser les arguments `col_names`, `skip`, et `n_max` (présents dans les fonctions de lecture les plus connues). Dans le cas d’une table située dans une base de données SQL, cela revient à optimiser la requête SQL.
+   La fonction `read.table` (et ses dérivés comme `read.csv`) disposent de nombreux arguments pour réaliser des traitements dès de la phase de lecture.
+   Or, cela permet généralement de gagner en temps d'exécution, emais aussi de ne pas stocker la totalité de la table en RAM.
+   On y retrouve par exemple des arguments pour filtrer les lignes (`skip`,`n_max`) et sélectionner les colonnes souhaitées (`colClasses`).
+   Dans le cas d’une connexion à une base de données SQL, cela revient à enrichir la requête SQL avec un maximum de traitements.
 
-2. Gérer les données volumineuses avec data.table
+3. Gérer les données volumineuses avec data.table
 
    Comparable au paquet 'dplyr', le paquet 'data.table' propose une syntaxe pour manipuler la donnée. Elle est adaptée aux volumes importants de données. En effet, dans ce contexte, l’utilisation de 'data.table' peut faire gagner un temps significatif sur l’exécution du code.
 
-3. Vectoriser les processus itératifs
+4. Vectoriser les processus itératifs
 
    La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. Cette caractéristique permet de ne pas avoir systématiquement recours à des boucles FOR.
    En effet, en règle générale, réaliser une opération par vectorisation est plus rapide que de la réaliser par boucle. De plus, il permet d’éviter un niveau d’indentation supplémentaire. 
