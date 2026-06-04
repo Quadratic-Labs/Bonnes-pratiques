@@ -105,7 +105,10 @@ Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vou
       
     Il est donc important de contrôler les types des variables en amont pour vérifier que la comparaison n'est pas absurde.
 
-  * test
+  * Toute comparaison faisant intervenir un `NA` aura pour sortie `NA`. C'est un problème que l'on retrouve couramment dans les conditions des `IF`. En effet, le `IF` retourne une erreur si la condition évaluée est égale à `NA`. Or il suffit qu'un seul élément soit manquant, pour que la sortie de la comparaison le soit aussi.  
+    Si possible, on étend la condition avec `| is.na(x)` pour traiter explicitement ces cas.
+
+  * 
     
 
 ## 3. Gestion des fonctions  
