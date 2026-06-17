@@ -74,22 +74,49 @@ A partir des indicateurs précédents, on déduit des règles concrètes appliqu
 
 * Gérer explicitement les erreurs de lecture/écriture
   
-  La lecture et l'écriture de fichiers utilisent des chemins physiques pour localiser des données sur le disque. Ces chemins sont souvent gérés par des chaînes de caractères en un unique bloc. Pour repérer plus facilement les problèmes de fichier non trouvé, je recommande d’utiliser en amont de la lecture les fonctions `base::dir.exits` ou `base::file.exists`. De plus, pour gagner en lisibilité, je recommande d’utiliser la fonction `base::file.path`, où chaque répertoire du chemin correspond à un argument. Elle est d’autant plus pratique qu’elle fonctionne de manière récursive. 
+  La lecture et l'écriture de fichiers utilisent des chemins physiques pour localiser des données sur le disque. Ces chemins sont souvent gérés par des chaînes de caractères en un unique bloc. Pour repérer plus facilement les problèmes de fichier non trouvé, je recommande d’utiliser en amont de la lecture les fonctions `dir.exits` ou `file.exists`. De plus, pour gagner en lisibilité, je recommande d’utiliser la fonction `file.path`, où chaque répertoire du chemin correspond à un argument. Elle est d’autant plus pratique qu’elle fonctionne de manière récursive. 
 
 * Pas de codage dynamique
   
   Le codage dynamique fait référence à l’utilisation de chaînes de caractères dont la valeur est une instruction ou un nom de variables. En R, il se manifeste notamment par la présence des fonctions suivantes :
-  * `base::eval()` et `base::parse()` pour gérer les chaînes de caractère comme des instructions 
-  * `base::get()` et `base::assign()` pour gérer les chaînes de caractère comme des noms de variable
+  * `eval()` et `parse()` pour gérer les chaînes de caractère comme des instructions 
+  * `get()` et `assign()` pour gérer les chaînes de caractère comme des noms de variable
 
   N’utilisez jamais ces méthodes. En effet, elles rendent particulièrement laborieux le débogage des scripts. C'est pourquoi si vous les trouvez dans un script existant, je vous déconseille fortement de le modifier.  
 Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vous n'en avez pas besoin.  
 
-* Ne pas utiliser `$` pour référencer les colonnes d’un tableau
-  
-  Avec les data.frames (la structure de table de base), il existe 2 moyens de manipuler une colonne comme un vecteur : soit avec des crochets (`Table1[[« nom_colonne1 »]]`), soit un symbole dollar (`Table1$nom_colonne1)`. Parmi ces 2 possibilités, je conseille d’utiliser plutôt les crochets. En effet, l’opérateur `$` fait implicitement de l’auto-complétion. Par conséquent, si le nom de la colonne après le symbole `$` n’existe pas, alors il peut malgré tout retourner les valeurs d’une autre colonne. 
+* Ne pas utiliser la correspondance partielle
 
+  Dans certaines situations, R peut "deviner" le nom d'un élément en ne donnant que le début de celui-ci.
+  Pour faire référence à une colonne nommée "price_wh" dans un data frame, `df$price` serait suffisant (à condition qu'il n'existe pas d'autres colonnes débutant par "price").
+  A noter que la correspondance partielle ne s'applique pas uniquement aux data frames : lorsqu'on fait appel à une fonction, elle peut être utilisée pour définir la valeur des paramètres.  
+
+  Je déconseille d'y avoir recours.
+  En effet, cette pratique génère de la confusion. Dans un script, il est difficile de déterminer si la correspondance partielle a été utilisée sciemment, ou s'il s'agit d'une erreur de nommage.
+  De plus, si on reste sur le cas des data frames, la correspondance partielle est très sensible au renommage et ajout de colonnes. Avec ces modifications, ils risquent de vous retourner une valeur NULL, ou pire une autre colonne.
+  Ainsi, pour ne pas utiliser ce mécanisme involontairement et bien détecter les erreurs de nommage, je vous conseille d'utiliser les crochets (`Table1[[« nom_colonne1 »]]`) plutôt que le dollar (`Table1$nom_colonne1`). En effet, la référence par crochet n'est pas soumise à la correspondance partielle.
+
+* Contrôler les comparaisons
+
+  Il existe plusieurs subtilités sur les comparaisons en R, qu'il est nécessaire de connaître pour réaliser des comparaisons pertinentes :
+  * R peut comparer tout avec n'importe quoi. En effet, les 2 expressions suivantes ne retournent aucunes erreurs dans la console : `356 > TRUE` et `1 < 'a'`. En effet, R effectue une "conversion automatique vers le type le plus générale". Concrètement, R convertit les éléments jusqu'à ce qu'ils soient tous au même type. En reprenant les exemples suivants :
+    * `356 > TRUE` devient `356 > 1` donc `TRUE`  
+    * `1 < 'a'` devient `'1' < 'a'`, donc `TRUE` (ordre ASCII)
+      
+    Il est donc important de contrôler les types des variables en amont pour vérifier que la comparaison n'est pas absurde.
+
+  * Toute comparaison faisant intervenir un `NA` aura pour sortie `NA`. C'est un problème que l'on retrouve couramment dans les conditions des `IF`. En effet, le `IF` retourne une erreur si la condition évaluée est égale à `NA`. Or il suffit qu'un seul élément soit manquant, pour que la sortie de la comparaison le soit aussi.  
+    Si possible, on étend la condition avec le terme `| is.na(x)` pour traiter explicitement ces cas.
+
+  * Les comparaisons avec des nombres flottants retournent fréquemment des résultats étonnants. Par exemple `.1 == .3/3` est `FALSE`. Sans rentrer dans les détails, les nombres flottants, ainsi que la plupart des divisions avec des entiers, ne peuvent pas stockés sur un nombre de bits exact. On retrouve des écarts minimes, que l'on peut constater avec l'exemple suivant : `print(2/3,digits=20)`. Ainsi, pour les comparaisons de nombres flottants et de divisions, il faut mieux utiliser `all.equal` que `==`. En effet, `all.equal` réalise une comparaison selon un nombre défini de chiffres après la virgule.
  
+* Opter pour la structure la plus simple
+
+  Il existe plusieurs types de structure en R. On distingue généralement les structure à 1 dimension (vecteurs et listes) et ceux à 2 dimensions (matrices et data frames). Chacunes de ces structures à ses propres spécificités, que je ne vais pas traiter ici. On sait néanmoins noter que ces objets n'ont pas le même degré de complexité : un vecteur est plus simple qu'une liste, et une matrice est plus simple qu'un data frame. Ainsi, en accord avec le principe du rasoir d'Ockham, on peut établir les 2 principes suivants :
+  * On utilise un data frame uniquement si une matrice ne suffit pas
+  * On utilise une liste uniquement si un vecteur ne suffit pas
+
+    
 
 ## 3. Gestion des fonctions  
 
@@ -150,19 +177,33 @@ Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pou
 
 1. Affiner la lecture des inputs
 
-   Il faut éviter de stocker la totalité de la table en mémoire. Pour cela, on peut filtrer les données et/ou sélectionner les colonnes dès la lecture de l’input sur le disque dur.
-   Dans le cas de de fichier Excel, cela consiste à utiliser les arguments `col_names`, `skip`, et `n_max` (présents dans les fonctions de lecture les plus connues). Dans le cas d’une table située dans une base de données SQL, cela revient à optimiser la requête SQL.
+   La fonction `read.table` (et ses dérivés comme `read.csv`) dispose de nombreux arguments pour réaliser des traitements dès la phase de lecture.
+   Or, cela fait généralement de gagner du temps d'exécution dans le script, et limiter la quantité de RAM nécessaire à l'opération.
+   On a par exemple des arguments pour filtrer les lignes (`skip`,`n_max`) et sélectionner les colonnes souhaitées (`colClasses`).
+   Dans le cas d’une connexion à une base de données SQL, cela revient à enrichir la requête SQL avec un maximum de traitements.
 
 2. Gérer les données volumineuses avec data.table
 
    Comparable au paquet 'dplyr', le paquet 'data.table' propose une syntaxe pour manipuler la donnée. Elle est adaptée aux volumes importants de données. En effet, dans ce contexte, l’utilisation de 'data.table' peut faire gagner un temps significatif sur l’exécution du code.
 
-3. Vectoriser les processus itératifs
+3. Minimiser le coût en RAM des objets construits par boucle
 
-   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ à ses éléments de manière indépendante. Cette caractéristique permet de ne pas avoir systématiquement recours à des boucles FOR.
-   En effet, en règle générale, réaliser une opération par vectorisation est plus rapide que de la réaliser par boucle. De plus, il permet d’éviter un niveau d’indentation supplémentaire. 
+   Une pratique courante consiste à ajouter, à chaque itération d'une boucle, des éléments à un objet composé: ajout de lignes avec `rbind`, ajout d'un élément à une liste,...
+   Cette pratique d'augmentation de la taille d'un objet n'est pas optimal en terme d'allocation de mémoire. En effet, le changement de taille progressif d'un objet tend à fragmenter la mémoire, et donc à utiliser plus d'espaces que l'objet nécessiterait réellement.
+   Dans le cas où la taille finale de l'objet est connu, il est conseillé d'initialiser en amont un objet de même taille (avec uniquement des valeurs NULL par exemple), puis de les remplacer lors des itérations successives.
+   Dans le cas d'un data frame on peut d'abord initialiser une liste, puis remplacer successivement les valeurs NULL par les tables, puis les concaténer avec `do.call('rbind',ma_liste)`.
 
-Du point de vue de la lisibité, je conseille la fonction `base::vectorize()`. Elle simule une vectorisation sur des fonctions non vectorisables. Attention, cette fonction ne diminue pas le temps d’exécution : elle n’est qu’un "wrapper" pour les boucles. Néanmoins, il existe d'autres fonctions qui appliquent une "vraie" vectorisation. C'est le cas de par exemple `base::bind_rows()` pour les concaténations, `plyr::join()` pour les jointures, ou les fonctions de la famille `base::apply` pour différentes applications de la vectorisation.
+4. Vectoriser des processus itératifs
+
+   Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ aux éléments de manière indépendante, tout en retournant un vecteur de même dimension qu'en entrée.
+   Elle est possible dans le cas où, dans une boucle, une itération ne dépend pas du résultat de l'itération précédente.
+   Quand la vectorisation est possible, elle devient une alternatives aux boucles FOR.
+   En règle générale, réaliser une opération (réellement) vectorisée est plus rapide que de la réaliser par boucle.
+
+   La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une erreur commune consiste à insérer dans une boucle une fonction, qui pourrait elle-même remplacer la boucle.
+   Ces fonctions peut réduire le temps de calcul, par exemple `bind_rows()` pour les concaténations, `plyr::join()` pour les jointures. Ce processus requiert néanmoins une quantité de RAM importante dans le cas de données volumineuses.
+   D'autres fonctions ne réalisent qu'une illusion de vectorisation, en étant simplement des wrappers de boucles `FOR`. C'est le cas des fonctions de la famille `apply`, et les fonctions utilisées avec `Vectorize()` (avec une majuscule). Dans ce cas-ci, ces fonctions ne sont pas nécessairement plus légitime qu'une boucle `FOR` propre.
+
 
 ## 3. Optimisation de l'utilisation de son environnement
 
@@ -265,4 +306,31 @@ Shiny permet de transformer vos analyses R en applications web interactives sans
 
 Le débogage est une étape inévitable pour garantir la fiabilité de vos scripts, surtout lorsque la logique métier devient complexe. 
 
-* `base::browser()` : Plus qu'un package, c'est une fonction native essentielle. Insérée dans votre code, elle interrompt l'exécution et vous permet d'inspecter l'environnement à cet instant précis. Vous pouvez alors tester vos variables, exécuter le code ligne par ligne et comprendre exactement où et pourquoi une erreur se produit. C'est l'outil de diagnostic primaire de tout développeur R. 
+* `browser()` : Plus qu'un package, c'est une fonction native essentielle. Insérée dans votre code, elle interrompt l'exécution et vous permet d'inspecter l'environnement à cet instant précis. Vous pouvez alors tester vos variables, exécuter le code ligne par ligne et comprendre exactement où et pourquoi une erreur se produit. C'est l'outil de diagnostic primaire de tout développeur R. Par ailleurs, il en existe des dérivés comme `recover()` et `debug()`.
+ 
+* `codetools::findGlobals()` : Une erreur courante consiste à utiliser des objets globaux dans une fonction, c'est-à-dire définis hors de celle-ci. Avec `findGlobals()`, vous pouvez les détecter facilement et ajuster votre fonction.
+
+* `conflicts()` :  Le fait d'avoir 2 objets portant un même nom peut génèrer des erreurs assez incompréhensible. C'est le cas quand une variable porte le même nom qu'une fonction d'un paquet chargé. Ainsi, `conflicts()` vérifie si deux objets portent le nom dans l'environnement.  
+
+# SOURCES ET RESSOURCES
+
+* "R for Data Science" de H. WICKAM et G. GROLEMUND  
+  LA bible de R. Indispensable à tout data scientist.  
+  Je conseille la première édition plutôt que la deuxième : elle se réfère d'avantage à des méthodes issues des paquets `base` et `utile`
+
+* "Advanced R" de H. WICKAM  
+  Suite canonique du livre précédent
+
+* "R Packages" de H. WICKAM et J.  BRYAN  
+  Essentiel pour monter en compétence sur la création des paquets R
+
+* "Coder proprement" de R. C. MARTIN  
+  Référence dans le monde de la programmation. Même si il est orienté JAVA, la plupart de ses principes et règles sont transposables à R.  
+  Source principale de la section 1.
+
+* "R FAQ"  
+  Document officiel du CRAN. Il dispose d'éléments de réponses sur certaines questions techniques récurrentes du langage.
+
+* "The R Inferno" de P. BURNS  
+  Etrange document, mais très riche. Il aborde certaines idées fausses sur R, et liste un nombre important de particularités/bizzareries du langage.  
+  Attention : le document date de 2011. Certaines observations peuvent être caduques sur les versions récentes de R.
