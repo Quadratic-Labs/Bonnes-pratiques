@@ -228,12 +228,12 @@ C'est une solution adaptée pour rendre accessible votre paquet à tous, en cré
 
 Malgré sa prise en main relativement simple, une application shiny comporte plusieurs risques. Le principal étant que celui-ci devienne non-maintenanble avec sa complexification. Ce risque est dû à 2 caractéristiques du framework :
 - Avec l'agrandissement des parties UI et Serveur, il devient de plus en plus difficile d'avoir une vue d'ensemble des mécanismes sous-jacents de l'application
-- La structure de l'application shiny est permissive : 2 applications identiques peuvent avoir une structure totalement différente. De plus, certaines structures ne sont pas compatibles avec une mise en production.
-C'est pourquoi des bonnes pratiques sont indispensables pour espérer la survie sur le long terme de votre application.
+- La structure de l'application shiny est permissive : 2 applications identiques d'un point de vue utilisateur peuvent avoir une structure totalement différente. C'est d'autant plus un problème que certaines structures ne sont pas compatibles avec une mise en production.
+C'est pourquoi des bonnes pratiques sont indispensables pour espérer le maintien sur le long terme de votre application.
 
-Tout d'abord, dans une logique de découpage, je vous conseille de privilégier plusieurs petites applications shiny spécialisée, qu'une grande application généraliste. Ainsi, vous évitez les facteurs de complexification. Le client peut être réticent à cela, mais vous avez tout intérêt à le convaincre.
-Ensuite, pour travailler à partir d'une arborescence clairement définie, je vous conseille d'intégrer votre shiny à un paquet. La totalité des fonctions (y compris module) seront `R/`, tandis que la partie serveur et ui seront appelés depuis le `inst/`.
-Enfin, définir des modules shiny pour découper l'application. Cela revient à créer 2 fonctions : une UI et une autre serveur. Je conseille de mettre ces 2 fonctions dans un même script de `R/`. Néanmoins, les modules doivent contenir un minimum de code : les différentes traitements doivent être encapsulé dans des fonctions pour être rattachés à des tests unitaires.
+Tout d'abord, dans une logique de découpage, je vous conseille de privilégier plusieurs petites applications shiny spécialisée qu'une grande application généraliste. Ainsi, vous éviterez les facteurs de complexification cités ci-dessus. Le client peut être réticent à cela, mais vous avez tout intérêt à le convaincre si les tâches sont indépendantes les unes des autres.
+Ensuite, pour travailler à partir d'une arborescence clairement définie, je vous conseille d'intégrer votre shiny à un paquet. La totalité des fonctions (y compris module) seront placées `R/`, tandis l'appel du shiny s'effectuera depuis le `inst/`.
+Enfin, il faut utiliser les modules shiny pour découper l'application. Cela revient à créer 2 fonctions : une UI et une autre serveur. Je conseille de mettre ces 2 fonctions dans un même script de `R/`, et de les nommer de la même manière avec seulement le dernier terme qui diffère (ex : "_UI" et "_serveur"). Pour autant, les modules doivent contenir un minimum de code : les différentes traitements doivent être encapsulé dans des fonctions pour être rattachés à des tests unitaires. A noter que des tests peuvent être réalisés sur les modules shiny, mais que cela concerne d'avantage des développements chevronnés de shiny.
 
 
 # PARTIE 4 : SELECTION DE PAQUETS PAR CAS D'USAGE
