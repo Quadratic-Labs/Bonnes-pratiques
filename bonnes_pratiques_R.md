@@ -226,10 +226,14 @@ Shiny est un framework pour développer des applications. Il est historiquement 
 
 C'est une solution adaptée pour rendre accessible votre paquet à tous, en créant une interface "clique-bouton" ne nécessitant aucune connaissance en R. De plus, combiné avec un paquet comme `plotly`, on peut développer des outils orientés dataviz.
 
-Le coût d'entrée sur shiny est relativement faible. Néanmoins décider de recourir à ce type d'outils nécessite quelques précautions : 
-* Complexité exponentielle
-* Infrastructure du client
-* Gérer activement les dépendances
+Malgré sa prise en main relativement simple, une application shiny comporte plusieurs risques. Le principal étant que celui-ci devienne non-maintenanble avec sa complexification. Ce risque est dû à 2 caractéristiques du framework :
+- Avec l'agrandissement des parties UI et Serveur, il devient de plus en plus difficile d'avoir une vue d'ensemble des mécanismes sous-jacents de l'application
+- La structure de l'application shiny est permissive : 2 applications identiques peuvent avoir une structure totalement différente. De plus, certaines structures ne sont pas compatibles avec une mise en production.
+C'est pourquoi des bonnes pratiques sont indispensables pour espérer la survie sur le long terme de votre application.
+
+Tout d'abord, dans une logique de découpage, je vous conseille de privilégier plusieurs petites applications shiny spécialisée, qu'une grande application généraliste. Ainsi, vous évitez les facteurs de complexification. Le client peut être réticent à cela, mais vous avez tout intérêt à le convaincre.
+Ensuite, pour travailler à partir d'une arborescence clairement définie, je vous conseille d'intégrer votre shiny à un paquet. La totalité des fonctions (y compris module) seront `R/`, tandis que la partie serveur et ui seront appelés depuis le `inst/`.
+Enfin, définir des modules shiny pour découper l'application. Cela revient à créer 2 fonctions : une UI et une autre serveur. Je conseille de mettre ces 2 fonctions dans un même script de `R/`. Néanmoins, les modules doivent contenir un minimum de code : les différentes traitements doivent être encapsulé dans des fonctions pour être rattachés à des tests unitaires.
 
 
 # PARTIE 4 : SELECTION DE PAQUETS PAR CAS D'USAGE
