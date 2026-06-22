@@ -224,7 +224,7 @@ Ainsi, un paquet R vous permettra de :
 
 Shiny est un framework pour développer des applications. Il est historiquement associé à R, mais est aussi disponible sur Python depuis 2022. Sur ce dernier, il existe néanmoins des alternatives plus optimisées comme Dash.
 
-C'est une solution adaptée pour rendre accessible votre paquet à tous, en créant une interface "clique-bouton" ne nécessitant aucune connaissance en R et Rstudio. De plus, combiné avec un paquet comme `plotly`, on peut développer un bon outil orienté dataviz.
+C'est une solution adaptée pour rendre accessible votre paquet à tous, en créant une interface "clique-bouton" ne nécessitant aucune connaissance en R. De plus, combiné avec un paquet comme `plotly`, on peut développer des outils orientés dataviz.
 
 Le coût d'entrée sur shiny est relativement faible. Néanmoins décider de recourir à ce type d'outils nécessite quelques précautions : 
 * Complexité exponentielle
