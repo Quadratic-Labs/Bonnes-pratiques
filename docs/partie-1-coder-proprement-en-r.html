@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 PARTIE 1 : CODER PROPREMENT EN R | _main.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 PARTIE 1 : CODER PROPREMENT EN R | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 PARTIE 1 : CODER PROPREMENT EN R | _main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="partie-2-optimisation-du-code.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> INTRODUCTION</a></li>
+<li class="chapter" data-level="2" data-path="partie-1-coder-proprement-en-r.html"><a href="partie-1-coder-proprement-en-r.html"><i class="fa fa-check"></i><b>2</b> PARTIE 1 : CODER PROPREMENT EN R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="partie-1-coder-proprement-en-r.html"><a href="partie-1-coder-proprement-en-r.html#la-propret%C3%A9-du-code"><i class="fa fa-check"></i><b>2.1</b> 1. La propreté du code</a></li>
+<li class="chapter" data-level="2.2" data-path="partie-1-coder-proprement-en-r.html"><a href="partie-1-coder-proprement-en-r.html#les-r%C3%A8gles-de-propret%C3%A9-en-r"><i class="fa fa-check"></i><b>2.2</b> 2. Les règles de propreté en R</a></li>
+<li class="chapter" data-level="2.3" data-path="partie-1-coder-proprement-en-r.html"><a href="partie-1-coder-proprement-en-r.html#gestion-des-fonctions"><i class="fa fa-check"></i><b>2.3</b> 3. Gestion des fonctions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="partie-2-optimisation-du-code.html"><a href="partie-2-optimisation-du-code.html"><i class="fa fa-check"></i><b>3</b> PARTIE 2 : OPTIMISATION DU CODE</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="partie-2-optimisation-du-code.html"><a href="partie-2-optimisation-du-code.html#analyse-des-performances"><i class="fa fa-check"></i><b>3.1</b> 1. Analyse des performances</a></li>
+<li class="chapter" data-level="3.2" data-path="partie-2-optimisation-du-code.html"><a href="partie-2-optimisation-du-code.html#optimisation-du-temps-dex%C3%A9cution-de-son-code"><i class="fa fa-check"></i><b>3.2</b> 2. Optimisation du temps d’exécution de son code</a></li>
+<li class="chapter" data-level="3.3" data-path="partie-2-optimisation-du-code.html"><a href="partie-2-optimisation-du-code.html#optimisation-de-lutilisation-de-son-environnement"><i class="fa fa-check"></i><b>3.3</b> 3. Optimisation de l’utilisation de son environnement</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="partie-3-forme-du-livrable.html"><a href="partie-3-forme-du-livrable.html"><i class="fa fa-check"></i><b>4</b> PARTIE 3 : FORME DU LIVRABLE</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="partie-3-forme-du-livrable.html"><a href="partie-3-forme-du-livrable.html#un-rmarkdown-pour-lanalyse"><i class="fa fa-check"></i><b>4.1</b> Un rmarkdown pour l’analyse</a></li>
+<li class="chapter" data-level="4.2" data-path="partie-3-forme-du-livrable.html"><a href="partie-3-forme-du-livrable.html#un-paquet-r-pour-le-code"><i class="fa fa-check"></i><b>4.2</b> Un paquet R pour le code</a></li>
+<li class="chapter" data-level="4.3" data-path="partie-3-forme-du-livrable.html"><a href="partie-3-forme-du-livrable.html#un-shiny-pour-les-outils-interactifs"><i class="fa fa-check"></i><b>4.3</b> Un shiny pour les outils interactifs</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html"><i class="fa fa-check"></i><b>5</b> PARTIE 4 : SELECTION DE PAQUETS PAR CAS D’USAGE</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html#gestion-de-la-data"><i class="fa fa-check"></i><b>5.1</b> 1. Gestion de la data</a></li>
+<li class="chapter" data-level="5.2" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html#statistique-et-machine-learning-ml"><i class="fa fa-check"></i><b>5.2</b> 2. Statistique et Machine Learning (ML)</a></li>
+<li class="chapter" data-level="5.3" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html#graphique-et-visualisation"><i class="fa fa-check"></i><b>5.3</b> 3. Graphique et Visualisation</a></li>
+<li class="chapter" data-level="5.4" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html#shiny-applications-web-interactives"><i class="fa fa-check"></i><b>5.4</b> 4. Shiny : Applications Web Interactives</a></li>
+<li class="chapter" data-level="5.5" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html#d%C3%A9boggage"><i class="fa fa-check"></i><b>5.5</b> 5. Déboggage</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="sources-et-ressources.html"><a href="sources-et-ressources.html"><i class="fa fa-check"></i><b>6</b> SOURCES ET RESSOURCES</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="partie-1-coder-proprement-en-r" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> PARTIE 1 : CODER PROPREMENT EN R<a href="partie-1-coder-proprement-en-r.html#partie-1-coder-proprement-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>La notion de propreté est commune à tous les langages de programmation, malgré leurs différences (orienté objet ou procédural, de haut ou bas niveau…).
+Un code propre, quel que soit son langage, a les qualités subjectives suivantes :<br />
+* Sa maintenabilité : Il peut être lu et amélioré par un développeur autre que le développeur d’origine
+* Son imperfectibilité : rien ne permet de l’améliorer de manière évidente
+* Sa clarté : il demande peu d’effort pour être lu et compris
+* Sa limpidité : il retranscrit parfaitement l’idée d’origine du développeur</p>
+<p>Dans cette partie, je vous présente des moyens pour produire un code ayant ces qualités.</p>
+<div id="la-propreté-du-code" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> 1. La propreté du code<a href="partie-1-coder-proprement-en-r.html#la-propret%C3%A9-du-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote>
+<p>“La logique doit être simple, pour que les bogues aient du mal à se cacher.<br />
+Les dépendances doivent être minimes afin de faciliter la maintenance.<br />
+La gestion des erreurs doit être totale […].<br />
+Les performances doivent être proches de l’idéal […].<br />
+Un code propre fait une chose et le fait bien”<br />
+<em>B. STROUSTRUP</em> (humble inventeur du C++)</p>
+</blockquote>
+<p>Avant d’aborder plus précisément les spécificités du langage R, je présente les principes généraux de propreté d’un code.</p>
+<p>Les indicateurs de propreté du code ont été discutés par des développeurs renommés. Dans les différents points de vue que l’on peut trouver, on retrouve certaines tendances. Ainsi, un code propre doit être :<br />
+* Explicite : aucune règle n’est implicite. Le lecteur n’a rien à deviner
+* Lisible : les imbrications sont identifiées. Le code est aéré. Les noms des entités sont pertinents.
+* Simple : le code est logique et va à l’essentiel
+* Parcimonieux : aucune opération superflue est présente
+* Non redondant : il n’y a pas 2 blocs/fonctions qui réalisent un traitement identique
+* Harmonieux : le style (cf. annexe1 pour plus de détails sur cette notion) est cohérent tout au long du script</p>
+<p><strong>Le mythe de la reprise à 0 :</strong><br />
+Pour appliquer ces principes aux scripts existants, il peut être tentant d’entreprendre une réécriture complète. En effet, il est plus facile de créer son propre script que de modifier celui de quelqu’un d’autre. Néanmoins il est communément admis que cela n’est pas une bonne idée, y compris si vous êtes un développeur expérimenté. En effet, si le code n’est pas propre, alors les intentions du développeur d’origine ne sont pas claires. Par conséquent, il vous manquerait très probablement des informations pour produire un script au moins aussi pertinent que celui de votre prédécesseur.</p>
+<p>Ainsi, pour éviter de reprendre de zéro tous les scripts non propres, je vous propose les 2 règles suivantes :
+* Quand vous travaillez sur un code, laissez le toujours un peu plus propre qu’il ne l’était initialement
+* “Plus tard signifie jamais” : si vous voyez un moyen évident d’améliorer un code, alors prenez le temps de le faire.</p>
+<p>De cette manière, le script gagnera en qualité à chaque passe.</p>
+</div>
+<div id="les-règles-de-propreté-en-r" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> 2. Les règles de propreté en R<a href="partie-1-coder-proprement-en-r.html#les-r%C3%A8gles-de-propret%C3%A9-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A partir des indicateurs précédents, on déduit des règles concrètes appliquées au langage R. A noter que certains de ces critères sont transposables à d’autres langages, selon qu’ils soient proches ou non de R.</p>
+<ul>
+<li><p>Respecter les conventions d’indentation</p>
+<p>En R, l’indentation du code n’a pas de conséquences sur son exécution. Néanmoins, un script mal indenté perd significativement en lisibilité. De plus, une bonne indentation indique quelles parties du code sont particulièrement imbriquées, et donc lesquelles pourraient bénéficier d’une réécriture. En effet, un code imbriqué est généralement moins lisible qu’un code plat. Pour reprendre le <em>zen de Python</em> (cf. Annexe 2) « Nested is better than flat”.</p></li>
+<li><p>Ecrire des commentaires uniquement s’ils sont irremplaçables</p>
+<p>S’ils peuvent être pertinents, les commentaires sont souvent utilisés pour compenser des défauts réels du code. Si le code est propre, alors un développeur n’a pas besoin de commentaires pour le comprendre. Par opposition, le bon commentaire est celui qui ne peut pas être remplacé par du code (cf. Annexe 3 pour des exemples précis de mauvais commentaires). Aussi, les développeurs, intervenant sur un code tierce, sont plus réticents à supprimer un commentaire qu’à modifier du code, même si le commentaire en question est énigmatique.</p></li>
+<li><p>Utiliser les pipes</p>
+<p>Le pipe (ou ‘conduit’ en français) est un type d’opérateur qui permet de construire un ‘pipeline’, pour appliquer une suite de transformations à un input. Il évite la création de variables purement intermédiaires, tout en rendant le code moins redondant. L’opérateur de type pipe le plus connu est <code>%&gt;%</code> du package ‘magrittr’. Mais je conseillerais plutôt l’utilisation du pipe natif <code>|&gt;</code>. Bien qu’il soit moins courant, il a l’avantage d’être légèrement plus rapide que celui de ‘magrittr’, tout en évitant une dépendance supplémentaire.</p></li>
+<li><p>Identifier, minimiser, et mettre à jour les paquets importés</p>
+<p>Les importations ont tendance à complexifier la maintenance et le déploiement de code. C’est le cas par exemple si une montée de version d’un paquet utilisé engendre des nouveaux comportements non gérés par le code. De plus, le risque de conflit entre paquets augmente logiquement avec le nombre de dépendances. C’est pourquoi je déconseille notamment d’avoir un recours systématique au paquet ‘dplyr’. Bien que pratique et couramment utilisé, il ne reste pas moins une dépendance supplémentaire à gérer.</p>
+<p>Pour minimiser le nombre de dépendances, je conseille d’abord de les identifier en signalant les fonctions importées de cette façon : <code>[paquet]::[methode]</code>. De cette manière, vous pouvez vérifier si certains paquets importés ne sont plus nécessaires. Ensuite, pour des paquets où seul une ou deux fonctions sont importées, recherchez si des fonctions natives pourraient les remplacer. De cette manière, vous pourrez les supprimer. Enfin, pour les dépendances restantes, vérifiez que votre code est fonctionnel avec la version la plus récente du CRAN.</p></li>
+<li><p>Gérer explicitement les erreurs de lecture/écriture</p>
+<p>La lecture et l’écriture de fichiers utilisent des chemins physiques pour localiser des données sur le disque. Ces chemins sont souvent gérés par des chaînes de caractères en un unique bloc. Pour repérer plus facilement les problèmes de fichier non trouvé, je recommande d’utiliser en amont de la lecture les fonctions <code>dir.exits</code> ou <code>file.exists</code>. De plus, pour gagner en lisibilité, je recommande d’utiliser la fonction <code>file.path</code>, où chaque répertoire du chemin correspond à un argument. Elle est d’autant plus pratique qu’elle fonctionne de manière récursive.</p></li>
+<li><p>Pas de codage dynamique</p>
+<p>Le codage dynamique fait référence à l’utilisation de chaînes de caractères dont la valeur est une instruction ou un nom de variables. En R, il se manifeste notamment par la présence des fonctions suivantes :</p>
+<ul>
+<li><code>eval()</code> et <code>parse()</code> pour gérer les chaînes de caractère comme des instructions</li>
+<li><code>get()</code> et <code>assign()</code> pour gérer les chaînes de caractère comme des noms de variable</li>
+</ul>
+<p>N’utilisez jamais ces méthodes. En effet, elles rendent particulièrement laborieux le débogage des scripts. C’est pourquoi si vous les trouvez dans un script existant, je vous déconseille fortement de le modifier.<br />
+Il peut exister des cas rares où cela est pertinent. Mais dans 99% des cas, vous n’en avez pas besoin.</p></li>
+<li><p>Ne pas utiliser la correspondance partielle</p>
+<p>Dans certaines situations, R peut “deviner” le nom d’un élément en ne donnant que le début de celui-ci.
+Pour faire référence à une colonne nommée “price_wh” dans un data frame, <code>df$price</code> serait suffisant (à condition qu’il n’existe pas d’autres colonnes débutant par “price”).
+A noter que la correspondance partielle ne s’applique pas uniquement aux data frames : lorsqu’on fait appel à une fonction, elle peut être utilisée pour définir la valeur des paramètres.</p>
+<p>Je déconseille d’y avoir recours.
+En effet, cette pratique génère de la confusion. Dans un script, il est difficile de déterminer si la correspondance partielle a été utilisée sciemment, ou s’il s’agit d’une erreur de nommage.
+De plus, si on reste sur le cas des data frames, la correspondance partielle est très sensible au renommage et ajout de colonnes. Avec ces modifications, ils risquent de vous retourner une valeur NULL, ou pire une autre colonne.
+Ainsi, pour ne pas utiliser ce mécanisme involontairement et bien détecter les erreurs de nommage, je vous conseille d’utiliser les crochets (<code>Table1[[« nom_colonne1 »]]</code>) plutôt que le dollar (<code>Table1$nom_colonne1</code>). En effet, la référence par crochet n’est pas soumise à la correspondance partielle.</p></li>
+<li><p>Contrôler les comparaisons</p>
+<p>Il existe plusieurs subtilités sur les comparaisons en R, qu’il est nécessaire de connaître pour réaliser des comparaisons pertinentes :</p>
+<ul>
+<li><p>R peut comparer tout avec n’importe quoi. En effet, les 2 expressions suivantes ne retournent aucunes erreurs dans la console : <code>356 &gt; TRUE</code> et <code>1 &lt; 'a'</code>. En effet, R effectue une “conversion automatique vers le type le plus générale”. Concrètement, R convertit les éléments jusqu’à ce qu’ils soient tous au même type. En reprenant les exemples suivants :</p>
+<ul>
+<li><code>356 &gt; TRUE</code> devient <code>356 &gt; 1</code> donc <code>TRUE</code><br />
+</li>
+<li><code>1 &lt; 'a'</code> devient <code>'1' &lt; 'a'</code>, donc <code>TRUE</code> (ordre ASCII)</li>
+</ul>
+<p>Il est donc important de contrôler les types des variables en amont pour vérifier que la comparaison n’est pas absurde.</p></li>
+<li><p>Toute comparaison faisant intervenir un <code>NA</code> aura pour sortie <code>NA</code>. C’est un problème que l’on retrouve couramment dans les conditions des <code>IF</code>. En effet, le <code>IF</code> retourne une erreur si la condition évaluée est égale à <code>NA</code>. Or il suffit qu’un seul élément soit manquant, pour que la sortie de la comparaison le soit aussi.<br />
+Si possible, on étend la condition avec le terme <code>| is.na(x)</code> pour traiter explicitement ces cas.</p></li>
+<li><p>Les comparaisons avec des nombres flottants retournent fréquemment des résultats étonnants. Par exemple <code>.1 == .3/3</code> est <code>FALSE</code>. Sans rentrer dans les détails, les nombres flottants, ainsi que la plupart des divisions avec des entiers, ne peuvent pas stockés sur un nombre de bits exact. On retrouve des écarts minimes, que l’on peut constater avec l’exemple suivant : <code>print(2/3,digits=20)</code>. Ainsi, pour les comparaisons de nombres flottants et de divisions, il faut mieux utiliser <code>all.equal</code> que <code>==</code>. En effet, <code>all.equal</code> réalise une comparaison selon un nombre défini de chiffres après la virgule.</p></li>
+</ul></li>
+<li><p>Opter pour la structure la plus simple</p>
+<p>Il existe plusieurs types de structure en R. On distingue généralement les structure à 1 dimension (vecteurs et listes) et ceux à 2 dimensions (matrices et data frames). Chacunes de ces structures à ses propres spécificités, que je ne vais pas traiter ici. On sait néanmoins noter que ces objets n’ont pas le même degré de complexité : un vecteur est plus simple qu’une liste, et une matrice est plus simple qu’un data frame. Ainsi, en accord avec le principe du rasoir d’Ockham, on peut établir les 2 principes suivants :</p>
+<ul>
+<li>On utilise un data frame uniquement si une matrice ne suffit pas</li>
+<li>On utilise une liste uniquement si un vecteur ne suffit pas</li>
+</ul></li>
+</ul>
+</div>
+<div id="gestion-des-fonctions" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> 3. Gestion des fonctions<a href="partie-1-coder-proprement-en-r.html#gestion-des-fonctions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>J’aimerais aborder certains critères spécifiques aux fonctions. Les concernant, 3 règles essentielles reviennent :</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>“Une fonction ne fait qu’une seule chose, et le fait bien”</strong></p>
+<p>Cette phrase implique que :</p>
+<ul>
+<li>Le nom de la fonction énonce clairement ce qu’elle est sensée faire.</li>
+<li>Chaque fonction est associée à un niveau d’abstraction. Le vocabulaire employé pour nommer la fonction et ses variables locales doit être cohérent avec le lexique de ce niveau. Par exemple, une fonction de haut niveau utilisera plutôt un vocabulaire métier, tandis qu’une fonction de bas niveau utilisera plutôt un vocabulaire technique/informatique.</li>
+<li>Une fonction ne doit pas produire d’effet de bords, c’est-à-dire d’autres effets que celui qu’elle est sensée produire.</li>
+<li>Ne pas avoir d’arguments indicateurs, c’est-à-dire d’arguments booléens qui changeraient le rôle de la fonction. Ce type d’argument indique qu’il vous faut non pas une, mais deux fonctions.</li>
+<li>Des tests unitaires doivent vérifier si la fonction remplie bien son unique objectif, y compris dans les cas particuliers.</li>
+<li>Le nombre de fonctions dans un script est souvent important, et cela n’est pas un problème.</li>
+</ul></li>
+<li><p>: <strong>“Ecrire des fonctions courtes”</strong></p>
+<p>A cette règle, on peut se demander quelle est la longueur maximale (en nombre de lignes) que doit atteindre une fonction. Dans la littérature, ce seuil maximum varie généralement de 30 à 50 lignes, mais peut descendre jusqu’à 10. Plutôt que de se baser sur un seuil arbitraire dans cet intervalle, je vous propose une méthode simple : à chaque passe d’écriture de votre fonction, considérer qu’elle est trop longue et essayer de la rendre plus courte.</p></li>
+<li><p>: <strong>“Pour chaque fonction, limiter drastiquement le nombre d’arguments”</strong></p>
+<p>L’ajout d’arguments dans une fonction n’est pas sans conséquences : elle complexifie son utilisation. De plus, chaque argument nécessite la création de tests unitaires adéquats pour tester son bon fonctionnement.
+Dans les faits, une fonction a rarement besoin de plus de 3 arguments. Ce nombre peut sembler irréalisable. Néanmoins certaines astuces permettent de s’en rapprocher :</p>
+<ul>
+<li>Pour les paramètres techniques : les développeurs ont tendance à mettre l’ensemble des paramètres techniques en argument, en leur attribuant une valeur par défaut. Or, si la valeur d’un paramètre ne varie pas dans votre fonction, alors celui-ci n’a pas besoin d’être un argument, mais seulement une variable locale</li>
+<li>Utiliser des listes : les listes tendent à remplacer la programmation orientée objet (POO) en R (qui existe bien, mais est rarement utilisée). Il n’y a donc pas de soucis à mettre une liste en argument, à condition que l’objet qu’elle représente a une structure clairement définie et a du sens.</li>
+<li>Pour les paramètres utilisateurs : à l’inverse des paramètres techniques, certains paramètres peuvent varier selon le souhait de l’utilisateur. Mon conseil est de créer une fonction spécifique pour récupérer les valeurs des paramètres utilisateurs depuis un fichier isolé (dans le cas d’un projet R) ou comme un objet global (dans le cas d’un paquet)</li>
+</ul></li>
+</ol>
+<p>Pour rappel : l’écriture des fonctions est un processus itératif. Quand vous écrivez une nouvelle fonction, il est normal que celle-ci ne soit pas propre dans sa première version. L’objectif du développeur consistera à faire plusieurs passes d’écriture sur cette fonction pour qu’elle adhère progressivement aux critères de qualité.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="partie-2-optimisation-du-code.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

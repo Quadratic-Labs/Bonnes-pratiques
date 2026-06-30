@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 PARTIE 2 : OPTIMISATION DU CODE | _main.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 PARTIE 2 : OPTIMISATION DU CODE | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 PARTIE 2 : OPTIMISATION DU CODE | _main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="partie-1-coder-proprement-en-r.html"/>
+<link rel="next" href="partie-3-forme-du-livrable.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> INTRODUCTION</a></li>
+<li class="chapter" data-level="2" data-path="partie-1-coder-proprement-en-r.html"><a href="partie-1-coder-proprement-en-r.html"><i class="fa fa-check"></i><b>2</b> PARTIE 1 : CODER PROPREMENT EN R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="partie-1-coder-proprement-en-r.html"><a href="partie-1-coder-proprement-en-r.html#la-propret%C3%A9-du-code"><i class="fa fa-check"></i><b>2.1</b> 1. La propreté du code</a></li>
+<li class="chapter" data-level="2.2" data-path="partie-1-coder-proprement-en-r.html"><a href="partie-1-coder-proprement-en-r.html#les-r%C3%A8gles-de-propret%C3%A9-en-r"><i class="fa fa-check"></i><b>2.2</b> 2. Les règles de propreté en R</a></li>
+<li class="chapter" data-level="2.3" data-path="partie-1-coder-proprement-en-r.html"><a href="partie-1-coder-proprement-en-r.html#gestion-des-fonctions"><i class="fa fa-check"></i><b>2.3</b> 3. Gestion des fonctions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="partie-2-optimisation-du-code.html"><a href="partie-2-optimisation-du-code.html"><i class="fa fa-check"></i><b>3</b> PARTIE 2 : OPTIMISATION DU CODE</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="partie-2-optimisation-du-code.html"><a href="partie-2-optimisation-du-code.html#analyse-des-performances"><i class="fa fa-check"></i><b>3.1</b> 1. Analyse des performances</a></li>
+<li class="chapter" data-level="3.2" data-path="partie-2-optimisation-du-code.html"><a href="partie-2-optimisation-du-code.html#optimisation-du-temps-dex%C3%A9cution-de-son-code"><i class="fa fa-check"></i><b>3.2</b> 2. Optimisation du temps d’exécution de son code</a></li>
+<li class="chapter" data-level="3.3" data-path="partie-2-optimisation-du-code.html"><a href="partie-2-optimisation-du-code.html#optimisation-de-lutilisation-de-son-environnement"><i class="fa fa-check"></i><b>3.3</b> 3. Optimisation de l’utilisation de son environnement</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="partie-3-forme-du-livrable.html"><a href="partie-3-forme-du-livrable.html"><i class="fa fa-check"></i><b>4</b> PARTIE 3 : FORME DU LIVRABLE</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="partie-3-forme-du-livrable.html"><a href="partie-3-forme-du-livrable.html#un-rmarkdown-pour-lanalyse"><i class="fa fa-check"></i><b>4.1</b> Un rmarkdown pour l’analyse</a></li>
+<li class="chapter" data-level="4.2" data-path="partie-3-forme-du-livrable.html"><a href="partie-3-forme-du-livrable.html#un-paquet-r-pour-le-code"><i class="fa fa-check"></i><b>4.2</b> Un paquet R pour le code</a></li>
+<li class="chapter" data-level="4.3" data-path="partie-3-forme-du-livrable.html"><a href="partie-3-forme-du-livrable.html#un-shiny-pour-les-outils-interactifs"><i class="fa fa-check"></i><b>4.3</b> Un shiny pour les outils interactifs</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html"><i class="fa fa-check"></i><b>5</b> PARTIE 4 : SELECTION DE PAQUETS PAR CAS D’USAGE</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html#gestion-de-la-data"><i class="fa fa-check"></i><b>5.1</b> 1. Gestion de la data</a></li>
+<li class="chapter" data-level="5.2" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html#statistique-et-machine-learning-ml"><i class="fa fa-check"></i><b>5.2</b> 2. Statistique et Machine Learning (ML)</a></li>
+<li class="chapter" data-level="5.3" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html#graphique-et-visualisation"><i class="fa fa-check"></i><b>5.3</b> 3. Graphique et Visualisation</a></li>
+<li class="chapter" data-level="5.4" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html#shiny-applications-web-interactives"><i class="fa fa-check"></i><b>5.4</b> 4. Shiny : Applications Web Interactives</a></li>
+<li class="chapter" data-level="5.5" data-path="partie-4-selection-de-paquets-par-cas-dusage.html"><a href="partie-4-selection-de-paquets-par-cas-dusage.html#d%C3%A9boggage"><i class="fa fa-check"></i><b>5.5</b> 5. Déboggage</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="sources-et-ressources.html"><a href="sources-et-ressources.html"><i class="fa fa-check"></i><b>6</b> SOURCES ET RESSOURCES</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="partie-2-optimisation-du-code" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> PARTIE 2 : OPTIMISATION DU CODE<a href="partie-2-optimisation-du-code.html#partie-2-optimisation-du-code" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>L’optimisation est l’étape logique qui suit la réécriture d’un code. Elle a 2 objectifs :
+* Mobiliser de manière efficiente les ressources, à la fois en termes de mémoire (RAM) et de calcul (processeur)
+* Diminuer le temps d’exécution du code</p>
+<p>En pratique, l’optimisation consiste donc à :
+* Utiliser les méthodes les plus adaptées à la volumétrie de la donnée
+* Minimiser le volume des tables
+* Arbitrer entre les performances de 2 processus similaires
+* Minimiser l’usage des processus itératifs</p>
+<p>Dans cette section, nous verrons d’abord comment analyser les performances d’un code, et ensuite comment les améliorer.</p>
+<p>Remarque importante : l’optimisation ne doit pas se faire au détriment de sa propreté. Le temps gagné côté utilisateur ne doit pas se transformer en du temps perdu côté développeur.</p>
+<div id="analyse-des-performances" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> 1. Analyse des performances<a href="partie-2-optimisation-du-code.html#analyse-des-performances" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>L’outil de base de l’optimisation est le benchmark : l’évaluation des performances d’un code, ou seulement d’une partie. Deux fonctions complémentaires sont couramment utilisées pour cela : <code>profvis::profvis()</code> et <code>microbenmark::microbenmark()</code>. Ils sont chacun associés à un paquet éponyme.</p>
+<p>La fonction <code>profvis::profvis()</code> s’exécute sur un code entier. La fonction analyse les performances de chaque étape. On peut donc identifier quelles sont celles qui nécessitent une optimisation. A noter qu’on retrouve généralement une répartition de Pareto. En effet, dans un code non optimisé, une faible partie du code (&lt;20%) est responsable d’une grande partie du temps d’exécution (&gt;80%).</p>
+<p>C’est à l’issue de l’identification qu’on utilise <code>microbenmark::microbenchmark()</code>. Contrairement à <code>profvis::profvis()</code>, celle-ci est conçue pour analyser des blocs courts. Elle analyse les performances de ce bloc sur plusieurs itérations. Cela permet de disposer d’indicateurs de performance fiables. A l’aide de ces indicateurs, on cherchera à refactoriser le bloc de manière à l’optimiser, notamment en termes de temps d’exécution. Il faut bien vérifier que ces gains sont significatifs, mais aussi analyser comment ils évoluent avec l’augmentation du volume de la donnée.</p>
+</div>
+<div id="optimisation-du-temps-dexécution-de-son-code" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> 2. Optimisation du temps d’exécution de son code<a href="partie-2-optimisation-du-code.html#optimisation-du-temps-dex%C3%A9cution-de-son-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dans cette sous-section, je vous présente 3 méthodes couramment utilisées pour optimiser le temps d’exécution de votre code.</p>
+<ol style="list-style-type: decimal">
+<li><p>Affiner la lecture des inputs</p>
+<p>La fonction <code>read.table</code> (et ses dérivés comme <code>read.csv</code>) dispose de nombreux arguments pour réaliser des traitements dès la phase de lecture.
+Or, cela fait généralement de gagner du temps d’exécution dans le script, et limiter la quantité de RAM nécessaire à l’opération.
+On a par exemple des arguments pour filtrer les lignes (<code>skip</code>,<code>n_max</code>) et sélectionner les colonnes souhaitées (<code>colClasses</code>).
+Dans le cas d’une connexion à une base de données SQL, cela revient à enrichir la requête SQL avec un maximum de traitements.</p></li>
+<li><p>Gérer les données volumineuses avec data.table</p>
+<p>Comparable au paquet ‘dplyr’, le paquet ‘data.table’ propose une syntaxe pour manipuler la donnée. Elle est adaptée aux volumes importants de données. En effet, dans ce contexte, l’utilisation de ‘data.table’ peut faire gagner un temps significatif sur l’exécution du code.</p></li>
+<li><p>Minimiser le coût en RAM des objets construits par boucle</p>
+<p>Une pratique courante consiste à ajouter, à chaque itération d’une boucle, des éléments à un objet composé: ajout de lignes avec <code>rbind</code>, ajout d’un élément à une liste,…
+Cette pratique d’augmentation de la taille d’un objet n’est pas optimal en terme d’allocation de mémoire. En effet, le changement de taille progressif d’un objet tend à fragmenter la mémoire, et donc à utiliser plus d’espaces que l’objet nécessiterait réellement.
+Dans le cas où la taille finale de l’objet est connu, il est conseillé d’initialiser en amont un objet de même taille (avec uniquement des valeurs NULL par exemple), puis de les remplacer lors des itérations successives.
+Dans le cas d’un data frame on peut d’abord initialiser une liste, puis remplacer successivement les valeurs NULL par les tables, puis les concaténer avec <code>do.call('rbind',ma_liste)</code>.</p></li>
+<li><p>Vectoriser des processus itératifs</p>
+<p>Une fonction est vectorisée au sens strict si, en prenant en input un vecteur, elle applique sa transformation ‘simultanément’ aux éléments de manière indépendante, tout en retournant un vecteur de même dimension qu’en entrée.
+Elle est possible dans le cas où, dans une boucle, une itération ne dépend pas du résultat de l’itération précédente.
+Quand la vectorisation est possible, elle devient une alternatives aux boucles FOR.
+En règle générale, réaliser une opération (réellement) vectorisée est plus rapide que de la réaliser par boucle.</p>
+<p>La vectorisation est une caractéristique que présente la majorité des fonctions natives de R. Une erreur commune consiste à insérer dans une boucle une fonction, qui pourrait elle-même remplacer la boucle.
+Ces fonctions peut réduire le temps de calcul, par exemple <code>bind_rows()</code> pour les concaténations, <code>plyr::join()</code> pour les jointures. Ce processus requiert néanmoins une quantité de RAM importante dans le cas de données volumineuses.
+D’autres fonctions ne réalisent qu’une illusion de vectorisation, en étant simplement des wrappers de boucles <code>FOR</code>. C’est le cas des fonctions de la famille <code>apply</code>, et les fonctions utilisées avec <code>Vectorize()</code> (avec une majuscule). Dans ce cas-ci, ces fonctions ne sont pas nécessairement plus légitime qu’une boucle <code>FOR</code> propre.</p></li>
+</ol>
+</div>
+<div id="optimisation-de-lutilisation-de-son-environnement" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> 3. Optimisation de l’utilisation de son environnement<a href="partie-2-optimisation-du-code.html#optimisation-de-lutilisation-de-son-environnement" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Nous avons vu comment optimiser le temps d’exécution d’un code indépendamment de son environnement.
+Or, les ressources de calcul à disposition forment un autre levier d’action possible.
+C’est une étape qui arrive après, et seulement après, avoir optimisé son code.</p>
+<p>2 questions doivent se poser :
+* Comment maximiser son utilisation des ressources à disposition ? (efficacité)
+* La quantité de ressources mobilisées est-elle cohérente avec votre besoin ? (efficience)</p>
+<p>En termes d’efficacité, la parallélisation est une technique qui vous permet d’exploiter toute la puissance de calcul de vos ressources.
+En effet, elle consiste à répartir l’exécution du code simultanément sur plusieurs unités de calcul (coeurs ou processeurs).
+Dans les paquets R, la parallélisation se manifeste sous la forme d’un ou plusieurs paramètres utilisateur : activer ou non la paraléllisation, combien d’unités doivent être mobilisées…
+Il sera particulièrement apprécié dans les paquets réalisant des traitements de donnée volumineuse.
+L’objectif ici sera de paralléliser le maximum de traitements. En effet, plus les traitements seront parallélisés, et plus le gain de vitesse par unité de calcul sera important.
+Plusieurs paquets R permettent de paralléliser son code, comme par exemple ‘parallel’ ou le duo de ‘doParallel’ et ‘foreach’.
+Attention : en plus d’avoir tendance à complexifier le code, la mise en place de la parallélisation nécessite une certaine expérience pour être bien exploitée.</p>
+<p>Une fois la parallélisation implémentée, il faut identifier le nombre d’unités de traitement suffisant pour votre code.
+En effet, mobiliser des ressources a un coût (monétaire ou d’opportunité), qu’il convient de minimiser.
+Or, le gain de vitesse obtenu par chaque unité de calcul (coeurs ou processeurs) est décroissant, et tend vers 0 (cf. Loi d’Amdahl).
+Ainsi, avec les outils présentés dans la sous-section 1, vous identifierez le nombre optimal de ressources pour votre besoin.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="partie-1-coder-proprement-en-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="partie-3-forme-du-livrable.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
